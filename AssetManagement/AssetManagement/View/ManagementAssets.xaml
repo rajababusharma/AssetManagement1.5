@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetManagement.View.ManagementAssets"
+             Title="Assets Management"
+            >
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+      
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     >
+            <StackLayout BackgroundColor="White"
+                         Margin="2,0,2,0">
+                <StackLayout Orientation="Vertical"
+                             Margin="0,5,0,5">
+
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <Entry x:Name="entrydocket"
+                               Grid.Column="1"
+                               Text="{Binding ASSETID}"
+                               TextColor="Black"
+                               Placeholder="Please scan asset here to search"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />
+
+                        <Image x:Name="imgsearch"
+                               Grid.Column="2"
+                               HeightRequest="30"
+                               WidthRequest="30"
+                               Source="search.png"></Image>
+
+                        <Image x:Name="qrcode"
+                               Grid.Column="0"
+                               HeightRequest="30"
+                               WidthRequest="30"
+                               Source="qrcode.png"></Image>
+                    </Grid>
+
+                </StackLayout>
+                <ActivityIndicator x:Name="indicator"
+                                   IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                   IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                   IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                   Color="Red" />
+                <!--<Grid ColumnSpacing="3"
+                  BackgroundColor="#001933">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+
+
+
+
+                </Grid.ColumnDefinitions>
+                <BoxView Grid.Row="0"
+                         Grid.Column="0"
+                         BackgroundColor="#BC6C25" />
+                <Label Text="Asset Id."
+                       FontSize="14"
+                       Grid.Column="0"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       TextColor="White" />
+                <BoxView Grid.Row="0"
+                         Grid.Column="1"
+                         BackgroundColor="#BC6C25" />
+                <Label Text="Name"
+                       FontSize="14"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       TextColor="White" />
+                <BoxView Grid.Row="0"
+                         Grid.Column="2"
+                         BackgroundColor="#BC6C25" />
+
+                <Label Text="Branch"
+                       FontSize="14"
+                       Grid.Column="2"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       TextColor="White" />
+
+
+            </Grid>-->
+
+                <ListView x:Name="docketView"
+                          Margin="0,-5,0,0"
+                          SeparatorColor="Green"
+                          HorizontalOptions="FillAndExpand"
+                          HasUnevenRows="True"
+                          IsPullToRefreshEnabled="False"
+                          ItemsSource="{Binding ObjStockList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+
+                            <ViewCell>
+                                <Frame BorderColor="Green"
+                                       BackgroundColor="White">
+                                    <Grid ColumnSpacing="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1*"></RowDefinition>
+                                            <RowDefinition Height="1.5*"></RowDefinition>
+                                            <RowDefinition Height="1*"></RowDefinition>
+                                            <RowDefinition Height="3*"></RowDefinition>
+
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="{Binding Asset_id}"
+                                               TextColor="Black"
+                                               FontSize="24"
+                                               FontAttributes="Bold"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="Start"
+                                               x:Name="txtdoket"
+                                               Grid.Row="0"
+                                               Grid.ColumnSpan="2">
+
+                                        </Label>
+                                        <Label Text="Asset Name:"
+                                               TextColor="Black"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               Grid.Row="1"
+                                               Grid.Column="0"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="Start"></Label>
+                                        <Label Text="{Binding Asset_name}"
+                                               TextColor="Black"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="Start"
+                                               FontSize="18"
+                                               Grid.Row="1"
+                                               Grid.Column="1"></Label>
+
+                                        <Label Text="Branch:"
+                                               TextColor="Black"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               Grid.Row="2"
+                                               Grid.Column="0"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="Start"></Label>
+                                        <Label Text="{Binding Branch}"
+                                               TextColor="Black"
+                                               VerticalTextAlignment="Center"
+                                               HorizontalTextAlignment="Start"
+                                               FontSize="18"
+                                               Grid.Row="2"
+                                               Grid.Column="1"></Label>
+
+                                        <ScrollView Orientation="Horizontal"
+                                                    Grid.Row="3"
+                                                    Grid.ColumnSpan="2">
+                                        <Grid ColumnSpacing="2"
+                                             >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="35"></RowDefinition>
+                                                <RowDefinition Height="45"></RowDefinition>
+
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="90"></ColumnDefinition>
+                                                    <ColumnDefinition Width="90"></ColumnDefinition>
+                                                    <ColumnDefinition Width="90"></ColumnDefinition>
+                                                    <ColumnDefinition Width="90"></ColumnDefinition>
+                                                    <ColumnDefinition Width="90"></ColumnDefinition>
+                                                    <ColumnDefinition Width="90"></ColumnDefinition>
+                                                    <ColumnDefinition Width="90"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                            <Image  Source="edit.png"
+                                                    BackgroundColor="Transparent"
+                                                    Grid.Column="0"></Image>
+                                                <Image  Source="move.png"
+                                                     BackgroundColor="Transparent"
+                                                     Grid.Column="1"></Image>           
+                                                <Image Source="transfer.png"
+                                                   BackgroundColor="Transparent"
+                                                   Grid.Column="2"></Image>
+                                            <Image Source="dispose2.png"
+                                                   BackgroundColor="Transparent"
+                                                   Grid.Column="3"></Image>
+                                            <Image Source="repair3.png"
+                                                   BackgroundColor="Transparent"
+                                                   Grid.Column="4"></Image>
+                                            <Image Source="amc.png"
+                                                   BackgroundColor="Transparent"
+                                                   Grid.Column="5"></Image>
+                                            <Image Source="insurance.png"
+                                                   BackgroundColor="Transparent"
+                                                   Grid.Column="6"></Image>
+                                                <Button x:Name="btnedit"
+                                                     Text="Update"
+                                                     Clicked="btnedit_Clicked"
+                                                     TextColor="White"
+                                                     BackgroundColor="Orange"
+                                                     FontSize="10"
+                                                     FontAttributes="Bold"
+                                                     Grid.Row="1"
+                                                     CornerRadius="10"
+                                                     Grid.Column="0"
+                                                     HorizontalOptions="Center"></Button>   
+                                                <Button x:Name="btnmove"
+                                                    Text="Move"
+                                                    Clicked="btnmove_Clicked"
+                                                    TextColor="White"
+                                                    BackgroundColor="{x:DynamicResource TooltripColor}"
+                                                    FontSize="10"
+                                                    FontAttributes="Bold"
+                                                    Grid.Row="1"
+                                                    CornerRadius="10"
+                                                    Grid.Column="1"
+                                                    HorizontalOptions="Center"></Button>
+                                            <Button x:Name="btntransfer"
+                                                    Text="Transfer"
+                                                    Clicked="btntransfer_Clicked"
+                                                    CornerRadius="10"
+                                                    HorizontalOptions="Center"
+                                                    TextColor="White"
+                                                    BackgroundColor="Green"
+                                                    FontSize="10"
+                                                    FontAttributes="Bold"
+                                                    Grid.Row="1"
+                                                    Grid.Column="2"></Button>
+                                            <Button x:Name="btndispose"
+                                                    Text="Dispose"
+                                                    Clicked="btndispose_Clicked"
+                                                    CornerRadius="10"
+                                                    HorizontalOptions="Center"
+                                                    TextColor="White"
+                                                    BackgroundColor="{x:DynamicResource PrimaryVariantColor}"
+                                                    FontSize="10"
+                                                    FontAttributes="Bold"
+                                                    Grid.Row="1"
+                                                    Grid.Column="3"></Button>
+                                            <Button x:Name="btnrepair"
+                                                    Text="Repair"
+                                                    Clicked="btnrepair_Clicked"
+                                                    CornerRadius="10"
+                                                    HorizontalOptions="Center"
+                                                    TextColor="White"
+                                                    BackgroundColor="Orange"
+                                                    FontSize="10"
+                                                    FontAttributes="Bold"
+                                                    Grid.Row="1"
+                                                    Grid.Column="4"></Button>
+
+                                            <Button x:Name="btnamc"
+                                                    Text="AMC"
+                                                    Clicked="btnamc_Clicked"
+                                                    CornerRadius="10"
+                                                    HorizontalOptions="Center"
+                                                    TextColor="White"
+                                                    BackgroundColor="Purple"
+                                                    FontSize="10"
+                                                    FontAttributes="Bold"
+                                                    Grid.Row="1"
+                                                    Grid.Column="5"></Button>
+                                            <Button x:Name="btninsurance"
+                                                    Text="Insurance"
+                                                    Clicked="btninsurance_Clicked"
+                                                    CornerRadius="10"
+                                                    HorizontalOptions="Center"
+                                                    TextColor="White"
+                                                        BackgroundColor="{x:DynamicResource TooltripColor}"
+                                                        FontSize="10"
+                                                    FontAttributes="Bold"
+                                                    Grid.Row="1"
+                                                    Grid.Column="6"></Button>
+                                        </Grid>
+
+                                        </ScrollView>
+
+                                    </Grid>
+                                </Frame>
+
+                            </ViewCell>
+                        </DataTemplate>
+
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

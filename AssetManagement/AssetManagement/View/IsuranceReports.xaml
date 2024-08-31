@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetManagement.View.IsuranceReports" Title="Insurance Report">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+        <ToolbarItem x:Name="share"
+                     Text="Share"
+                     Clicked="share_Clicked"
+                     Priority="1"
+                     IconImageSource="@mipmap/share.png"
+                     Order="Primary" />
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+      
+            <StackLayout Orientation="Vertical">
+                <StackLayout x:Name="mainlayout"
+                             IsVisible="{Binding ShowMain}"
+                             BackgroundColor="White">
+                    <StackLayout Orientation="Vertical"
+                                 Margin="0,5,0,0">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="6*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Entry x:Name="entrydocket"
+                                   Grid.Column="1"
+                                   Text="{Binding ASSETID}"
+                                   TextColor="Black"
+                                   Placeholder="Pleas scan asset here to search"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center" />
+
+                            <Image x:Name="imgsearch"
+                                   Grid.Column="2"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="search.png"></Image>
+
+                            <Image x:Name="qrcode"
+                                   Grid.Column="0"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="qrcode.png"></Image>
+                        </Grid>
+
+                    </StackLayout>
+                    <ActivityIndicator x:Name="indicator"
+                                       IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                       IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                       IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                       Color="Red" />
+                    <Grid ColumnSpacing="3"
+                          BackgroundColor="{x:DynamicResource PrimaryColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+
+
+
+
+                        </Grid.ColumnDefinitions>
+                        <BoxView Grid.Row="0"
+                                 Grid.Column="0"
+                                 BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+                        <Label Text="Asset Id."
+                               FontSize="14"
+                               Grid.Column="0"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"
+                               TextColor="White" />
+                        <BoxView Grid.Row="0"
+                                 Grid.Column="1"
+                                 BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+                        <Label Text="Name"
+                               FontSize="14"
+                               Grid.Column="1"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"
+                               TextColor="White" />
+                        <BoxView Grid.Row="0"
+                                 Grid.Column="2"
+                                 BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+
+                        <Label Text="Branch"
+                               FontSize="14"
+                               Grid.Column="2"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"
+                               TextColor="White" />
+
+
+                    </Grid>
+
+                    <ListView x:Name="docketView"
+                              Margin="0,-5,0,0"
+                              ItemTapped="docketView_ItemTapped"
+                              BackgroundColor="White"
+                              HorizontalOptions="FillAndExpand"
+                              HasUnevenRows="True"
+                              IsPullToRefreshEnabled="False"
+                              ItemsSource="{Binding ObjStockList}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+
+                                <ViewCell>
+                                    <Frame BorderColor="{x:DynamicResource PrimaryColor}"
+                                           BackgroundColor="White">
+                                        <Grid ColumnSpacing="2">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="35"></RowDefinition>
+
+
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                <ColumnDefinition Width="2*"></ColumnDefinition>
+
+
+
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding Asset_id}"
+                                                   TextColor="Black"
+                                                   VerticalTextAlignment="Center"
+                                                   HorizontalTextAlignment="Start"
+                                                   x:Name="txtdoket"
+                                                   Grid.Column="0">
+
+                                            </Label>
+
+
+                                            <Label Text="{Binding Policy_Name}"
+                                                   TextColor="Black"
+                                                   VerticalTextAlignment="Center"
+                                                   HorizontalTextAlignment="Center"
+                                                   Grid.Column="1"></Label>
+
+
+                                            <Label Text="{Binding Policy_Date}"
+                                                   TextColor="Black"
+                                                   VerticalTextAlignment="Center"
+                                                   HorizontalTextAlignment="End"
+                                                   Grid.Column="2"></Label>
+
+
+                                        </Grid>
+                                    </Frame>
+
+                                </ViewCell>
+                            </DataTemplate>
+
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <!--popuplayout-->
+                <Frame x:Name="popuplayout"
+                       Margin="20,0,20,0"
+                       BorderColor="Black"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       IsVisible="{Binding Show_popuplayout}"
+                       VerticalOptions="CenterAndExpand"
+                       BackgroundColor="{x:DynamicResource PopupColor}">
+                    <StackLayout  Margin="10,0,10,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="Asset Id:"
+                                   FontAttributes="Bold"
+                                   Grid.Row="0"
+                                   Grid.Column="0"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="Policy Name:"
+                                   Grid.Row="1"
+                                   FontAttributes="Bold"
+                                   Grid.Column="0"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+
+
+                            <Label Text="Maturity Date:"
+                                   FontAttributes="Bold"
+                                   Grid.Row="2"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   Grid.Column="0"
+                                   TextColor="Black"></Label>
+
+                            <Label Text="Insurance Date:"
+                                   Grid.Row="3"
+                                   FontAttributes="Bold"
+                                   Grid.Column="0"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="Policy No:"
+                                   Grid.Row="4"
+                                   Grid.Column="0"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="Insured By:"
+                                   FontAttributes="Bold"
+                                   Grid.Row="5"
+                                   Grid.Column="0"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="Policy Date:"
+                                   Grid.Row="6"
+                                   Grid.Column="0"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="Premium:"
+                                   FontAttributes="Bold"
+                                   Grid.Row="7"
+                                   Grid.Column="0"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+
+
+
+
+
+
+                            <Label Text="{Binding ASSET_ID}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="{Binding POLICY_NAME}"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="{Binding MATURITY_DATE}"
+                                   Grid.Row="2"
+                                   Grid.Column="1"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="{Binding INSURANCE_DATE}"
+                                   Grid.Row="3"
+                                   Grid.Column="1"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+
+                            <Label Text="{Binding POLICY_NO}"
+                                   Grid.Row="4"
+                                   Grid.Column="1"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="{Binding INSURANCECOMPANY_NAME}"
+                                   Grid.Row="5"
+                                   Grid.Column="1"
+                                   FontSize="14"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Editor Text="{Binding POLICY_DATE}"
+                                    Grid.Row="6"
+                                    Grid.Column="1"
+                                    FontSize="14"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="FillAndExpand"
+                                    TextColor="Black"></Editor>
+
+
+                        <Label Text="{Binding PREMIUM}"
+                               Grid.Row="7"
+                               Grid.Column="1"
+                               FontSize="14"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               TextColor="Black"></Label>
+                    </Grid>
+                    <Grid BackgroundColor="{x:DynamicResource PrimaryColor}"
+                          Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Frame BorderColor="Black"
+                               Padding="5"
+                               Margin="5"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               CornerRadius="5">
+                            <Image x:Name="click1"
+                                   Aspect="AspectFill"
+                                   Source="{Binding Image1}"></Image>
+                        </Frame>
+
+                        <Label Text="Document 1"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               HorizontalTextAlignment="Center"></Label>
+
+                    </Grid>
+                    <Button x:Name="btncancel"
+                                FontAttributes="Bold"
+                                Text="Cancel"
+                                Style="{x:DynamicResource ButtonStyle}"
+                                Command="{Binding CLEAR}">
+
+                        </Button>
+
+
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+          
+       
+    </ContentPage.Content>
+</ContentPage>

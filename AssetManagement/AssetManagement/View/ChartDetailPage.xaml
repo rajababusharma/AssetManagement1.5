@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             x:Class="AssetManagement.View.ChartDetailPage"
+             Title="Details">
+    <ContentPage.Content>
+
+        <chart:SfChart Margin="0,0,5,0">
+            <chart:SfChart.ChartBehaviors>
+                <chart:ChartZoomPanBehavior EnableDirectionalZooming="True" EnableZooming="True" MaximumZoomLevel="500" ZoomMode="XY">
+
+                </chart:ChartZoomPanBehavior>
+            </chart:SfChart.ChartBehaviors>
+            <chart:SfChart.Title>
+
+                <chart:ChartTitle Text="{Binding TOOLTRIPBRANCH}"
+                      FontAttributes="Bold"
+                      TextColor="Black"
+                      FontSize="20" />
+
+            </chart:SfChart.Title>
+            <chart:SfChart.PrimaryAxis>
+
+                <chart:CategoryAxis ZoomPosition="20">
+
+                    <chart:CategoryAxis.Title>
+
+                        <chart:ChartAxisTitle Text="Asset Types" FontAttributes="Bold"
+                                  TextColor="Black"
+                                  FontSize="18"></chart:ChartAxisTitle>
+
+                    </chart:CategoryAxis.Title>
+                    <!--To change axis line color-->
+                    <chart:CategoryAxis.AxisLineStyle>
+                        <chart:ChartLineStyle StrokeColor="{x:DynamicResource PrimaryVariantColor}"
+                                  StrokeWidth="2" />
+                    </chart:CategoryAxis.AxisLineStyle>
+                    <!--To change axis major grid line color-->
+                    <chart:CategoryAxis.MajorGridLineStyle>
+                        <chart:ChartLineStyle StrokeColor="{x:DynamicResource PrimaryVariantColor}"
+                                  StrokeWidth="2" />
+                    </chart:CategoryAxis.MajorGridLineStyle>
+                    <!--To change axis label text color-->
+                    <chart:CategoryAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle TextColor="{x:DynamicResource PrimaryVariantColor}"
+                                       FontSize="10" />
+                    </chart:CategoryAxis.LabelStyle>
+                    <!--To change axis ticks color-->
+                    <chart:CategoryAxis.MajorTickStyle>
+                        <chart:ChartAxisTickStyle StrokeColor="{x:DynamicResource PrimaryVariantColor}"
+                                      StrokeWidth="2" />
+                    </chart:CategoryAxis.MajorTickStyle>
+
+                </chart:CategoryAxis>
+
+            </chart:SfChart.PrimaryAxis>
+
+            <chart:SfChart.SecondaryAxis>
+
+                <chart:NumericalAxis>
+
+                    <chart:NumericalAxis.Title>
+
+                        <chart:ChartAxisTitle Text="Assets Count" FontAttributes="Bold"
+                                  BorderColor="{x:DynamicResource PrimaryVariantColor}"
+                                  TextColor="Black"
+                                  FontSize="18"></chart:ChartAxisTitle>
+
+                    </chart:NumericalAxis.Title>
+
+                    <chart:NumericalAxis.MajorGridLineStyle>
+                        <chart:ChartLineStyle StrokeColor="{x:DynamicResource PrimaryVariantColor}"
+                                  StrokeWidth="2">
+
+                        </chart:ChartLineStyle>
+
+
+                    </chart:NumericalAxis.MajorGridLineStyle>
+
+                    <chart:NumericalAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle TextColor="{x:DynamicResource TooltripColor}"
+                                       Font="10">
+
+                        </chart:ChartAxisLabelStyle>
+                    </chart:NumericalAxis.LabelStyle>
+
+                    <chart:NumericalAxis.MinorGridLineStyle>
+                        <chart:ChartLineStyle StrokeColor="{x:DynamicResource PrimaryVariantColor}"
+                                  StrokeWidth="2"></chart:ChartLineStyle>
+                    </chart:NumericalAxis.MinorGridLineStyle>
+
+                </chart:NumericalAxis>
+
+
+
+            </chart:SfChart.SecondaryAxis>
+
+            <chart:SfChart.Series>
+
+                <chart:LineSeries ItemsSource="{Binding ASSETCATEGORYCOUNT}"
+                      XBindingPath="AssetCategory"
+                      YBindingPath="Count"
+                      EnableDataPointSelection="True"
+                      EnableTooltip="True"
+                      Label="Category Wise Asset Count">
+
+                    <chart:LineSeries.TooltipTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Category:"
+                               TextColor="Black" />
+                                    <Label Text="{Binding AssetCategory, Converter={StaticResource TooltipConverter}}"
+                               TextColor="Black" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="count:"
+                               TextColor="Black" />
+                                    <Label Text="{Binding Count}"
+                               TextColor="Black" />
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </chart:LineSeries.TooltipTemplate>
+
+                    <chart:LineSeries.DataMarker>
+
+                        <chart:ChartDataMarker MarkerColor="{x:DynamicResource TooltripColor}"
+                                   ShowMarker="True"
+                                   MarkerType="Triangle"
+                                   MarkerHeight="30" />
+
+                    </chart:LineSeries.DataMarker>
+                </chart:LineSeries>
+            </chart:SfChart.Series>
+            <chart:SfChart.Legend>
+
+                <chart:ChartLegend CornerRadius="10"
+                       IconHeight="20"
+                       IconWidth="20" />
+
+            </chart:SfChart.Legend>
+
+
+        </chart:SfChart>
+
+    </ContentPage.Content>
+</ContentPage>

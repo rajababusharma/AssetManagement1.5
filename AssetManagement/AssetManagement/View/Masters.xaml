@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetManagement.View.Masters" Title="Create Masters">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView Orientation="Vertical"
+                        Margin="2,0,2,0">
+                <StackLayout BackgroundColor="{x:DynamicResource PrimaryColor}"
+                             VerticalOptions="CenterAndExpand">
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,2,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand">
+                        <Frame CornerRadius="100"
+                               Padding="7"
+                               Margin="5">
+
+
+                            <Image
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="arrow.png"></Image>
+                        </Frame>
+                        <Label x:Name="txt_createlocation"
+                               Text="Location Master"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                    </StackLayout>
+
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand">
+
+                        <Frame CornerRadius="100"
+                               Padding="7"
+                               Margin="5">
+                            <Image
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="arrow.png"></Image>
+                        </Frame>
+                        <Label x:Name="txt_branch"
+                               Text="Branch Master"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                    </StackLayout>
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal">
+
+                        <Frame CornerRadius="100"
+                               Padding="7"
+                               Margin="5">
+                            <Image
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="arrow.png"></Image>
+                        </Frame>
+                        <Label x:Name="txt_createvendor"
+                               Text="Vendor Master"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                    </StackLayout>
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal">
+
+                        <Frame CornerRadius="100"
+                               Padding="7"
+                               Margin="5">
+                            <Image
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="arrow.png"></Image>
+                        </Frame>
+                        <Label x:Name="txt_createCategory"
+                               Text="Asset Category Master"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                    </StackLayout>
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal">
+
+                        <Frame CornerRadius="100"
+                               Padding="7"
+                               Margin="5">
+                            <Image
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="arrow.png"></Image>
+                        </Frame>
+                        <Label x:Name="txt_createsubcategory"
+                               Text="Asset Sub Category Master"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                    </StackLayout>
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal">
+
+                        <Frame CornerRadius="100"
+                               Padding="7"
+                               Margin="5">
+                            <Image HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="arrow.png"></Image>
+                        </Frame>
+                        <Label x:Name="txt_createdepartment"
+                               Text="Department Master"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                    </StackLayout>
+
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal">
+
+                        <Frame CornerRadius="100"
+                               Padding="7"
+                               Margin="5">
+                            <Image
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="arrow.png"></Image>
+                        </Frame>
+                        <Label x:Name="txt_createemployee"
+                               Text="Employee Master"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                    </StackLayout>
+<!--
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal">
+
+                        <Frame CornerRadius="100"
+                               Padding="7"
+                               Margin="5">
+                            <Image HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="arrow.png"></Image>
+                        </Frame>
+                        <Label x:Name="txt_createAMC"
+                               Text="AMC Master"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                    </StackLayout>
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal">
+
+                        <Frame CornerRadius="100"
+                               Padding="7"
+                               Margin="5">
+                            <Image HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="arrow.png"></Image>
+                        </Frame>
+                        <Label x:Name="txt_createInsurance"
+                               Text="Insurance Master"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                    </StackLayout>
+-->
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

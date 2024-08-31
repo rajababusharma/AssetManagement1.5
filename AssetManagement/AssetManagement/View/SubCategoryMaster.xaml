@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             x:Class="AssetManagement.View.SubCategoryMaster" Title="Create Sub Category">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Vertical"
+                         Margin="2,0,2,0"
+                         BackgroundColor="White">
+                <ScrollView Orientation="Vertical">
+                    <StackLayout Orientation="Vertical"
+                                 Margin="0,10,0,0">
+
+                        <Label Text="Enter details to create a location!"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               FontSize="Title"
+                               HorizontalOptions="CenterAndExpand" />
+                        <ActivityIndicator x:Name="indicator"
+                                           IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                           IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                           IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                           Color="Red" />
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <local:EntryBorder  Text="{Binding ASSET_CODE}"
+                                                Placeholder="Enter Asset Code"
+                                                Grid.Row="0"></local:EntryBorder>
+
+                            <local:Dropdown x:Name="pkrcategory"
+                                            ItemSelected="pkrcategory_ItemSelected"
+                                            Grid.Row="1"
+                                            ItemsSource="{Binding CategoryList}">
+                            </local:Dropdown>
+
+                            <local:EntryBorder  Text="{Binding SUBCATEGORY_DESCRIPTION}"
+                                                Placeholder="Enter Sub Category"
+                                                Grid.Row="2"></local:EntryBorder>
+
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+                <Button Text="Save"
+                        IsEnabled="{Binding BTNSUBMITSTATUS}"
+                        FontAttributes="Bold"
+                        Command="{Binding CREATESUBCATEGORY}"
+                        Style="{x:DynamicResource ButtonStyle}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

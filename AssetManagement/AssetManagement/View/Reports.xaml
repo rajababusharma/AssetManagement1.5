@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetManagement.View.Reports" Title="Reports">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout >
+            <ScrollView Orientation="Vertical"
+                        Margin="2,0,2,0">
+
+
+                <StackLayout BackgroundColor="{x:DynamicResource PrimaryColor}"
+                         VerticalOptions="CenterAndExpand">
+
+
+
+                <BoxView HeightRequest="3"
+                         BackgroundColor="White"
+                         Margin="0,2,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand"
+                              >
+                    <Frame CornerRadius="100" Padding="7"
+                           Margin="5">
+
+
+                        <Image x:Name="imgasset"
+                               HeightRequest="30" WidthRequest="30"
+                                   Source="report.png"></Image>
+                    </Frame>
+                    <Label x:Name="txt_astreport"
+                               Text="Asset reports"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                </StackLayout>
+
+                <BoxView HeightRequest="3"
+                         BackgroundColor="White"
+                         Margin="0,15,0,0"></BoxView>
+
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand"
+                               >
+
+                    <Frame CornerRadius="100" Padding="7"
+                           Margin="5">
+                        <Image x:Name="imgmove"
+                               HeightRequest="30" WidthRequest="30"
+                               Source="move.png"></Image>
+                    </Frame>
+                    <Label x:Name="txt_movereport"
+                               Text="Asset move report"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                </StackLayout>
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal"
+                           >
+
+                    <Frame CornerRadius="100" Padding="7"
+                           Margin="5">
+                        <Image x:Name="imgrepair"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="repair3.png"></Image>
+                    </Frame>
+                    <Label x:Name="txt_repair"
+                               Text="Asset repair report"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                </StackLayout>
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal"
+                            >
+
+                    <Frame CornerRadius="100" Padding="7"
+                           Margin="5">
+                        <Image x:Name="imgdispose"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="dispose2.png"></Image>
+                    </Frame>
+                    <Label x:Name="txt_disposereport"
+                               Text="Asset dispose report"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                </StackLayout>
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal"
+                            >
+
+                    <Frame CornerRadius="100" Padding="7"
+                           Margin="5">
+                        <Image x:Name="imgfound"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="inventory.png"></Image>
+                    </Frame>
+                    <Label x:Name="txt_foundreport"
+                               Text="Found/Missing Inventory Report"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                </StackLayout>
+                
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal">
+
+                    <Frame CornerRadius="100" Padding="7"
+                           Margin="5">
+                        <Image x:Name="imgamc"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="amc.png"></Image>
+                    </Frame>
+                    <Label x:Name="txt_amcreport"
+                               Text="Asset AMC report"
+                               Style="{x:DynamicResource MediumLabelFont}"></Label>
+
+
+                </StackLayout>
+                    <BoxView HeightRequest="3"
+                             BackgroundColor="White"
+                             Margin="0,15,0,0"></BoxView>
+                    <StackLayout Orientation="Horizontal"
+                           >
+
+                    <Frame CornerRadius="100" Padding="7"
+                           Margin="5">
+                        <Image x:Name="img_insurance"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="insurance.png"></Image>
+                    </Frame>
+                    <Label x:Name="txt_insurance" Style="{x:DynamicResource MediumLabelFont}"
+                               Text="Asset Insurance report"
+                          ></Label>
+
+
+                </StackLayout>
+            </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

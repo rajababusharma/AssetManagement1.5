@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             x:Class="AssetManagement.View.CreateAssets" Title="Assets detail">
+
+    <ContentPage.ToolbarItems>
+      
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{x:DynamicResource PrimaryColor}">
+            <StackLayout Margin="2,0,2,0" BackgroundColor="White">
+                <ScrollView Orientation="Vertical">
+                    <StackLayout>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="6*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Entry x:Name="entrydocket"
+                                   Grid.Column="1"
+                                   Text="{Binding ASSETID}"
+                                   TextColor="Black"
+                                   IsEnabled="{Binding CANCHANGE}"
+                                   Placeholder="Please scan asset here"
+                                   PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center" />
+
+
+                            <Image x:Name="imgsearch" IsVisible="False"
+                                   Grid.Column="2"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="search.png"></Image>
+                            <Image x:Name="qrcode"
+                                   Grid.Column="0"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="qrcode.png"></Image>
+                        </Grid>
+                        <Label Text="Basic Info" FontAttributes="Bold"
+                               FontSize="Title"
+                               TextColor="Black"
+                               HorizontalOptions="CenterAndExpand"></Label>
+                        <ActivityIndicator x:Name="indicator"
+                                           IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                           IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                           IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                           Color="Red" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                
+                            </Grid.RowDefinitions>
+                            <local:EntryBorder  Text="{Binding Asset_name}"
+                                                Placeholder="Asset Name"
+                                                PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                                Grid.Row="0"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding Description}"
+                                               Placeholder="Asset Description"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="1"></local:EntryBorder>
+                            <local:Dropdown x:Name="pkrlocation"
+                                            ItemSelected="pkrlocation_ItemSelected"
+                                            Grid.Row="2"
+                                            SelectedIndex="{Binding SELECTEDLOCATION_INDEX}"
+                                            ItemsSource="{Binding LocationList}" />
+
+                            <local:Dropdown x:Name="pkrbranch"
+                                            SelectedIndex="{Binding SELECTEDBRANCH_INDEX}"
+                                            ItemSelected="pkrbranch_ItemSelected"
+                                            Grid.Row="3"
+                                            ItemsSource="{Binding BranchList}" />
+
+                            <local:Dropdown x:Name="pkremployee"
+                                            SelectedIndex="{Binding SELECTEDEMPLOYEE_INDEX}"
+                                            ItemSelected="pkremployee_ItemSelected"
+                                            Grid.Row="4"
+                                            ItemsSource="{Binding EmployeeList}" />
+                            <local:Dropdown x:Name="pkrcategory"
+                                            SelectedIndex="{Binding SELECTEDCATEGORY_INDEX}"
+                                            ItemSelected="pkrcategory_ItemSelected"
+                                            Grid.Row="5"
+                                            ItemsSource="{Binding CategoryList}" />
+                            <local:Dropdown x:Name="pkrsubcategory"
+                                            SelectedIndex="{Binding SELECTEDSUBCATEGORY_INDEX}"
+                                            ItemSelected="pkrsubcategory_ItemSelected"
+                                            Grid.Row="6"
+                                            ItemsSource="{Binding SubCategoryList}" />
+                           
+                           
+                            <local:EntryBorder Text="{Binding Asset_value}"
+                                               Placeholder="Asset_value"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="7"></local:EntryBorder>
+
+                            <local:Dropdown x:Name="pkrassetlife"
+                                            SelectedIndex="{Binding SELECTEDLIFE_INDEX}"
+                                            ItemSelected="pkrassetlife_ItemSelected"
+                                            Grid.Row="8"
+                                            ItemsSource="{Binding asset_lifeList}" />
+
+
+                        </Grid>
+                        <Label Text="Purchase Info"
+                               FontAttributes="Bold"
+                               FontSize="Title"
+                               TextColor="Black"
+                               HorizontalOptions="CenterAndExpand"></Label>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="80" />
+                                <RowDefinition Height="80" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="80" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+
+                            </Grid.RowDefinitions>
+                            <local:Dropdown x:Name="pkrvendor"
+                                            SelectedIndex="{Binding SELECTEDVENDOR_INDEX}"
+                                            ItemSelected="pkrvendor_ItemSelected"
+                                            Grid.Row="0"
+                                            ItemsSource="{Binding VendorList}" />
+                           
+                            <local:EntryBorder Text="{Binding SAP_code}"
+                                               Placeholder="SAP_code"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="1"></local:EntryBorder>
+                            <StackLayout Orientation="Vertical"
+                                         Margin="10,0,0,0"
+                                         Grid.Row="2">
+                                <Label Text="Purchase Date:"
+                                       
+                                       FontSize="18"
+                                       TextColor="Black"></Label>
+                                <DatePicker x:Name="pkrPurchaseDate"
+                                            Date="{Binding SELECTEDPURCHASE_DATE}"
+                                            DateSelected="pkrPurchaseDate_DateSelected"
+                                            Grid.Row="2"></DatePicker>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical"
+                                         Margin="10,0,0,0"
+                                         Grid.Row="3">
+                                <Label Text="Install Date:"
+                                       
+                                       FontSize="18"
+                                       TextColor="Black"></Label>
+                                <DatePicker x:Name="pkrInstallDate"
+                                            Date="{Binding SELECTEDINSTALL_DATE}"
+                                            DateSelected="pkrInstallDate_DateSelected"
+                                            ></DatePicker>
+                            </StackLayout>
+                           
+                           
+                            <local:EntryBorder Text="{Binding ManufacturedBy}"
+                                               Placeholder="Manufactured By"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="4"></local:EntryBorder>
+
+                            <StackLayout Orientation="Vertical"
+                                         Margin="10,0,0,0"
+                                         Grid.Row="5">
+                                <Label Text="MFD Date:"  FontSize="18" 
+                                       TextColor="Black"></Label>
+                                <DatePicker x:Name="pkrMFDDate"
+                                            Date="{Binding SELECTEDMFD_DATE}"
+                                            DateSelected="pkrMFDDate_DateSelected"
+                                           ></DatePicker>
+                            </StackLayout>
+                            
+
+                            <local:Dropdown x:Name="pkrwarranty"
+                                            SelectedIndex="{Binding SELECTEDWARRANT_INDEX}"
+                                            ItemSelected="pkrwarranty_ItemSelected"
+                                            Grid.Row="6"
+                                            ItemsSource="{Binding asset_warrantyList}" />
+                            
+                          
+                            <local:EntryBorder Text="{Binding Model_no}"
+                                               Placeholder="Model No"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="7"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding Part_no}"
+                                               Placeholder="Part No"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="8"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding Serial_no}"
+                                               Placeholder="Serial No"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="9"></local:EntryBorder>
+                           
+                            <local:EntryBorder Text="{Binding Residual_value}"
+                                               Placeholder="Residual Value"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="10"></local:EntryBorder>
+                        </Grid>
+                        <Label Text="Other Info"
+                               FontAttributes="Bold"
+                               FontSize="Title"
+                               TextColor="Black"
+                               HorizontalOptions="CenterAndExpand"></Label>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+
+
+                            </Grid.RowDefinitions>
+                            <local:EntryBorder  Text="{Binding Depreciation}" IsEnabled="False"
+                                                Placeholder="Depreciation"
+                                                TextColor="Red"
+                                                Grid.Row="0"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding Invoice_No}"
+                                               Placeholder="Invoice No"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="1"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding Make}"
+                                               Placeholder="Make"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="2"></local:EntryBorder>
+                            <local:Dropdown x:Name="pkrdepartment"
+                                            SelectedIndex="{Binding SELECTEDDEPARTMENT_INDEX}"
+                                            ItemSelected="pkrdepartment_ItemSelected"
+                                            Grid.Row="3"
+                                            ItemsSource="{Binding DepartmentList}" />
+                           
+                            <local:EntryBorder Text="{Binding Remark}"
+                                               Placeholder="Remark"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="4"></local:EntryBorder>
+
+                        </Grid>
+                        <Label Text="Attach Invoice Copy"
+                               FontAttributes="Bold"
+                               FontSize="Title"
+                               TextColor="Black"
+                               HorizontalOptions="CenterAndExpand"></Label>
+                        <Grid BackgroundColor="{x:DynamicResource PrimaryColor}"
+                              Margin="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="120"></RowDefinition>
+                                <RowDefinition Height="30"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Frame BorderColor="Black"
+                                   Padding="5"
+                                   Margin="5"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   CornerRadius="5">
+                                <Image x:Name="click1"
+                                       Aspect="AspectFill"
+                                       Source="{Binding Image1}"></Image>
+                            </Frame>
+
+                            <Label Text="Document 1"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   HorizontalTextAlignment="Center"></Label>
+                           
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+                <Button Text="Save"
+                        FontAttributes="Bold"
+                        Command="{Binding createAssets}"
+                        Style="{x:DynamicResource ButtonStyle}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             x:Class="AssetManagement.View.CompanyRegistration" Title="Registration">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{x:DynamicResource PrimaryBackgroundColor}">
+            <StackLayout Orientation="Vertical"
+                         Margin="2,0,2,0"
+                         BackgroundColor="White">
+                <ScrollView Orientation="Vertical">
+                    <StackLayout Orientation="Vertical">
+                        <ActivityIndicator x:Name="indicator"
+                                           IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                           IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                           IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                           Color="Red" />
+                        <Label Text="Register your Company Here!"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               FontSize="Title"
+                               HorizontalOptions="CenterAndExpand" />
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+
+                            </Grid.RowDefinitions>
+                            <local:EntryBorder  Text="{Binding COMPANYID}"
+                                                Placeholder="Company code"
+                                                PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                                Grid.Row="0"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding COMPANYNAME}"
+                                               Placeholder="Company Name"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="1"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding ADDRESS1}"
+                                               Placeholder="Address1"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="2"></local:EntryBorder>
+                           
+                            <local:EntryBorder Text="{Binding ADDRESS2}"
+                                               Placeholder="Address2"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="3">
+                            </local:EntryBorder>
+                            <local:EntryBorder Text="{Binding ZIPCODE}"
+                                               Placeholder="ZipCode"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="4">
+                                
+                            </local:EntryBorder>
+                            <local:EntryBorder Text="{Binding GSTNO}"
+                                               Placeholder="GST NO."
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="5">
+
+                            </local:EntryBorder>
+
+
+
+
+
+                        </Grid>
+                        <Label Text="Create your first user Here!"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               FontSize="Title"
+                               HorizontalOptions="CenterAndExpand" />
+                        <Image x:Name="imguser"
+                               Source="{Binding Image1}"
+                               HeightRequest="100"
+                               HorizontalOptions="CenterAndExpand"></Image>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+
+                            </Grid.RowDefinitions>
+                            <local:EntryBorder  Text="{Binding EMPNAME}"
+                                                Placeholder="Employee Name"
+                                                PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                                Grid.Row="0"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding EMPCODE}"
+                                               Placeholder="Employee Code"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="1"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding USERNAME}"
+                                               Placeholder="User Name"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="2"></local:EntryBorder>
+                            <local:EntryBorder x:Name="password"
+                                               Text="{Binding PASSWORD}"
+                                               IsPassword="True"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Placeholder="Password"
+                                               Grid.Row="3">
+
+                            </local:EntryBorder>
+                            <local:EntryBorder x:Name="confirmpassword"
+                                               Text="{Binding CONFIRMPASSWORD}"
+                                               TextChanged="confirmpassword_TextChanged"
+                                               IsPassword="True"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Placeholder="Confirm Password"
+                                               Grid.Row="4">
+
+                            </local:EntryBorder>
+
+                            <local:EntryBorder Text="{Binding DEPARTMENT}"
+                                               Placeholder="Enter Department"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="5"></local:EntryBorder>
+
+                            <local:EntryBorder Text="{Binding LOCATION}"
+                                               Placeholder="Location"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="6"></local:EntryBorder>
+
+                            <local:EntryBorder Text="{Binding BRANCH}"
+                                               Placeholder="Branch"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="7"></local:EntryBorder>
+
+                           
+
+                            <local:EntryBorder Text="{Binding CONTACT}"
+                                               Placeholder="Contact No."
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="8"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding EMAIL}"
+                                               Placeholder="Email"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="9"></local:EntryBorder>
+
+
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+                <Button Text="Register Comany"
+                        FontAttributes="Bold"
+                        Command="{Binding REGISTER}"
+                        Style="{x:DynamicResource ButtonStyle}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

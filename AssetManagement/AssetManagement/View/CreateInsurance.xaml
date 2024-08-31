@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             x:Class="AssetManagement.View.CreateInsurance">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+           
+            <ActivityIndicator x:Name="indicator"
+                               IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                               IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                               IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                               Color="Red" />
+            <ScrollView>
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="80" />
+                            <RowDefinition Height="80" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="80" />
+
+                        </Grid.RowDefinitions>
+
+                        <local:EntryBorder  Text="{Binding ASSETID}"
+                                            Placeholder="Asset Id"
+                                            PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                            Grid.Row="0"></local:EntryBorder>
+                        
+                        <local:EntryBorder  Text="{Binding ASSETNAME}"
+                                            Placeholder="Asset Name"
+                                            PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                            Grid.Row="1"></local:EntryBorder>
+
+                        <local:EntryBorder  Text="{Binding INSURANCE_COMPANYNAME}"
+                                            Placeholder="Insurance Company Name"
+                                            PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                            Grid.Row="2"></local:EntryBorder>
+                        <local:EntryBorder  Text="{Binding POLICYNUMBER}"
+                                            Placeholder="Policy Number"
+                                            PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                            Grid.Row="3"></local:EntryBorder>
+                        <local:EntryBorder  Text="{Binding POLICYNAME}"
+                                            Placeholder="Policy Name"
+                                            PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                            Grid.Row="4"></local:EntryBorder>
+                        <StackLayout Orientation="Vertical"
+                                     Margin="10,0,0,0"
+                                     Grid.Row="5">
+                            <Label Text="Policy Date:"
+                                   FontSize="18"
+                                   TextColor="Black"></Label>
+                            <DatePicker x:Name="pkrPolicyDate"
+                                        Date="{Binding START_DATE}"
+                                        DateSelected="pkrPolicyDate_DateSelected"
+                                        Grid.Row="5"></DatePicker>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Vertical"
+                                     Margin="10,0,0,0"
+                                     Grid.Row="6">
+                            <Label Text="Due Date:"
+                                   FontSize="18"
+                                   TextColor="Black"></Label>
+                            <DatePicker x:Name="pkrDueDate"
+                                        Date="{Binding DUE_DATE}"
+                                        DateSelected="pkrDueDate_DateSelected"
+                                        Grid.Row="6"></DatePicker>
+                        </StackLayout>
+
+                       
+                        <local:EntryBorder  Text="{Binding PREMIUM}"
+                                            Placeholder="Premium"
+                                            PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                            Grid.Row="7"></local:EntryBorder>
+
+
+                        <local:Dropdown x:Name="pkrmodeofpayment"
+                                        ItemSelected="pkrmodeofpayment_ItemSelected"
+                                        Grid.Row="8"
+                                        ItemsSource="{Binding PAYMENTMODELIST}">
+                        </local:Dropdown>
+
+                        <StackLayout Orientation="Vertical"
+                                     Margin="10,0,0,0"
+                                     Grid.Row="9">
+                            <Label Text="Alert Date:"
+                                   FontSize="18"
+                                   TextColor="Black"></Label>
+                            <DatePicker x:Name="pkrAlertDate"
+                                        Date="{Binding ALERT_DATE}"
+                                        DateSelected="pkrAlertDate_DateSelected"
+                                        Grid.Row="9"></DatePicker>
+                        </StackLayout>
+                      
+                        
+                      
+
+                    </Grid>
+                    <Label Text="Attach Insurance Document"
+                           FontAttributes="Bold"
+                           FontSize="Title"
+                           TextColor="Black"
+                           HorizontalOptions="CenterAndExpand"></Label>
+                    <Grid BackgroundColor="{x:DynamicResource PrimaryColor}"
+                          Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="4*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Frame BorderColor="Black"
+                               Padding="5"
+                               Margin="5"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               CornerRadius="5">
+                            <Image x:Name="click1"
+                                   Aspect="AspectFill"
+                                   Source="{Binding Image1}"></Image>
+                        </Frame>
+
+                        <Label Text="Document 1"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               Grid.Row="1"
+                               Grid.Column="1"
+                               HorizontalTextAlignment="Center"></Label>
+
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+            <Button Text="Save"
+                    FontAttributes="Bold"
+                    Command="{Binding SUBMIT}"
+                    Style="{x:DynamicResource ButtonStyle}"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

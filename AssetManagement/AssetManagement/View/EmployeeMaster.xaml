@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             x:Class="AssetManagement.View.EmployeeMaster" Title="Create Employee">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="FillAndExpand"
+                         Margin="2,10,2,0"
+                         BackgroundColor="White">
+                <ScrollView Orientation="Vertical">
+                    <StackLayout Orientation="Vertical"
+                                 VerticalOptions="FillAndExpand">
+                       
+                        <Label Text="Create New Employee Here!" 
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               FontSize="Title"
+                               HorizontalOptions="CenterAndExpand" />
+                        <ActivityIndicator x:Name="indicator"
+                                           IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                           IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                           IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                           Color="Red" />
+
+                        <Grid VerticalOptions="Fill">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+
+                            </Grid.RowDefinitions>
+                            <local:EntryBorder Text="{Binding EMPCODE}"
+                                               Placeholder="Employee Code"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="0"></local:EntryBorder>
+                            <local:EntryBorder  Text="{Binding EMPNAME}"
+                                                Placeholder="Employee Name"
+                                                PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                                Grid.Row="1"></local:EntryBorder>
+                           
+                           
+
+                            <local:Dropdown x:Name="pkrdepartment"
+                                            ItemSelected="pkrdepartment_ItemSelected"
+                                            Grid.Row="2"
+                                            ItemsSource="{Binding DepartmentList}">
+                            </local:Dropdown>
+
+                            <local:Dropdown x:Name="pkrlocation"
+                                            ItemSelected="pkrlocation_ItemSelected"
+                                            Grid.Row="3"
+                                            ItemsSource="{Binding LocationList}">
+                            </local:Dropdown>
+
+                            <local:Dropdown x:Name="pkrbranch"
+                                            ItemSelected="pkrbranch_ItemSelected"
+                                            Grid.Row="4"
+                                            ItemsSource="{Binding BranchList}">
+                            </local:Dropdown>
+
+                            <local:EntryBorder Text="{Binding CONTACT}"
+                                               Placeholder="Contact No."
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="5"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding EMAIL}"
+                                               Placeholder="Email"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="6"></local:EntryBorder>
+
+
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+                <Button Text="Save"
+                        FontAttributes="Bold"
+                        Command="{Binding SUBMIT}"
+                        IsEnabled="{Binding BTNSUBMITSTATUS}"
+                        Style="{x:DynamicResource ButtonStyle}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

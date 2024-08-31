@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.Converters"
+             x:Class="AssetManagement.View.DownloadDocuments" Title="Download Documents">
+    <ContentPage.Resources>
+
+        <local:Base64_ToImage x:Key="Base64_ToImageConverter"></local:Base64_ToImage>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Vertical"
+                         Margin="0,5,0,0">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    <Entry x:Name="entrydocket"
+                           Grid.Column="1"
+                           Text="{Binding ASSETID}"
+                           TextColor="Black"
+                           Placeholder="Pleas scan asset here to search"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center" />
+
+                    <Image x:Name="imgsearch"
+                           Grid.Column="2"
+                           HeightRequest="30"
+                           WidthRequest="30"
+                           Source="search.png"></Image>
+
+                    <Image x:Name="qrcode"
+                           Grid.Column="0"
+                           HeightRequest="30"
+                           WidthRequest="30"
+                           Source="qrcode.png"></Image>
+                </Grid>
+
+            </StackLayout>
+            <ActivityIndicator x:Name="indicator"
+                               IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                               IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                               IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                               Color="Red" />
+            <ListView x:Name="docketView"
+                      BackgroundColor="White"
+                      HorizontalOptions="FillAndExpand"
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="False"
+                      ItemsSource="{Binding ObjImageList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <ViewCell>
+                        
+                                <Grid ColumnSpacing="2" BackgroundColor="{x:DynamicResource PrimaryVariantColor}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"></RowDefinition>
+                                        <RowDefinition Height="200"></RowDefinition>
+
+                                </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                       
+
+                                    </Grid.ColumnDefinitions>
+                                <StackLayout Orientation="Horizontal" Margin="10"
+                                             Grid.Row="0">
+                                    <Label Text="{Binding ImageType}"
+                                         FontAttributes="Bold"
+                                           TextColor="White"
+                                           FontSize="20"
+                                           HorizontalTextAlignment="Start"></Label>
+                                    <ImageButton x:Name="image_download" Clicked="image_download_Clicked"
+                                         
+                                           Source="share.png"
+                                           HorizontalOptions="EndAndExpand"
+                                           VerticalOptions="Start"></ImageButton>
+                                </StackLayout>
+                               
+                                <!--<Frame BorderColor="{x:DynamicResource PrimaryVariantColor}"
+                                       Grid.Row="1"
+                                       CornerRadius="10">-->
+                                <Frame BorderColor="Black"
+                                       Padding="5"
+                                       Margin="5"
+                                       Grid.Row="1"
+                                       CornerRadius="5">
+                                    <Image 
+                                           Aspect="AspectFill"
+                                           HeightRequest="200"
+                                           Source="{Binding Images,Converter={StaticResource Base64_ToImageConverter}}">
+                                        
+                                    </Image>
+                                </Frame>
+                                    
+                                <!--<Image Margin="10"  Source="{Binding Images,Converter={StaticResource Base64_ToImageConverter}}"
+                                       Aspect="Fill"
+                                       Grid.Row="1"
+                                           HeightRequest="200"
+                                       VerticalOptions="CenterAndExpand"></Image>-->
+                                <!--</Frame>-->
+                                   
+                                   
+
+                                </Grid>
+                           
+
+                        </ViewCell>
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

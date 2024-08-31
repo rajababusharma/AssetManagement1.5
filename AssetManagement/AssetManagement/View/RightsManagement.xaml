@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             x:Class="AssetManagement.View.RightsManagement" Title="Rights Management">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout 
+                         Margin="2,0,2,0">
+                <StackLayout Orientation="Vertical"
+                             Margin="0,5,0,0">
+
+                    <Grid BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="5*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Label Text="Select User:" FontAttributes="Bold"
+                               FontSize="18"
+                               Grid.Column="0"
+                               TextColor="Black"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalTextAlignment="Center" />
+
+
+
+                        <local:Dropdown x:Name="pkrusers"
+                                        ItemSelected="pkrusers_ItemSelected"
+                                     
+                                        Grid.Column="1"
+                                        ItemsSource="{Binding UsersList}">
+                        </local:Dropdown>
+                    </Grid>
+
+                </StackLayout>
+                <BoxView HeightRequest="1"
+                         BackgroundColor="{x:DynamicResource PrimaryColor}" />
+                <StackLayout Orientation="Vertical"
+                             BackgroundColor="White">
+                    <Label Text="Please enable/disable the permissions given below."
+                           FontAttributes="Bold"
+                           Margin="10"
+                           FontSize="24"
+                           TextColor="{x:DynamicResource PrimaryVariantColor}"></Label>
+                    <Grid Margin="10"
+                          BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <Label Text="Create Assets"
+                               FontAttributes="Bold"
+                               FontSize="18"
+                               TextColor="Black"
+                               Grid.Row="0"
+                               Grid.Column="0"></Label>
+                        <Switch IsToggled="{Binding CREATEASSETS}"
+                                Grid.Row="0"
+                                Grid.Column="1" />
+                        <Label Text="Move Assets"
+                               FontAttributes="Bold"
+                               FontSize="18"
+                               TextColor="Black"
+                               Grid.Row="1"
+                               Grid.Column="0"></Label>
+                        <Switch IsToggled="{Binding MOVEASSETS}"
+                                Grid.Row="1"
+                                Grid.Column="1" />
+                        <Label Text="Transfer Assets"
+                               FontAttributes="Bold"
+                               FontSize="18"
+                               TextColor="Black"
+                               Grid.Row="2"
+                               Grid.Column="0"></Label>
+                        <Switch IsToggled="{Binding TRANSFERASSETS}"
+                                Grid.Row="2"
+                                Grid.Column="1" />
+                        <Label Text="Dispose Assets"
+                               FontAttributes="Bold"
+                               FontSize="18"
+                               TextColor="Black"
+                               Grid.Row="3"
+                               Grid.Column="0"></Label>
+                        <Switch IsToggled="{Binding DISPOSEASSETS}"
+                                Grid.Row="3"
+                                Grid.Column="1" />
+                        <Label Text="Repair Assets"
+                               FontAttributes="Bold"
+                               FontSize="18"
+                               TextColor="Black"
+                               Grid.Row="4"
+                               Grid.Column="0"></Label>
+                        <Switch IsToggled="{Binding REPAIRASSETS}"
+                                Grid.Row="4"
+                                Grid.Column="1" />
+
+                        <Label Text="Rights Management"
+                               FontAttributes="Bold"
+                               FontSize="18"
+                               TextColor="Black"
+                               Grid.Row="5"
+                               Grid.Column="0"></Label>
+                        <Switch IsToggled="{Binding RIGHTS_MANAGMENT}"
+                                Grid.Row="5"
+                                Grid.Column="1" />
+                    </Grid>
+
+                    <Button Command="{Binding SAVEPERMISSIONS}"
+                            Text="Save Permissions"
+                            FontAttributes="Bold"
+                            Style="{x:DynamicResource ButtonStyle}" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

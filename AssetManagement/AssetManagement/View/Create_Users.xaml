@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             xmlns:behaviors="clr-namespace:AssetManagement.Behavior"
+             x:Class="AssetManagement.View.Create_Users" Title="Create New Users">
+    
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{x:DynamicResource PrimaryBackgroundColor}">
+            <StackLayout Orientation="Vertical"
+                         Margin="2,0,2,0"
+                         BackgroundColor="White">
+                <ScrollView Orientation="Vertical">
+                    <StackLayout Orientation="Vertical">
+                        <Image x:Name="imguser" Source="{Binding Image1}"
+                               HeightRequest="100"
+                               HorizontalOptions="CenterAndExpand"></Image>
+                        <Label Text="Create New User Here!" FontAttributes="Bold" TextColor="Black"
+                               FontSize="Title"
+                               HorizontalOptions="CenterAndExpand" />
+                        <ActivityIndicator x:Name="indicator"
+                                           IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                           IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                           IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                           Color="Red" />
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+
+                            </Grid.RowDefinitions>
+                            <local:EntryBorder  Text="{Binding EMPNAME}"
+                                                Placeholder="Employee Name"
+                                                PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                                Grid.Row="0"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding EMPCODE}"
+                                               Placeholder="Employee Code"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="1"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding USERNAME}"
+                                               Placeholder="E-mail"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="2">
+                                <local:EntryBorder.Behaviors>
+                                    <behaviors:EmailValidatorBehavior />
+                                </local:EntryBorder.Behaviors>
+                            </local:EntryBorder>
+                            <local:EntryBorder x:Name="password"
+                                               Text="{Binding PASSWORD}"
+                                               IsPassword="True"
+                                               Placeholder="Password"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="3">
+
+                            </local:EntryBorder>
+                            <local:EntryBorder x:Name="confirmpassword"
+                                               Text="{Binding CONFIRMPASSWORD}"
+                                               TextChanged="confirmpassword_TextChanged"
+                                               IsPassword="True"
+                                               Placeholder="Confirm Password"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="4">
+
+                            </local:EntryBorder>
+
+                            <local:Dropdown x:Name="pkrdepartment" ItemSelected="pkrdepartment_ItemSelected"
+                                          
+                                            Grid.Row="5"
+                                            ItemsSource="{Binding DepartmentList}">
+                            </local:Dropdown>
+
+                            <local:Dropdown x:Name="pkrlocation" ItemSelected="pkrlocation_ItemSelected"
+                                            Grid.Row="6"
+                                            ItemsSource="{Binding LocationList}">
+                            </local:Dropdown>
+
+                            <local:Dropdown x:Name="pkrbranch" ItemSelected="pkrbranch_ItemSelected"
+                                            Grid.Row="7"
+                                            ItemsSource="{Binding BranchList}">
+                            </local:Dropdown>
+                           
+                            <local:EntryBorder Text="{Binding CONTACT}"
+                                               Placeholder="Contact No."
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="8"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding EMAIL}"
+                                               Placeholder="Alternate Email"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="9">
+                                <local:EntryBorder.Behaviors>
+                                    <behaviors:EmailValidatorBehavior />
+                                </local:EntryBorder.Behaviors>
+                            </local:EntryBorder>
+
+
+                        </Grid>
+                    </StackLayout>
+                </ScrollView>
+                <Button Text="Create" FontAttributes="Bold"
+                        Command="{Binding REGISTER}"
+                       Style="{x:DynamicResource ButtonStyle}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

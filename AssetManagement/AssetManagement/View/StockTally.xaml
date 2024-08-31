@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.Converters"
+             x:Class="AssetManagement.View.StockTally" Title="Stock Inventory">
+
+    <ContentPage.Resources>
+
+        <local:TextColorConverter x:Key="ColorConverter"></local:TextColorConverter>
+        <local:ImageConverter x:Key="ImageConverter"></local:ImageConverter>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     >
+            <StackLayout BackgroundColor="White"
+                         Margin="2,0,2,0">
+
+                <!--<BoxView HeightRequest="3"
+                     BackgroundColor="#003E38"
+                     Margin="0,2,0,0"></BoxView>-->
+
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    <Entry x:Name="entrydocket"
+                           Grid.Column="1"
+                           Text="{Binding ASSETID}"
+                           TextColor="Black"
+                           PlaceholderColor="Black"
+                           Placeholder="Please scan asset here"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center" />
+
+
+                    <Image x:Name="qrcode"
+                           Grid.Column="0"
+                           HeightRequest="30"
+                           WidthRequest="30"
+                           Source="qrcode.png"></Image>
+                    <Image x:Name="imgsearch"
+                           Grid.Column="2"
+                           HeightRequest="30"
+                           WidthRequest="30"
+                           Source="search.png"></Image>
+                </Grid>
+
+
+                <ScrollView Orientation="Vertical">
+                    <StackLayout>
+                        <ActivityIndicator x:Name="indicator"
+                                           IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                           IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                           IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                           Color="Red" />
+                        <Grid ColumnSpacing="3"
+                              BackgroundColor="{x:DynamicResource PrimaryColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="70"></RowDefinition>
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+
+
+
+                            </Grid.ColumnDefinitions>
+
+                            <BoxView Grid.Row="0"
+                                     BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+                            <StackLayout Orientation="Vertical"
+                                         Grid.Column="0">
+                                <Label Text="Total Assets" FontAttributes="Bold"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalOptions="Start"></Label>
+                                <Label Text="{Binding TOTAL_STOCK}"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="White"
+                                       FontSize="24"></Label>
+                            </StackLayout>
+                            <BoxView Grid.Column="1"
+                                     BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+                            <StackLayout Orientation="Vertical"
+                                         Grid.Column="1">
+                                <Label Text="Scanned Assets"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       TextColor="White"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalOptions="Start"></Label>
+                                <Label Text="{Binding SCANNED_STOCK}"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="White"
+                                       FontSize="24"
+                                       VerticalOptions="End"></Label>
+                            </StackLayout>
+
+                        </Grid>
+
+
+                        <Grid ColumnSpacing="3"
+                              BackgroundColor="{x:DynamicResource PrimaryColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"></RowDefinition>
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+
+
+
+
+                            </Grid.ColumnDefinitions>
+                            <BoxView Grid.Row="0"
+                                     Grid.Column="0"
+                                     BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+                            <Label Text="Asset Id."
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   Grid.Column="0"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="White" />
+                            <BoxView Grid.Row="0"
+                                     Grid.Column="1"
+                                     BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+                            <Label Text="Name"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   Grid.Column="1"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="White" />
+                            <BoxView Grid.Row="0"
+                                     Grid.Column="2"
+                                     BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+
+                            <Label Text="Status"
+                                   FontAttributes="Bold"
+                                   FontSize="14"
+                                   Grid.Column="2"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="White" />
+
+
+                        </Grid>
+
+                        <!--Listview implementation-->
+
+                        <CollectionView x:Name="docketView"
+                                
+                                  HorizontalOptions="FillAndExpand"
+                                
+                                
+                                  ItemsSource="{Binding ObjStockList}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+
+                                   
+                                        <Frame BorderColor="{x:DynamicResource PrimaryColor}"
+                                               BackgroundColor="White">
+                                            <Grid ColumnSpacing="2">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="50"></RowDefinition>
+
+
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+
+
+
+                                                </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding Asset_id}"
+                                                   TextColor="Black"
+                                                   VerticalTextAlignment="Center"
+                                                   HorizontalTextAlignment="Start"
+                                                   x:Name="txtdoket"
+                                                   FontSize="14"
+                                                   Grid.Column="0">
+
+                                            </Label>
+                                            <!--<Label Text="{Binding Asset_id}"
+                                                       TextColor="{Binding .,Converter={StaticResource ColorConverter},ConverterParameter={x:Reference Name=docketView}}"
+                                                       VerticalTextAlignment="Center"
+                                                       HorizontalTextAlignment="Start"
+                                                       x:Name="txtdoket"
+                                                       FontSize="14"
+                                                       Grid.Column="0">
+
+                                                </Label>-->
+
+
+                                                <Label Text="{Binding Asset_name}"
+                                                   TextColor="Black"
+                                                   VerticalTextAlignment="Center"
+                                                       HorizontalTextAlignment="Center"
+                                                       FontSize="14"
+                                                       Grid.Column="1"></Label>
+
+
+
+                                                <Image Source="{Binding Status,Converter={StaticResource ImageConverter}}"
+                                                       HorizontalOptions="EndAndExpand"
+                                                       VerticalOptions="Center"
+                                                       Grid.Column="2"></Image>
+
+                                            </Grid>
+                                        </Frame>
+
+                                   
+                                </DataTemplate>
+
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+                <Button Text=" Submit"
+                        FontAttributes="Bold"
+                        Style="{x:DynamicResource ButtonStyle}"
+                        Command="{Binding Submit_StockTake}"
+                        IsEnabled="{Binding BTNSUBMITSTATUS}"></Button>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

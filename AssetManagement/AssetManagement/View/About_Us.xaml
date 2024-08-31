@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetManagement.View.About_Us" Title="About Us">
+    <ContentPage.Content>
+        <StackLayout Margin="10,5,10,20">
+            <ScrollView Orientation="Vertical">
+                <StackLayout>
+                    <Image Source="icon.png" HorizontalOptions="Center" HeightRequest="50" WidthRequest="50"></Image>
+                    <Label HorizontalTextAlignment="Center" Text="Aniche Infotech Solutions" TextColor="White" FontSize="24" FontAttributes="Bold" BackgroundColor="{x:DynamicResource PrimaryVariantColor}"/>
+
+                    <Label Text="ANiche Infotech a 20-year-old company specialising in giving Barcoding and RFID solutions in the field of Automatic Identification Data Capture (AIDC) Industry. A' Niche Infotech is based out in Thane, Maharashtra, India. We have domain expertise in giving solutions to different verticals like Manufacturing, Automotive, Pharmaceuticals, Retail, Food and Beverage, Transportation and Logistics, etc 
+Solutions given to customers are for Warehouse Management, Work-In-Process, Finished Goods Inventory, Asset Management, etc." 
+                   TextColor="Black" FontSize="18" HorizontalTextAlignment="Start" HorizontalOptions="Fill" Margin="5"></Label>
+                    <Label Text="Contact Details:"
+                   TextColor="White"
+                   FontSize="24"
+                   FontAttributes="Bold" HorizontalTextAlignment="Center"
+                   BackgroundColor="{x:DynamicResource PrimaryVariantColor}"></Label>
+                    <Label Text="Office: F15, 1st Floor, Kris Korner Commercial Plaza, Anand Nagar, GB Road, Thane West – 400 610, Maharashtra, India." TextColor="Black" FontAttributes="Bold"></Label>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="10*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Image Source="telephone.png"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       HeightRequest="20" WidthRequest="20"></Image>
+                        <Label Grid.Column="1"
+                       Grid.Row="0"
+                       HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Text="Tel:-8108081660 / 8108081661" TextColor="Black" FontSize="16"></Label>
+
+                        <Image Source="email.png" Grid.Row="1"
+                       Grid.Column="0"
+                       HeightRequest="20"
+                       WidthRequest="20"></Image>
+                        <Label Grid.Column="1"
+                       Grid.Row="1"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"
+                       Text="Email: contact@aniche-solutions.com"
+                       TextColor="Black"
+                       FontSize="16"></Label>
+
+                        <Image Source="website.png"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       HeightRequest="20"
+                       WidthRequest="20"></Image>
+                        <Label x:Name="website" Grid.Column="1"
+                       Grid.Row="2"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"
+                       Text="Web:- www.aniche-solutions.com"
+                       TextColor="Blue"
+                       FontSize="16"></Label>
+
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+       
+    </ContentPage.Content>
+</ContentPage>

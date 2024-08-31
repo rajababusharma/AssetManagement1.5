@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AssetManagement.View.MoveNotification" Title="Move Notifications">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+       
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                    >
+            <StackLayout Margin="2,0,2,0"
+                         BackgroundColor="White">
+                <StackLayout x:Name="mainlayout"
+                             IsVisible="{Binding ShowMain}"
+                             BackgroundColor="White">
+                    <StackLayout Orientation="Vertical">
+
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="6*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Entry x:Name="entrydocket"
+                                   Grid.Column="1"
+                                   Text="{Binding ASSETID}"
+                                   TextColor="Black"
+                                   Placeholder="Pleas scan asset here to search"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center" />
+
+                            <Image x:Name="imgsearch"
+                                   Grid.Column="2"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="search.png"></Image>
+
+
+                            <Image x:Name="qrcode"
+                                   Grid.Column="0"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   Source="qrcode.png"></Image>
+                        </Grid>
+
+                    </StackLayout>
+                    <ActivityIndicator x:Name="indicator"
+                                       IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                       IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                       IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                       Color="Red" />
+                    <Grid ColumnSpacing="3"
+                          BackgroundColor="white">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+
+
+
+
+                        </Grid.ColumnDefinitions>
+                        <BoxView Grid.Row="0"
+                                 Grid.Column="0"
+                                 BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+                        <Label Text="Asset Id."
+                               FontSize="14"
+                               Grid.Column="0"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"
+                               TextColor="White" />
+                        <BoxView Grid.Row="0"
+                                 Grid.Column="1"
+                                 BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+                        <Label Text="Name"
+                               FontSize="14"
+                               Grid.Column="1"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"
+                               TextColor="White" />
+                        <BoxView Grid.Row="0"
+                                 Grid.Column="2"
+                                 BackgroundColor="{x:DynamicResource PrimaryVariantColor}" />
+
+                        <Label Text="Branch"
+                               FontSize="14"
+                               Grid.Column="2"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center"
+                               TextColor="White" />
+
+
+                    </Grid>
+
+                    <ListView x:Name="docketView"
+                              Margin="0,-5,0,0"
+                              BackgroundColor="White"
+                              SeparatorColor="Green"
+                              HorizontalOptions="FillAndExpand"
+                              HasUnevenRows="True"
+                              IsPullToRefreshEnabled="False"
+                              ItemsSource="{Binding Objmovenotification}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+
+                                <ViewCell>
+                                    <Frame BorderColor="{x:DynamicResource PrimaryVariantColor}"
+                                           BackgroundColor="White">
+                                        <Grid ColumnSpacing="2">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="35"></RowDefinition>
+
+
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                                <ColumnDefinition Width="2*"></ColumnDefinition>
+
+
+
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Text="{Binding Asset_id}"
+                                                   TextColor="Black"
+                                                   VerticalTextAlignment="Center"
+                                                   HorizontalTextAlignment="Start"
+                                                   x:Name="txtdoket"
+                                                   Grid.Column="0">
+
+                                            </Label>
+
+
+                                            <Label Text="{Binding Asset_name}"
+                                                   TextColor="Black"
+                                                   VerticalTextAlignment="Center"
+                                                   HorizontalTextAlignment="Center"
+                                                   Grid.Column="1"></Label>
+
+
+                                            <Label Text="{Binding From_Floor}"
+                                                   TextColor="Black"
+                                                   VerticalTextAlignment="Center"
+                                                   HorizontalTextAlignment="End"
+                                                   Grid.Column="2"></Label>
+
+
+                                        </Grid>
+                                    </Frame>
+
+                                </ViewCell>
+                            </DataTemplate>
+
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <!--popuplayout-->
+                <Frame x:Name="popuplayout"
+                       Margin="20,0,20,0"
+                       BorderColor="Black"
+                       CornerRadius="10"
+                       HasShadow="True"
+                       IsVisible="{Binding Show_popuplayout}"
+                       VerticalOptions="CenterAndExpand"
+                       BackgroundColor="LightGray">
+                    <StackLayout  Margin="10,0,10,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="Asset Id:"
+                                   Grid.Row="0"
+                                   Grid.Column="0"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="Asset Name:"
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+
+
+                            <Label Text="From Location:"
+                                   Grid.Row="2"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   Grid.Column="0"
+                                   TextColor="Black"></Label>
+
+                            <Label Text="To Location:"
+                                   Grid.Row="3"
+                                   Grid.Column="0"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="From Branch:"
+                                   Grid.Row="4"
+                                   Grid.Column="0"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="To Branch:"
+                                   Grid.Row="5"
+                                   Grid.Column="0"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="Date:"
+                                   Grid.Row="6"
+                                   Grid.Column="0"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="Status:"
+                                   Grid.Row="7"
+                                   Grid.Column="0"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+
+                            <Label Text="Remarks:"
+                                   Grid.Row="8"
+                                   Grid.Column="0"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+
+
+
+
+                            <Label Text="{Binding ASSET_ID}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="{Binding ASSETNAME}"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="{Binding FROMLOCATION}"
+                                   Grid.Row="2"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="{Binding TOLOCATION}"
+                                   Grid.Row="3"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+
+                            <Label Text="{Binding FROMBRANCH}"
+                                   Grid.Row="4"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="{Binding TOBRANCH}"
+                                   Grid.Row="5"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+                            <Label Text="{Binding MOVEDATE}"
+                                   Grid.Row="6"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="FillAndExpand"
+                                   TextColor="Black"></Label>
+
+
+                            <!--<Label Text="{Binding STATUS}"
+                               Grid.Row="7"
+                               Grid.Column="1"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               TextColor="Black"></Label>-->
+
+                            <CheckBox x:Name="chkisreturn"
+                                      Grid.Row="7"
+                                      Grid.Column="1"
+                                      Margin="0,0,0,0"
+                                      VerticalOptions="Center"
+                                      HorizontalOptions="Start"
+                                      IsChecked="{Binding STATUS}"></CheckBox>
+
+                            <Label Text="{Binding Remarks}"
+                                   Grid.Row="8"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"></Label>
+
+
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Button x:Name="btnsave"
+                                    Grid.Column="0"
+                                    Style="{x:DynamicResource ButtonStyle}"
+                                    Text="Save"
+                                    Clicked="btnsave_Clicked" />
+                            <Button x:Name="btncancel"
+                                    Grid.Column="1"
+                                    Text="Cancel"
+                                    Style="{x:DynamicResource ButtonStyle}"
+                                    Clicked="btncancel_Clicked" />
+                        </Grid>
+
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

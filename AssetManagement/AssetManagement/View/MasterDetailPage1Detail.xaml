@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             xmlns:local1="clr-namespace:AssetManagement.Behavior"
+             xmlns:local2="clr-namespace:AssetManagement.Converters"
+             x:Class="AssetManagement.View.MasterDetailPage1Detail"
+             Title="Dashboard">
+    <ContentPage.Resources>
+
+        <local2:TooltipConverter x:Key="TooltipConverter"></local2:TooltipConverter>
+        <ResourceDictionary>
+            <!--<chart:ChartColorCollection x:Key="Colors">
+                <Color>Blue</Color>
+                <Color>Red</Color>
+                <Color>Maroon</Color>
+                <Color>Green</Color>
+                <Color>Yellow</Color>
+            </chart:ChartColorCollection>-->
+            <chart:ChartColorCollection x:Key="Colors">
+                <Color>#9FE7F5</Color>
+                <Color>#429EBD</Color>
+                <Color>#053F5C</Color>
+                <Color>#E6BEAE</Color>
+                <Color>#B2967D</Color>
+            </chart:ChartColorCollection>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+       
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+        
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+
+
+
+        <AbsoluteLayout >
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                  BackgroundColor="{DynamicResource PrimaryColor}"
+                  AbsoluteLayout.LayoutFlags="All">
+               
+                <!--<ScrollView Orientation="Vertical">-->
+                    <Grid Margin="2,0,2,0"
+               BackgroundColor="{DynamicResource PrimaryColor}"
+                IsVisible="{Binding IsMain}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="4*" />
+                            <RowDefinition Height="7*" />
+
+                        </Grid.RowDefinitions>
+
+
+                        <BoxView HeightRequest="3"
+                      BackgroundColor="White"
+                      Margin="0,2,0,0"></BoxView>
+                        <Grid Margin="10,5,10,0" VerticalOptions="CenterAndExpand"
+                   Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="5*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+                            <Label Text="Select Branch:"
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        FontSize="18" FontAttributes="Bold"
+                        TextColor="Black"></Label>
+
+
+                            <local:Dropdown x:Name="pkrBranch"
+                                 ItemSelected="pkrBranch_ItemSelected"
+                                 Grid.Column="1"
+                                 SelectedIndex="{Binding CurrentBranch}"
+                               
+                                 ItemsSource="{Binding BranchList}">
+
+                            </local:Dropdown>
+
+
+                        </Grid>
+
+                        <!--Pie Chart  Series for assets at places-->
+                        <chart:SfChart Grid.Row="1">
+
+                            <chart:SfChart.Title>
+
+                                <chart:ChartTitle Text="Stocks At Places"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       FontSize="18" />
+
+                            </chart:SfChart.Title>
+                            <chart:PieSeries ItemsSource="{Binding ObjStockList}"
+                                  EnableSmartLabels="True"
+                                  ConnectorLineType="Line"
+                                  DataMarkerPosition="Outside"
+                                  EnableDataPointSelection="True"
+                                  XBindingPath="Asset_Type"
+                                  YBindingPath="count"
+                                  StrokeColor="#283618">
+                                <chart:PieSeries.ColorModel>
+                                    <chart:ChartColorModel Palette="Custom"
+                                                CustomBrushes="{StaticResource Colors}" />
+                                </chart:PieSeries.ColorModel>
+                                <chart:PieSeries.DataMarker>
+
+                                    <chart:ChartDataMarker MarkerColor="DarkGreen"
+                                                ShowMarker="True"
+                                                MarkerType="Square" />
+
+                                </chart:PieSeries.DataMarker>
+
+                            </chart:PieSeries>
+                            <chart:SfChart.Legend>
+
+
+
+                                <chart:ChartLegend StrokeColor="White"
+                                        DockPosition="Right"
+                                        CornerRadius="2"
+                                        StrokeWidth="2"
+                                        BackgroundColor="White"
+                                        Margin="2">
+
+                                    <chart:ChartLegend.StrokeDashArray>
+
+                                    </chart:ChartLegend.StrokeDashArray>
+
+                                </chart:ChartLegend>
+
+                            </chart:SfChart.Legend>
+
+                        </chart:SfChart>
+                        <!--ColumnSeries  Series-->
+
+
+                        <chart:SfChart Grid.Row="2"
+         SelectionChanged="SfChart_SelectionChanged"
+         EnableSeriesSelection="False"
+         BackgroundColor="White">
+
+
+
+                            <chart:SfChart.ChartBehaviors>
+                                <chart:ChartTooltipBehavior BackgroundColor="{x:DynamicResource PrimaryVariantColor}"
+                              BorderWidth="3"
+                              BorderColor="Aqua"
+                              TextColor="White"
+                              Margin="5"
+                              Duration="20"
+                              FontSize="18"
+                              FontFamily="Times New Roman" />
+
+
+                                <local1:ChartSelectionBehaviorExt />
+                                <chart:ChartZoomPanBehavior EnableDirectionalZooming="True" EnableZooming="True" MaximumZoomLevel="500" ZoomMode="XY">
+
+                                </chart:ChartZoomPanBehavior>
+                            </chart:SfChart.ChartBehaviors>
+
+                            <chart:SfChart.Title>
+
+                                <chart:ChartTitle Text="Branch Wise Asset Count"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                    FontSize="18" />
+
+                            </chart:SfChart.Title>
+
+                            <chart:SfChart.PrimaryAxis>
+
+                                <chart:CategoryAxis ZoomPosition="50">
+
+                                    <chart:CategoryAxis.Title>
+
+                                        <chart:ChartAxisTitle Text="Branches"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
+                                FontSize="12"></chart:ChartAxisTitle>
+
+                                    </chart:CategoryAxis.Title>
+                                    <!--To change axis line color-->
+                                    <chart:CategoryAxis.AxisLineStyle>
+                                        <chart:ChartLineStyle StrokeColor="{x:DynamicResource PrimaryVariantColor}"
+                                StrokeWidth="2" />
+                                    </chart:CategoryAxis.AxisLineStyle>
+                                    <!--To change axis major grid line color-->
+                                    <chart:CategoryAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle StrokeColor="{x:DynamicResource PrimaryVariantColor}"
+                                StrokeWidth="2" />
+                                    </chart:CategoryAxis.MajorGridLineStyle>
+                                    <!--To change axis label text color-->
+                                    <chart:CategoryAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="{x:DynamicResource PrimaryVariantColor}"
+                                     FontSize="10" />
+                                    </chart:CategoryAxis.LabelStyle>
+                                    <!--To change axis ticks color-->
+                                    <chart:CategoryAxis.MajorTickStyle>
+                                        <chart:ChartAxisTickStyle StrokeColor="{x:DynamicResource PrimaryVariantColor}"
+                                    StrokeWidth="2" />
+                                    </chart:CategoryAxis.MajorTickStyle>
+
+                                </chart:CategoryAxis>
+
+                            </chart:SfChart.PrimaryAxis>
+
+                            <chart:SfChart.SecondaryAxis>
+
+                                <chart:NumericalAxis>
+
+                                    <chart:NumericalAxis.Title>
+
+                                        <chart:ChartAxisTitle Text="Assets Count"
+                                    FontAttributes="Bold"
+                                    BorderColor="Blue"
+                                TextColor="Black"
+                                FontSize="12"></chart:ChartAxisTitle>
+
+                                    </chart:NumericalAxis.Title>
+
+                                    <chart:NumericalAxis.MajorGridLineStyle>
+                                        <chart:ChartLineStyle StrokeColor="Black"
+                                StrokeWidth="2">
+
+                                        </chart:ChartLineStyle>
+
+
+                                    </chart:NumericalAxis.MajorGridLineStyle>
+
+                                    <chart:NumericalAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle TextColor="{x:DynamicResource TooltripColor}"
+                                     Font="10">
+
+                                        </chart:ChartAxisLabelStyle>
+                                    </chart:NumericalAxis.LabelStyle>
+
+                                    <chart:NumericalAxis.MinorGridLineStyle>
+                                        <chart:ChartLineStyle StrokeColor="Black"
+                                StrokeWidth="2"></chart:ChartLineStyle>
+                                    </chart:NumericalAxis.MinorGridLineStyle>
+
+                                </chart:NumericalAxis>
+
+
+
+                            </chart:SfChart.SecondaryAxis>
+
+                            <chart:SfChart.Series>
+
+                                <chart:ColumnSeries ItemsSource="{Binding BranchwiseList}"
+                      EnableDataPointSelection="True"
+                      XBindingPath="Branch"
+                      YBindingPath="Asset_Count"
+                      EnableTooltip="True"
+                      Label="Counts">
+
+                                    <chart:ColumnSeries.ColorModel>
+                                        <chart:ChartColorModel Palette="Custom"
+                                 CustomBrushes="{StaticResource Colors}" />
+                                    </chart:ColumnSeries.ColorModel>
+
+                                    <chart:ColumnSeries.TooltipTemplate>
+                                        <DataTemplate>
+                                            <StackLayout Orientation="Vertical">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="Branch:"
+                             TextColor="White" />
+                                                    <Label Text="{Binding Branch, Converter={StaticResource TooltipConverter}}"
+                             TextColor="White" />
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="count:"
+                             TextColor="White" />
+                                                    <Label Text="{Binding Asset_Count}"
+                             TextColor="White" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </chart:ColumnSeries.TooltipTemplate>
+
+                                    <chart:ColumnSeries.DataMarker>
+
+                                        <chart:ChartDataMarker MarkerColor="{x:DynamicResource TooltripColor}"
+                                 ShowMarker="True"
+                                 MarkerType="Triangle"
+                                 MarkerHeight="20" />
+
+                                    </chart:ColumnSeries.DataMarker>
+                                </chart:ColumnSeries>
+                            </chart:SfChart.Series>
+                            <chart:SfChart.Legend>
+
+                                <chart:ChartLegend CornerRadius="10"
+                     IconHeight="20"
+                     IconWidth="20" />
+
+                            </chart:SfChart.Legend>
+
+
+
+                        </chart:SfChart>
+
+
+
+
+
+                    </Grid>
+                <!--</ScrollView>-->
+                <!--Pie Chart  Series for assets category count-->
+               
+                   
+
+            </StackLayout>
+            <ImageButton x:Name="btnaddassets" AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize" BackgroundColor="Transparent" Clicked="btnaddassets_Clicked"
+                                   AbsoluteLayout.LayoutFlags="PositionProportional" Source="add_assets.png"/>
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</ContentPage>

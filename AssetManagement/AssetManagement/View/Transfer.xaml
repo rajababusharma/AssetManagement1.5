@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             x:Class="AssetManagement.View.Transfer" Title="Transfer Asset">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     >
+            <StackLayout BackgroundColor="White"
+                         Margin="2,0,2,0">
+                <ActivityIndicator x:Name="indicator"
+                                   IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                   IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                   IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                   Color="Red" />
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="100" />
+
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Asset Id:"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="0"
+                           Grid.Column="0"></Label>
+                    <Label Text="Asset Name:"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="1"
+                           Grid.Column="0"></Label>
+                    <Label Text="From Employee:"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="2"
+                           Grid.Column="0"></Label>
+
+
+                    <Label Text="To Employee:"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="3"
+                           Grid.Column="0"></Label>
+
+                    <Label Text="Remarks"
+                           FontAttributes="Bold"
+                           Grid.Row="4"
+                           Grid.Column="0"
+                           FontSize="Medium"
+                           TextColor="Black"></Label>
+
+
+                    <Label Text="{Binding ASSETID}"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Grid.Row="0"
+                           Grid.Column="1"></Label>
+                    <Label Text="{Binding ASSETNAME}"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="1"
+                           Grid.Column="1"></Label>
+                    <Label Text="{Binding FROMEMPLOYEE}"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="2"
+                           Grid.Column="1"></Label>
+
+                    <local:Dropdown x:Name="pkremployee"
+                                    ItemSelected="pkremployee_ItemSelected"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    ItemsSource="{Binding EmployeeList}">
+                    </local:Dropdown>
+
+
+                    <local:EditorBorder Text="{Binding Remarks}"
+                                        FontSize="Medium"
+                                        Grid.Row="5"
+                                        Grid.ColumnSpan="2"></local:EditorBorder>
+                </Grid>
+
+
+
+                <Button Text="Transfer"
+                        FontAttributes="Bold"
+                        Command="{Binding SUBMIT}"
+                        IsEnabled="{Binding BTNSUBMITSTATUS}"
+                        Style="{x:DynamicResource ButtonStyle}"></Button>
+                <Image Source="transferasset.png"
+                       VerticalOptions="StartAndExpand"
+                       HorizontalOptions="CenterAndExpand"></Image>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.Converters"
+             x:Class="AssetManagement.View.MasterDetailPage1Master"
+             Title="Asset Management">
+    <ContentPage.Resources>
+        <local:Menu_ImageConverter x:Key="ImageConverter"></local:Menu_ImageConverter>
+        <local:DisplayNotification x:Key="DisplayMoveNotificatio"></local:DisplayNotification>
+    </ContentPage.Resources>
+    <StackLayout BackgroundColor="{x:DynamicResource PrimaryColor}">
+        <Frame BorderColor="Black"
+               CornerRadius="5"
+               BackgroundColor="{x:DynamicResource PrimaryColor}"
+               HeightRequest="300">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+
+                </Grid.RowDefinitions>
+                
+                <Image Source="{Binding Image1}"
+                       Grid.Column="0"
+                       Grid.Row="0"></Image>
+                <Label Grid.Column="0"
+                       Grid.Row="1"
+                       HorizontalOptions="Center"
+                       Text="{Binding USERNAME}" FontAttributes="Bold"
+                       TextColor="Black"
+                       FontSize="Medium" />
+                <Label Grid.Column="0"
+                       Grid.Row="2"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold"
+                       Text="{Binding BRANCH}"
+                       TextColor="Black"
+                       FontSize="Medium" />
+            </Grid>
+        </Frame>
+        <StackLayout x:Name="stkNotification"
+                     BackgroundColor="{x:DynamicResource PrimaryColor}"
+                     Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand">
+            <Frame CornerRadius="100"
+                   Margin="2"
+                   Padding="7">
+                <Image Source="notification.png"
+                       HeightRequest="30"
+                       WidthRequest="30"></Image>
+            </Frame>
+            <StackLayout VerticalOptions="Center"
+                     Orientation="Horizontal">
+
+
+
+
+                <Label     Text="Asset's Notifications" Margin="5,0,0,0"
+                           FontAttributes="Bold"
+                           VerticalTextAlignment="Center"
+                       TextColor="Black"
+                       FontSize="18" />
+                <Button IsVisible="{Binding NOTIFICATIONTEXT,Converter={StaticResource DisplayMoveNotificatio}}"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    CornerRadius="100"
+                    Text="{Binding NOTIFICATIONTEXT}"
+                    TextColor="White"
+                    FontSize="10"
+                    FontAttributes="Bold"
+                    BackgroundColor="Red" />
+        </StackLayout>
+        </StackLayout>
+        <StackLayout x:Name="AMCNotification"
+                     BackgroundColor="{x:DynamicResource PrimaryColor}"
+                     Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand">
+            <Frame CornerRadius="100"
+                   Margin="2"
+                   Padding="7">
+                <Image Source="notification.png"
+                       HeightRequest="30"
+                       WidthRequest="30"></Image>
+            </Frame>
+            <StackLayout VerticalOptions="Center"
+                         Orientation="Horizontal">
+
+
+
+
+                <Label     Text="AMC/Insurance Notifications"
+                           Margin="5,0,0,0"
+                           FontAttributes="Bold"
+                           VerticalTextAlignment="Center"
+                           TextColor="Black"
+                           FontSize="18" />
+                <Button IsVisible="{Binding AMCNOTIFICATIONTEXT,Converter={StaticResource DisplayMoveNotificatio}}"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        CornerRadius="100"
+                        Text="{Binding AMCNOTIFICATIONTEXT}"
+                        TextColor="White"
+                        FontSize="10"
+                        FontAttributes="Bold"
+                        BackgroundColor="Red" />
+            </StackLayout>
+        </StackLayout>
+        <ListView x:Name="MenuItemsListView"
+              SeparatorVisibility="Default"
+              HasUnevenRows="true"
+              ItemsSource="{Binding MenuItems}">
+     
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+                        <StackLayout BackgroundColor="{x:DynamicResource PrimaryColor}" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Frame CornerRadius="100"
+                                   Margin="5" Padding="7">
+                                <Image Source="{Binding Title,Converter={StaticResource ImageConverter}}"
+                                       HeightRequest="30"
+                                       WidthRequest="30"></Image>
+                            </Frame>
+                         
+              <!--<Label VerticalOptions="FillAndExpand" 
+                    VerticalTextAlignment="Center" TextColor="White"
+                    Text="{Binding Title}" 
+                    FontSize="20"/>-->
+                            <StackLayout VerticalOptions="Center" Orientation="Horizontal">
+
+
+
+
+                                <Label     Text="{Binding Title}"
+                                           VerticalTextAlignment="Center"
+                                           TextColor="Black"
+                                           FontAttributes="Bold"
+                                           FontSize="18" />
+                                <!--<Button IsVisible="{Binding Title,Converter={StaticResource DisplayMoveNotificatio}}"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        CornerRadius="100"
+                                        Text="{Binding NOTIFICATIONTEXT}"
+                                        TextColor="White"
+                                        FontSize="10"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="Red" />-->
+                            </StackLayout>
+                        </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </StackLayout>
+</ContentPage>

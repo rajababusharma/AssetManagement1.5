@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
+             Title="Dispose Asset"
+             x:Class="AssetManagement.View.Dispose">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem x:Name="logout"
+                     Text="Logout"
+                     Clicked="logout_Clicked"
+                     Priority="1"
+                     IconImageSource="logout_icon.png"
+                     Order="Primary" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     >
+            <StackLayout BackgroundColor="White"
+                         Margin="2,0,2,0">
+                <ActivityIndicator x:Name="indicator"
+                                   IsVisible="{Binding IsVisible,Mode=TwoWay}"
+                                   IsRunning="{Binding IsBusy,Mode=TwoWay}"
+                                   IsEnabled="{Binding IsEnable,Mode=TwoWay}"
+                                   Color="Red" />
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="80" />
+
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Asset Id:"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="0"
+                           Grid.Column="0"></Label>
+                    <Label Text="Asset Name:"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="1"
+                           Grid.Column="0"></Label>
+                    <Label Text="Mode of disposal:"
+                           FontAttributes="Bold"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="2"
+                           Grid.Column="0"></Label>
+
+                    <Label Text="Reason of disposal:"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           Grid.Row="3"
+                           Grid.Column="0"></Label>
+                    <Label Text="Residual Value:"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           Grid.Row="4"
+                           Grid.Column="0"></Label>
+
+                    <Label Text="Remarks"
+                           FontAttributes="Bold"
+                           Grid.Row="5"
+                           Grid.Column="0"
+                           FontSize="Medium"
+                           TextColor="Black"></Label>
+
+
+                    <Label Text="{Binding ASSETID}"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Grid.Row="0"
+                           Grid.Column="1"></Label>
+                    <Label Text="{Binding ASSETNAME}"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           Grid.Row="1"
+                           Grid.Column="1"></Label>
+                    <local:Dropdown x:Name="pkrmode"
+                                    ItemSelected="pkrmode_ItemSelected"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    ItemsSource="{Binding DISPOSALMODES}">
+                    </local:Dropdown>
+                    <local:Dropdown x:Name="pkrreason"
+                                    ItemSelected="pkrreason_ItemSelected"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    ItemsSource="{Binding DISPOSALREASONS}">
+                    </local:Dropdown>
+
+                    <Entry Text="{Binding RESIDUALVALUE}"
+                           FontSize="Medium"
+                           Grid.Row="4"
+                           Grid.Column="1"></Entry>
+
+                    <local:EditorBorder Text="{Binding Remarks}"
+                                        FontSize="Medium"
+                                        Grid.Row="6"
+                                        Grid.ColumnSpan="2"></local:EditorBorder>
+
+                </Grid>
+
+
+                <StackLayout Margin="10,-5,0,0">
+                    <Label Text="Challan and other documents"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           FontSize="24"></Label>
+                </StackLayout>
+                <Grid BackgroundColor="{x:DynamicResource PrimaryColor}"
+                      Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Frame BorderColor="Black"
+                           Padding="5"
+                           Margin="5"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           CornerRadius="5">
+                        <Image x:Name="click1"
+                               Aspect="AspectFill"
+                               Source="{Binding Image1}"></Image>
+                    </Frame>
+                    <Frame BorderColor="Black"
+                           Padding="5"
+                           Margin="5"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           CornerRadius="5">
+                        <Image x:Name="click2"
+                               Aspect="AspectFill"
+                               Source="{Binding Image2}"></Image>
+                    </Frame>
+                    <Frame BorderColor="Black"
+                           Padding="5"
+                           Margin="5"
+                           Grid.Row="0"
+                           Grid.Column="2"
+                           CornerRadius="5">
+                        <Image x:Name="click3"
+                               Aspect="AspectFill"
+                               Source="{Binding Image3}"></Image>
+                    </Frame>
+
+
+
+                    <Label Text="Document 1"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalTextAlignment="Center"></Label>
+                    <Label Text="Document 2"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalTextAlignment="Center"></Label>
+                    <Label Text="Document 3"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           HorizontalTextAlignment="Center"></Label>
+                </Grid>
+                <Button Text="Dispose"
+                        FontAttributes="Bold"
+                        Command="{Binding SUBMIT}"
+                        IsEnabled="{Binding BTNSUBMITSTATUS}"
+                        Style="{x:DynamicResource ButtonStyle}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
