@@ -6,17 +6,24 @@ using Plugin.Connectivity;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using static Android.App.Assist.AssistStructure;
 using static Android.Graphics.Paint;
 
 namespace AssetManagement.ViewModel
 {
     public class AssetReportViewModel:BaseViewModel
     {
+        List<string> loc = new List<string>(new string[] { "No Location" });
+        List<string> br = new List<string>(new string[] { "No Branch" });
+        List<string> emp = new List<string>(new string[] { "No Employee" });
+        List<string> cat = new List<string>(new string[] { "No Category" });
         List<string> sub = new List<string>(new string[] { "No Subcategory" });
+       // List<string> FilterList = new List<string>(new string[] { "Employee","Location","Branch","Category","Subcategory" });
 
         public AssetReportViewModel()
         {
@@ -24,28 +31,159 @@ namespace AssetManagement.ViewModel
             IsEnable = false;
             IsVisible = false;
             GetCat_Sub_Dept_Vendor();
-
+            GetEmployeeList();
         }
 
-        private int _selectedsubcategory_index = 0;
-        public int SELECTEDSUBCATEGORY_INDEX
+        private int _FilteredItem = 0;
+        public int FilteredItem
         {
-            get { return _selectedsubcategory_index; }
+            get { return _FilteredItem; }
             set
             {
-                _selectedsubcategory_index = value;
-                NotifyPropertyChanged("SELECTEDSUBCATEGORY_INDEX");
+                _FilteredItem = value;
+                NotifyPropertyChanged("FilteredItem");
             }
         }
 
-        private string _SubCategory;
-        public string SubCategory
+        private string _location;
+        public string Location
         {
-            get { return _SubCategory; }
+            get { return _location; }
             set
             {
-                _SubCategory = value;
+                _location = value;
+                NotifyPropertyChanged("Location");
+            }
+        }
+
+        private string _category;
+        public string Category
+        {
+            get { return _category; }
+            set
+            {
+                _category = value;
+                NotifyPropertyChanged("Category");
+            }
+        }
+
+        private string _subcat;
+        public string SubCategory
+        {
+            get { return _subcat; }
+            set
+            {
+                _subcat = value;
                 NotifyPropertyChanged("SubCategory");
+            }
+        }
+
+        private string _branch;
+        public string Branch
+        {
+            get { return _branch; }
+            set
+            {
+                _branch = value;
+                NotifyPropertyChanged("Branch");
+            }
+        }
+
+        private string _selectedemployee;
+        public string Employee
+        {
+            get { return _selectedemployee; }
+            set
+            {
+                _selectedemployee = value;
+                NotifyPropertyChanged("Employee");
+            }
+        }
+
+
+        List<String> _EmployeeList = new List<string>(100);
+
+        public List<String> EmployeeList
+        {
+            get { return _EmployeeList; }
+
+            set
+            {
+                if (_EmployeeList != value)
+                {
+                    _EmployeeList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("EmployeeList");
+                }
+            }
+        }
+
+        List<String> _FilterList = new List<string>(new string[] { "Employee", "Location", "Branch", "Category", "Subcategory" });
+
+        public List<String> FilterLists
+        {
+            get { return _FilterList; }
+
+            set
+            {
+                if (_FilterList != value)
+                {
+                    _FilterList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("FilterLists");
+                }
+            }
+        }
+
+
+        List<String> _branchList = null;
+
+        public List<String> BranchList
+        {
+            get { return _branchList; }
+
+            set
+            {
+                if (_branchList != value)
+                {
+                    _branchList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("BranchList");
+                }
+            }
+        }
+
+        List<String> _LocationList = null;
+
+        public List<String> LocationList
+        {
+            get { return _LocationList; }
+
+            set
+            {
+                if (_LocationList != value)
+                {
+                    _LocationList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("LocationList");
+                }
+            }
+        }
+
+        List<String> _CategoryList = null;
+
+        public List<String> CategoryList
+        {
+            get { return _CategoryList; }
+
+            set
+            {
+                if (_CategoryList != value)
+                {
+                    _CategoryList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("CategoryList");
+                }
             }
         }
 
@@ -302,16 +440,65 @@ namespace AssetManagement.ViewModel
             else
             {*/
                 foreach (STockTallyDetails docketforpayment in SEARCHOBJECT)
-                {
-                    if (SubCategory.Equals(docketforpayment.SubCategory))
+            {
+               
+                    if (FilteredItem==(int)FilterList.Employee)
                     {
-                        dkt.Add(docketforpayment);
-                        ObjStockList = dkt;
-                        status = true;
-                        break;
+                        if (Employee.Equals(docketforpayment.Employee))
+                        {
+                            dkt.Add(docketforpayment);
+                            ObjStockList = dkt;
+                            status = true;
+                            break;
+                        }
+                    }
+                    else if (FilteredItem == (int)FilterList.Location)
+                    {
+                        if (Location.Equals(docketforpayment.Location))
+                        {
+                            dkt.Add(docketforpayment);
+                            ObjStockList = dkt;
+                            status = true;
+                            break;
+                        }
+                    }
+                    else if (FilteredItem == (int)FilterList.Branch)
+                    {
+                        if (Branch.Equals(docketforpayment.Branch))
+                        {
+                            dkt.Add(docketforpayment);
+                            ObjStockList = dkt;
+                            status = true;
+                            break;
+                        }
+                    }
+                    else if (FilteredItem == (int)FilterList.Category)
+                    {
+                        if (Category.Equals(docketforpayment.Category))
+                        {
+                            dkt.Add(docketforpayment);
+                            ObjStockList = dkt;
+                            status = true;
+                            break;
+                        }
+                    }
+                    else if (FilteredItem == (int)FilterList.Subcategory)
+                    {
+                        if (SubCategory.Equals(docketforpayment.SubCategory))
+                        {
+                            dkt.Add(docketforpayment);
+                            ObjStockList = dkt;
+                            status = true;
+                            break;
+                        }
                     }
 
-                }
+                
+
+
+
+
+            }
                 if (!status)
                 {
                     ObjStockList = null;
@@ -419,8 +606,11 @@ namespace AssetManagement.ViewModel
                         if (apiresponse.Status.Equals("true"))
                         {
 
+                            CategoryList = apiresponse.CategoryList ?? cat;
                             SubCategoryList = apiresponse.SubCategoryList ?? sub;
-                        
+                            LocationList = apiresponse.LocationList ?? loc;
+                            BranchList = apiresponse.BranchList ?? br;
+
                         }
                         else
                         {
@@ -448,6 +638,91 @@ namespace AssetManagement.ViewModel
                     //await App.Current.MainPage.DisplayAlert("Exception", "Request could n, please try again later", "Ok");
                     Crashes.TrackError(excp);
 
+                }
+
+            }
+            else
+            {
+
+                await App.Current.MainPage.DisplayAlert("Alert", "No internet connection, please check and try again later.", "OK");
+            }
+        }
+
+        public async Task GetEmployeeList()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+
+                try
+                {
+                    IsBusy = true;
+                    IsEnable = true;
+                    IsVisible = true;
+
+                    var client = new System.Net.Http.HttpClient();
+                    client.BaseAddress = new Uri(ProjectConstants.GETEMPLOYEELIST_API);
+                    try
+                    {
+
+                        string branch = Preferences.Get(Pref.BRANCH, "");
+         
+                        var response = await client.GetAsync("GetEmployeeList?Branch=" + branch);
+                        var docketJson = response.Content.ReadAsStringAsync().Result;
+
+
+                      
+
+                        EmployeeMasterResp docketobject = new EmployeeMasterResp();
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            if (docketJson != "")
+                            {
+                                docketobject = JsonConvert.DeserializeObject<EmployeeMasterResp>(docketJson);
+                                if (docketobject.Status.Equals("true"))
+                                {
+                                    // dockets= JsonConvert.DeserializeObject<DeliveryDoket>(docketJson);
+
+                                    EmployeeList = docketobject.Employee ?? emp;
+
+                                }
+                                else
+                                {
+                                    await App.Current.MainPage.DisplayAlert("Exception", docketobject.Msg, "Ok");
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            await App.Current.MainPage.DisplayAlert("Exception", response.ReasonPhrase, "Ok");
+                        }
+                        IsBusy = false;
+                        IsEnable = false;
+                        IsVisible = false;
+
+                    }
+                    catch (Exception excp)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Exception", excp.Message, "Ok");
+                        Crashes.TrackError(excp);
+                        IsBusy = false;
+                        IsEnable = false;
+                        IsVisible = false;
+                    }
+
+                }
+                catch (Exception excp)
+                {
+                    // Common.SaveLogs(excp.StackTrace);
+                    IsBusy = false;
+                    IsEnable = false;
+                    IsVisible = false;
+
+                    // BranchList = null;
+                    //await App.Current.MainPage.DisplayAlert("Exception", "Request could n, please try again later", "Ok");
+
+                    Crashes.TrackError(excp);
                 }
 
             }

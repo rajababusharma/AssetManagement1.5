@@ -296,6 +296,14 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\Beep.mp3" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\drawable\refresh.png" />
+    <Content Include="Resources\mipmap-hdpi\refresh.png" />
+    <Content Include="Resources\mipmap-mdpi\refresh.png" />
+    <Content Include="Resources\mipmap-xhdpi\refresh.png" />
+    <Content Include="Resources\mipmap-xxhdpi\refresh.png" />
+    <Content Include="Resources\mipmap-xxxhdpi\refresh.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

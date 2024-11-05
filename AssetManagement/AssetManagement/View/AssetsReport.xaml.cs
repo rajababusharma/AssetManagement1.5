@@ -27,17 +27,17 @@ namespace AssetManagement.View
             InitializeComponent();
             viewModel = new AssetReportViewModel();
             BindingContext = viewModel;
-            entrydocket.Completed += Entrydocket_Completed;
-            entrydocket.TextChanged += Entrydocket_TextChanged;
+/*            entrydocket.Completed += Entrydocket_Completed;
+            entrydocket.TextChanged += Entrydocket_TextChanged;*/
             docketView.ItemTapped += DocketView_ItemTapped;
-            entrydocket.Focus();
-            var searchtapped = new TapGestureRecognizer();
+          //  entrydocket.Focus();
+          /*  var searchtapped = new TapGestureRecognizer();
             searchtapped.Tapped += async (s, e) =>
             {
                 viewModel.ASSETID = entrydocket.Text;
                 viewModel.SearchAsset();
             };
-            imgsearch.GestureRecognizers.Add(searchtapped);
+            imgsearch.GestureRecognizers.Add(searchtapped);*/
 
             var searchtapped1 = new TapGestureRecognizer();
             searchtapped1.Tapped += async (s, e) =>
@@ -48,7 +48,7 @@ namespace AssetManagement.View
             imgsearch1.GestureRecognizers.Add(searchtapped1);
 
             // scan assets
-            var verifyDocket = new TapGestureRecognizer();
+    /*        var verifyDocket = new TapGestureRecognizer();
             verifyDocket.Tapped += async (s, e) =>
             {
                 //your code
@@ -107,7 +107,7 @@ namespace AssetManagement.View
                 }
 
             };
-            qrcode.GestureRecognizers.Add(verifyDocket);
+            qrcode.GestureRecognizers.Add(verifyDocket);*/
 
             //...................
         }
@@ -118,21 +118,21 @@ namespace AssetManagement.View
            // await Navigation.PushAsync(new CreateAssets(assets.Asset_id));
         }
 
-        private void Entrydocket_TextChanged(object sender, TextChangedEventArgs e)
+    /*    private void Entrydocket_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (viewModel.ASSETID.Equals(""))
             {
                 viewModel.ObjStockList = viewModel.SEARCHOBJECT;
                 
             }
-        }
+        }*/
 
-        private void Entrydocket_Completed(object sender, EventArgs e)
+       /* private void Entrydocket_Completed(object sender, EventArgs e)
         {
             viewModel.ASSETID = entrydocket.Text;
             viewModel.SearchAsset();
           
-        }
+        }*/
 
         private void logout_Clicked(object sender, EventArgs e)
         {
@@ -166,17 +166,73 @@ namespace AssetManagement.View
             await Navigation.PushAsync(new CreateAssets(""));
         }
 
-        private void pkrsubcategory_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
+      
+
+        private void pkremployee_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            try
-            {
-                viewModel.SubCategory = viewModel.SubCategoryList[e.SelectedIndex];
-                viewModel.SELECTEDSUBCATEGORY_INDEX = e.SelectedIndex;
-            }
-            catch (Exception excp)
-            {
-                viewModel.SubCategory = "No Data";
-            }
+            viewModel.FilteredItem = (int)FilterList.Employee;
+            viewModel.Employee = viewModel.EmployeeList[e.SelectedIndex];
+             pkrsubcat.SelectedIndex = 0;
+            pkrlocation.SelectedIndex = 0;
+            pkrbranch.SelectedIndex = 0;
+            pkrcategory.SelectedIndex = 0;
+          //  pkremployee.SelectedIndex = 0;
+        }
+
+        private void pkrlocation_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
+        {
+            viewModel.FilteredItem = (int)FilterList.Location;
+            viewModel.Location = viewModel.LocationList[e.SelectedIndex];
+             pkrsubcat.SelectedIndex = 0;
+           // pkrlocation.SelectedIndex = 0;
+            pkrbranch.SelectedIndex = 0;
+            pkrcategory.SelectedIndex = 0;
+            pkremployee.SelectedIndex = 0;
+        }
+
+        private void pkrbranch_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
+        {
+            viewModel.FilteredItem = (int)FilterList.Branch;
+            viewModel.Branch = viewModel.BranchList[e.SelectedIndex];
+             pkrsubcat.SelectedIndex = 0;
+            pkrlocation.SelectedIndex = 0;
+           // pkrbranch.SelectedIndex = 0;
+            pkrcategory.SelectedIndex = 0;
+            pkremployee.SelectedIndex = 0;
+        }
+
+        private void pkrcategory_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
+        {
+            viewModel.FilteredItem = (int)FilterList.Category;
+            viewModel.Category = viewModel.CategoryList[e.SelectedIndex];
+             pkrsubcat.SelectedIndex = 0;
+            pkrlocation.SelectedIndex = 0;
+            pkrbranch.SelectedIndex = 0;
+           // pkrcategory.SelectedIndex = 0;
+            pkremployee.SelectedIndex = 0;
+        }
+
+        private void pkrsubcat_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
+        {
+            viewModel.FilteredItem = (int)FilterList.Subcategory;
+            viewModel.SubCategory = viewModel.SubCategoryList[e.SelectedIndex];
+           // pkrsubcat.SelectedIndex = 0;
+            pkrlocation.SelectedIndex = 0;
+            pkrbranch.SelectedIndex = 0;
+            pkrcategory.SelectedIndex = 0;
+            pkremployee.SelectedIndex = 0;
+           
+        }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+           viewModel.ObjStockList = viewModel.SEARCHOBJECT;
+          
+            pkrsubcat.SelectedIndex = 0;
+            pkrlocation.SelectedIndex = 0;
+            pkrbranch.SelectedIndex = 0;
+            pkrcategory.SelectedIndex = 0;
+            pkremployee.SelectedIndex = 0;
         }
     }
 }

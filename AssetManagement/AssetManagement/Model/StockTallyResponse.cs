@@ -24,5 +24,6 @@ namespace AssetManagement.Model
         public string Status { get; set; } = "Missing";
         public string User_Name { get; set; }
         public string SubCategory { get; set; }
+        public string Category { get; set; }
     }
 }
