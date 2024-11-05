@@ -39,6 +39,14 @@ namespace AssetManagement.View
             };
             imgsearch.GestureRecognizers.Add(searchtapped);
 
+            var searchtapped1 = new TapGestureRecognizer();
+            searchtapped1.Tapped += async (s, e) =>
+            {
+               // viewModel.ASSETID = entrydocket.Text;
+                viewModel.SearchAsset_bySubCat();
+            };
+            imgsearch1.GestureRecognizers.Add(searchtapped1);
+
             // scan assets
             var verifyDocket = new TapGestureRecognizer();
             verifyDocket.Tapped += async (s, e) =>
@@ -156,6 +164,19 @@ namespace AssetManagement.View
         private async void btnaddassets_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CreateAssets(""));
+        }
+
+        private void pkrsubcategory_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
+        {
+            try
+            {
+                viewModel.SubCategory = viewModel.SubCategoryList[e.SelectedIndex];
+                viewModel.SELECTEDSUBCATEGORY_INDEX = e.SelectedIndex;
+            }
+            catch (Exception excp)
+            {
+                viewModel.SubCategory = "No Data";
+            }
         }
     }
 }

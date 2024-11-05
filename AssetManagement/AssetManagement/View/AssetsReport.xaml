@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
              x:Class="AssetManagement.View.AssetsReport" Title="Asset Report">
     <ContentPage.ToolbarItems>
 
@@ -54,6 +55,29 @@
                                HeightRequest="30"
                                WidthRequest="30"
                                Source="qrcode.png"></Image>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <local:Dropdown x:Name="pkrsubcategory"
+                                        Grid.Column="0"
+                                        SelectedIndex="{Binding SELECTEDSUBCATEGORY_INDEX}"
+                                        ItemSelected="pkrsubcategory_ItemSelected"
+                                        ItemsSource="{Binding SubCategoryList}" />
+
+                        <Image x:Name="imgsearch1"
+                               Grid.Column="1"
+                               HeightRequest="30"
+                               WidthRequest="30"
+                               Source="search.png"></Image>
+
                     </Grid>
 
                 </StackLayout>
