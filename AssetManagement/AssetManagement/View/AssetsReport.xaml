@@ -36,32 +36,29 @@
                     <Grid >
                         <Grid.ColumnDefinitions>
 
-                            <ColumnDefinition Width="6*" />
-                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50" />
-                            <RowDefinition Height="50" />
-                            <RowDefinition Height="50" />
-                            <RowDefinition Height="50" />
-                            <RowDefinition Height="50" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
                         </Grid.RowDefinitions>
                         <local:Dropdown x:Name="pkremployee"
-                                        Grid.Column="0"
                                         Grid.Row="0"
                                         ItemsSource="{Binding EmployeeList}"
                                         ItemSelected="pkremployee_ItemSelected" />
 
                         <Image x:Name="imgsearch1"
-                               Grid.Column="1"
-                               Grid.RowSpan="5"
+                               Grid.Row="5"
                                HeightRequest="30"
                                WidthRequest="30"
                                BackgroundColor="#22577E"
                                Source="search.png"></Image>
 
                         <local:Dropdown x:Name="pkrlocation"
-                                        Grid.Column="0"
                                         Grid.Row="1"
                                         ItemsSource="{Binding LocationList}"
                                         ItemSelected="pkrlocation_ItemSelected" />
@@ -69,7 +66,6 @@
                       
 
                         <local:Dropdown x:Name="pkrbranch"
-                                        Grid.Column="0"
                                         Grid.Row="2"
                                         ItemsSource="{Binding BranchList}"
                                         ItemSelected="pkrbranch_ItemSelected" />
@@ -77,7 +73,6 @@
                        
 
                         <local:Dropdown x:Name="pkrcategory"
-                                        Grid.Column="0"
                                         Grid.Row="3"
                                         ItemsSource="{Binding CategoryList}"
                                         ItemSelected="pkrcategory_ItemSelected" />
@@ -85,7 +80,6 @@
                        
 
                         <local:Dropdown x:Name="pkrsubcat"
-                                        Grid.Column="0"
                                         Grid.Row="4"
                                         ItemsSource="{Binding SubCategoryList}"
                                         ItemSelected="pkrsubcat_ItemSelected" />
@@ -145,8 +139,7 @@
                           HorizontalOptions="FillAndExpand"
                           HasUnevenRows="True"
                           IsPullToRefreshEnabled="False"
-                                                                        
-                          ItemsSource="{Binding ObjStockList}">
+                          ItemsSource="{Binding AssetList}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
 

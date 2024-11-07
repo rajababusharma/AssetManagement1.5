@@ -30,8 +30,9 @@ namespace AssetManagement.ViewModel
             IsBusy = false;
             IsEnable = false;
             IsVisible = false;
-            GetCat_Sub_Dept_Vendor();
-            GetEmployeeList();
+              GetCat_Sub_Dept_Vendor();
+             GetEmployeeList();
+           // GetAssetsData();
         }
 
         private int _FilteredItem = 0;
@@ -270,7 +271,24 @@ namespace AssetManagement.ViewModel
             }
         }
 
-        List<STockTallyDetails> _searchObject;
+        List<CreateAssetRequest> _searchObject;
+
+        public List<CreateAssetRequest> SEARCHOBJECT
+        {
+            get { return _searchObject; }
+
+            set
+            {
+                if (_searchObject != value)
+                {
+                    _searchObject = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("SEARCHOBJECT");
+                }
+            }
+        }
+
+      /*  List<STockTallyDetails> _searchObject;
 
         public List<STockTallyDetails> SEARCHOBJECT
         {
@@ -285,7 +303,7 @@ namespace AssetManagement.ViewModel
                     NotifyPropertyChanged("SEARCHOBJECT");
                 }
             }
-        }
+        }*/
 
         private string _ASSETID;
         public string ASSETID
@@ -304,7 +322,7 @@ namespace AssetManagement.ViewModel
             }
         }
 
-        public async void GetAllAssetsData()
+  /*      public async void GetAllAssetsData()
         {
             //null or empty field validation, check weather email and password is null or empty  
 
@@ -336,7 +354,7 @@ namespace AssetManagement.ViewModel
                 IsEnable = true;
                 IsVisible = true;
 
-                /* string ctype = "Unloading";*/
+                *//* string ctype = "Unloading";*//*
                 // string ctype = Preferences.Get(ProjectConstants.CTYPE, "");
 
 
@@ -396,11 +414,11 @@ namespace AssetManagement.ViewModel
 
                 Crashes.TrackError(excp);
             }
-        }
+        }*/
         public async void SearchAsset()
         {
             bool status = false;
-            List<STockTallyDetails> dkt = new List<STockTallyDetails>();
+            List<CreateAssetRequest> dkt = new List<CreateAssetRequest>();
             if (string.IsNullOrEmpty(ASSETID))
             {
                 // await App.Current.MainPage..DisplayAlert("Alert", "Please enter docket number first.", "Ok");
@@ -408,12 +426,12 @@ namespace AssetManagement.ViewModel
             }
             else
             {
-                foreach (STockTallyDetails docketforpayment in SEARCHOBJECT)
+                foreach (CreateAssetRequest docketforpayment in SEARCHOBJECT)
                 {
                     if (ASSETID.Trim().Equals(docketforpayment.Asset_id))
                     {
                         dkt.Add(docketforpayment);
-                        ObjStockList = dkt;
+                        AssetList = dkt;
                         status = true;
                         break;
                     }
@@ -431,77 +449,75 @@ namespace AssetManagement.ViewModel
         public async void SearchAsset_bySubCat()
         {
             bool status = false;
-            List<STockTallyDetails> dkt = new List<STockTallyDetails>();
-           /* if (string.IsNullOrEmpty(ASSETID))
-            {
-                // await App.Current.MainPage..DisplayAlert("Alert", "Please enter docket number first.", "Ok");
-                await App.Current.MainPage.DisplayAlert("Alert", "Please Scan Asset Id first.", "Ok");
-            }
-            else
-            {*/
-                foreach (STockTallyDetails docketforpayment in SEARCHOBJECT)
-            {
+            List<CreateAssetRequest> dkt = new List<CreateAssetRequest>();
+           
+              //  foreach (CreateAssetRequest docketforpayment in SEARCHOBJECT)
+           // {
                
                     if (FilteredItem==(int)FilterList.Employee)
                     {
-                        if (Employee.Equals(docketforpayment.Employee))
+                        foreach (CreateAssetRequest docketforpayment in SEARCHOBJECT)
                         {
-                            dkt.Add(docketforpayment);
-                            ObjStockList = dkt;
-                            status = true;
-                            break;
+                            if (Employee.Equals(docketforpayment.Employee))
+                            {
+                                dkt.Add(docketforpayment);
+                            }
                         }
+                         AssetList = dkt;
+                         status = true;
                     }
                     else if (FilteredItem == (int)FilterList.Location)
                     {
-                        if (Location.Equals(docketforpayment.Location))
+                        foreach (CreateAssetRequest docketforpayment in SEARCHOBJECT)
                         {
-                            dkt.Add(docketforpayment);
-                            ObjStockList = dkt;
-                            status = true;
-                            break;
+                            if (Location.Equals(docketforpayment.Location))
+                            {
+                                dkt.Add(docketforpayment);
+                            }
                         }
+                         AssetList = dkt;
+                         status = true;
                     }
                     else if (FilteredItem == (int)FilterList.Branch)
                     {
-                        if (Branch.Equals(docketforpayment.Branch))
+                        foreach (CreateAssetRequest docketforpayment in SEARCHOBJECT)
                         {
-                            dkt.Add(docketforpayment);
-                            ObjStockList = dkt;
-                            status = true;
-                            break;
+                            if (Branch.Equals(docketforpayment.Branch))
+                            {
+                                dkt.Add(docketforpayment);
+                            }
                         }
+                         AssetList = dkt;
+                         status = true;
                     }
                     else if (FilteredItem == (int)FilterList.Category)
                     {
-                        if (Category.Equals(docketforpayment.Category))
+                        foreach (CreateAssetRequest docketforpayment in SEARCHOBJECT)
                         {
-                            dkt.Add(docketforpayment);
-                            ObjStockList = dkt;
-                            status = true;
-                            break;
+                            if (Category.Equals(docketforpayment.Category))
+                            {
+                                dkt.Add(docketforpayment);
+                            }
                         }
+                         AssetList = dkt;
+                         status = true;
                     }
                     else if (FilteredItem == (int)FilterList.Subcategory)
                     {
-                        if (SubCategory.Equals(docketforpayment.SubCategory))
+                        foreach (CreateAssetRequest docketforpayment in SEARCHOBJECT)
                         {
-                            dkt.Add(docketforpayment);
-                            ObjStockList = dkt;
-                            status = true;
-                            break;
+                            if (SubCategory.Equals(docketforpayment.SubCategory))
+                            {
+                                dkt.Add(docketforpayment);
+                            }
                         }
+                         AssetList = dkt;
+                         status = true;
                     }
-
-                
-
-
-
-
-            }
+           // }
                 if (!status)
                 {
-                    ObjStockList = null;
+                    AssetList = null;
                     await App.Current.MainPage.DisplayAlert("Alert", "Asset not found", "Ok");
                 }
 
@@ -537,7 +553,10 @@ namespace AssetManagement.ViewModel
                         stocktake = JsonConvert.DeserializeObject<AssetDataResponse>(responseJson);
                         if (stocktake.Status.Equals("true"))
                         {
+                          //  AssetList=null;
+                           // SEARCHOBJECT=null;
                             AssetList = stocktake.Assets;
+                            SEARCHOBJECT = stocktake.Assets;
                         }
                         else
                         {

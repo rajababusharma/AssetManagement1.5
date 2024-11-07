@@ -38,34 +38,27 @@
                                  Margin="0,5,0,0">
 
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="6*" />
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6*" />
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50" />
                             </Grid.RowDefinitions>
-                            <Entry x:Name="entrydocket1"
-                                   Grid.Column="1"
+                            <Entry x:Name="entrydocket1" ClearButtonVisibility="WhileEditing"
+                                   Grid.Column="0"
                                    Text="{Binding ASSETID}"
                                    TextColor="Black"
                                    Placeholder="Pleas scan asset here to search"
                                    HorizontalTextAlignment="Center"
                                    VerticalTextAlignment="Center" />
 
-                            <Image x:Name="imgsearch1"
-                                   Grid.Column="2"
-                                   HeightRequest="30"
-                                   WidthRequest="30"
-                                   Source="search.png"></Image>
-
-                            <Image x:Name="qrcode1"
-                                   Grid.Column="0"
-                                   HeightRequest="30"
-                                   WidthRequest="30"
-                                   Source="qrcode.png"></Image>
-                        </Grid>
+                                <Image x:Name="imgsearch1"
+                                       Grid.Column="1"
+                                       HeightRequest="30"
+                                       WidthRequest="30"
+                                       Source="search.png"></Image>
+                            </Grid>
 
                     </StackLayout>
                     <ActivityIndicator x:Name="indicator"
@@ -409,6 +402,14 @@
                         </StackLayout>
                     </Frame>
                 </StackLayout>
+                <ImageButton x:Name="btnsearchassets1"
+                             HeightRequest="60"
+                             WidthRequest="60"
+                             AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"
+                             Clicked="btnsearchassets1_Clicked"
+                             BackgroundColor="Transparent"
+                             AbsoluteLayout.LayoutFlags="PositionProportional"
+                             Source="qrcode2.png" />
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>
@@ -445,15 +446,14 @@
 
                             <Grid >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="6*" />
                                     <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="50" />
                                 </Grid.RowDefinitions>
-                                <Entry x:Name="entrydocket"
-                                       Grid.Column="1"
+                                <Entry x:Name="entrydocket" ClearButtonVisibility="WhileEditing"
+                                       Grid.Column="0"
                                        Text="{Binding ASSETID}"
                                        TextColor="Black"
                                        Placeholder="Pleas scan asset here to search"
@@ -461,16 +461,11 @@
                                        VerticalTextAlignment="Center" />
 
                                 <Image x:Name="imgsearch"
-                                       Grid.Column="2"
+                                       Grid.Column="1"
                                        HeightRequest="30"
                                        WidthRequest="30"
                                        Source="search.png"></Image>
 
-                                <Image x:Name="qrcode"
-                                       Grid.Column="0"
-                                       HeightRequest="30"
-                                       WidthRequest="30"
-                                       Source="qrcode.png"></Image>
                             </Grid>
 
                         </StackLayout>
@@ -832,6 +827,14 @@
                         </StackLayout>
                     </Frame>
                 </StackLayout>
+                <ImageButton x:Name="btnsearchassets2"
+                             HeightRequest="60"
+                             WidthRequest="60"
+                             AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"
+                             Clicked="btnsearchassets2_Clicked"
+                             BackgroundColor="Transparent"
+                             AbsoluteLayout.LayoutFlags="PositionProportional"
+                             Source="qrcode2.png" />
             </StackLayout>
         </ContentPage.Content>
     </ContentPage>

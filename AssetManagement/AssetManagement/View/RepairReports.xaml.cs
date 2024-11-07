@@ -54,7 +54,7 @@ namespace AssetManagement.View
             imgsearch1.GestureRecognizers.Add(searchtapped1);
 
 
-            var verifyDocket = new TapGestureRecognizer();
+           /* var verifyDocket = new TapGestureRecognizer();
             verifyDocket.Tapped += async (s, e) =>
             {
 
@@ -117,9 +117,9 @@ namespace AssetManagement.View
                 }
 
             };
-            qrcode.GestureRecognizers.Add(verifyDocket);
+            qrcode.GestureRecognizers.Add(verifyDocket);*/
 
-            var verifyDocket1 = new TapGestureRecognizer();
+           /* var verifyDocket1 = new TapGestureRecognizer();
             verifyDocket1.Tapped += async (s, e) =>
             {
 
@@ -182,7 +182,7 @@ namespace AssetManagement.View
                 }
 
             };
-            qrcode1.GestureRecognizers.Add(verifyDocket1);
+            qrcode1.GestureRecognizers.Add(verifyDocket1);*/
         }
 
         private void Entrydocket1_TextChanged(object sender, TextChangedEventArgs e)
@@ -331,6 +331,128 @@ namespace AssetManagement.View
         {
             viewModel.ShowMain1 = true;
             viewModel.Show_popuplayout1 = false;
+        }
+
+      
+
+        private async void btnsearchassets2_Clicked(object sender, EventArgs e)
+        { //your code
+            try
+            {
+                var options = new MobileBarcodeScanningOptions
+                {
+                    AutoRotate = false,
+                    UseFrontCameraIfAvailable = false,
+                    TryHarder = true
+                };
+
+                var overlay = new ZXingDefaultOverlay
+                {
+
+                    TopText = "Please scan QR code",
+                    BottomText = "Align the QR code within the frame"
+                };
+
+                var QRScanner = new ZXingScannerPage(options, overlay);
+
+                await Navigation.PushModalAsync(QRScanner);
+
+                QRScanner.OnScanResult += (result) =>
+                {
+                    // Stop scanning
+                    QRScanner.IsScanning = false;
+
+                    // Pop the page and show the result
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        Navigation.PopModalAsync(true);
+
+                        entrydocket1.Text = result.Text.Trim();
+
+
+                        DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.BEEP);
+                          viewModel.ASSETID = entrydocket1.Text;
+                         viewModel.SearchAsset1();
+
+                    });
+
+                };
+
+            }
+            catch (Exception excp)
+            {
+                // Common.SaveLogs(excp.ToString());
+                // Common.SaveLogs(excp.StackTrace);
+                //GlobalScript.SeptemberDebugMessages("ERROR", "BtnScanQR_Clicked", "Opening ZXing Failed: " + ex);
+                await DisplayAlert("Alert", "Please try again", "OK");
+                Crashes.TrackError(excp);
+            }
+            finally
+            {
+                // entrydocket.CursorPosition = entrydocket.Text.Length + 1;
+                //viewModel.ASSETID = "";
+            }
+
+        }
+
+        private async void btnsearchassets1_Clicked(object sender, EventArgs e)
+        {
+            //your code
+            try
+            {
+                var options = new MobileBarcodeScanningOptions
+                {
+                    AutoRotate = false,
+                    UseFrontCameraIfAvailable = false,
+                    TryHarder = true
+                };
+
+                var overlay = new ZXingDefaultOverlay
+                {
+
+                    TopText = "Please scan QR code",
+                    BottomText = "Align the QR code within the frame"
+                };
+
+                var QRScanner = new ZXingScannerPage(options, overlay);
+
+                await Navigation.PushModalAsync(QRScanner);
+
+                QRScanner.OnScanResult += (result) =>
+                {
+                    // Stop scanning
+                    QRScanner.IsScanning = false;
+
+                    // Pop the page and show the result
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        Navigation.PopModalAsync(true);
+
+                        entrydocket.Text = result.Text.Trim();
+
+
+                        DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.BEEP);
+                          viewModel.ASSETID = entrydocket.Text;
+                         viewModel.SearchAsset();
+
+                    });
+
+                };
+
+            }
+            catch (Exception excp)
+            {
+                // Common.SaveLogs(excp.ToString());
+                // Common.SaveLogs(excp.StackTrace);
+                //GlobalScript.SeptemberDebugMessages("ERROR", "BtnScanQR_Clicked", "Opening ZXing Failed: " + ex);
+                await DisplayAlert("Alert", "Please try again", "OK");
+                Crashes.TrackError(excp);
+            }
+            finally
+            {
+                // entrydocket.CursorPosition = entrydocket.Text.Length + 1;
+                //viewModel.ASSETID = "";
+            }
         }
     }
 }

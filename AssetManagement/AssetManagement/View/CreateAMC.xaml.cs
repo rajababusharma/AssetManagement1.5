@@ -22,6 +22,12 @@ namespace AssetManagement.View
     {
         CreateAMCViewModel vm;
         STockTallyDetails _details;
+        public CreateAMC()
+        {
+            InitializeComponent();
+            vm = new CreateAMCViewModel();
+            BindingContext = vm;
+        }
         public CreateAMC(STockTallyDetails details)
         {
             InitializeComponent();

@@ -297,17 +297,24 @@
     <AndroidAsset Include="Assets\Beep.mp3" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\qrcode2.png" />
+    <AndroidResource Include="Resources\drawable\clear1.png" />
     <Content Include="Resources\drawable\refresh.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\clear1.png" />
     <Content Include="Resources\mipmap-hdpi\refresh.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\clear1.png" />
     <Content Include="Resources\mipmap-mdpi\refresh.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\clear1.png" />
     <Content Include="Resources\mipmap-xhdpi\refresh.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\clear1.png" />
     <Content Include="Resources\mipmap-xxhdpi\refresh.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\clear1.png" />
     <Content Include="Resources\mipmap-xxxhdpi\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" />
+      <UserProperties XamarinHotReloadGenericExceptionInfoBarAssetManagementAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

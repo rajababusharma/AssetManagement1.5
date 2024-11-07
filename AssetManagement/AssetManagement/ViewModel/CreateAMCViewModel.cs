@@ -67,7 +67,8 @@ namespace AssetManagement.ViewModel
             }
         }
 
-        List<String> _VendorList = new List<string>();
+       // List<String> _VendorList = new List<string>();
+        List<String> _VendorList;
 
         public List<String> VendorList
         {
@@ -292,8 +293,11 @@ namespace AssetManagement.ViewModel
                         if (apiresponse.Status.Equals("true"))
                         {
 
-                          
-                            VendorList = apiresponse.VendorList;
+                            if (apiresponse.VendorList != null)
+                            { 
+                                VendorList = apiresponse.VendorList;
+                            }
+                           
                            
                         }
                         else

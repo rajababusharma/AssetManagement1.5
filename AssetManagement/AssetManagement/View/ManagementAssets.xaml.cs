@@ -19,11 +19,12 @@ namespace AssetManagement.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ManagementAssets : ContentPage
     {
-        AssetReportViewModel viewModel;
+        //  AssetReportViewModel viewModel;
+        ManageAssetsViewModel viewModel;
         public ManagementAssets()
         {
             InitializeComponent();
-            viewModel = new AssetReportViewModel();
+            viewModel = new ManageAssetsViewModel();
             BindingContext = viewModel;
             entrydocket.TextChanged += Entrydocket_TextChanged;
             entrydocket.Completed += Entrydocket_Completed;
@@ -38,7 +39,7 @@ namespace AssetManagement.View
             };
             imgsearch.GestureRecognizers.Add(searchtapped);
 
-            var verifyDocket = new TapGestureRecognizer();
+           /* var verifyDocket = new TapGestureRecognizer();
             verifyDocket.Tapped += async (s, e) =>
             {
 
@@ -100,14 +101,14 @@ namespace AssetManagement.View
                 }
 
             };
-            qrcode.GestureRecognizers.Add(verifyDocket);
+            qrcode.GestureRecognizers.Add(verifyDocket);*/
         }
 
         private void Entrydocket_Completed(object sender, EventArgs e)
         {
             viewModel.ASSETID = entrydocket.Text;
             viewModel.SearchAsset();
-           
+
         }
 
         private void Entrydocket_TextChanged(object sender, TextChangedEventArgs e)
@@ -192,13 +193,14 @@ namespace AssetManagement.View
         {
             base.OnAppearing();
             viewModel.GetAllAssetsData();
-          
+
         }
 
         private async void btnamc_Clicked(object sender, EventArgs e)
         {
             var assetetails = (STockTallyDetails)((Button)sender).BindingContext;
             await Navigation.PushAsync(new CreateAMC(assetetails));
+           // await Navigation.PushAsync(new CreateAMC());
         }
 
         private async void btninsurance_Clicked(object sender, EventArgs e)
@@ -211,6 +213,67 @@ namespace AssetManagement.View
         {
             var assetetails = (STockTallyDetails)((Button)sender).BindingContext;
             await Navigation.PushAsync(new CreateAssets(assetetails.Asset_id));
+        }
+
+        private async void btnsearchassets_Clicked(object sender, EventArgs e)
+        {
+            //your code
+            try
+            {
+                var options = new MobileBarcodeScanningOptions
+                {
+                    AutoRotate = false,
+                    UseFrontCameraIfAvailable = false,
+                    TryHarder = true
+                };
+
+                var overlay = new ZXingDefaultOverlay
+                {
+                    TopText = "Please scan QR code",
+                    BottomText = "Align the QR code within the frame"
+                };
+
+                var QRScanner = new ZXingScannerPage(options, overlay);
+
+                await Navigation.PushModalAsync(QRScanner);
+
+                QRScanner.OnScanResult += (result) =>
+                {
+                    // Stop scanning
+                    QRScanner.IsScanning = false;
+
+                    // Pop the page and show the result
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        Navigation.PopModalAsync(true);
+
+                        entrydocket.Text = result.Text.Trim();
+
+
+                        DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.BEEP);
+                        // viewModel.ASSETID = entrydocket.Text;
+                        // viewModel.SearchAsset();
+                        viewModel.ASSETID = entrydocket.Text;
+                        viewModel.SearchAsset();
+
+                    });
+
+                };
+
+            }
+            catch (Exception excp)
+            {
+                // Common.SaveLogs(excp.ToString());
+                // Common.SaveLogs(excp.StackTrace);
+                //GlobalScript.SeptemberDebugMessages("ERROR", "BtnScanQR_Clicked", "Opening ZXing Failed: " + ex);
+                await DisplayAlert("Alert", "Please try again", "OK");
+                Crashes.TrackError(excp);
+            }
+            finally
+            {
+                // entrydocket.CursorPosition = entrydocket.Text.Length + 1;
+                // viewModel.ASSETID = "";
+            }
         }
     }
 }

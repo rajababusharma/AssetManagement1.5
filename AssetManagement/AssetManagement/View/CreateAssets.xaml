@@ -48,7 +48,7 @@
                                    Grid.Column="0"
                                    HeightRequest="30"
                                    WidthRequest="30"
-                                   Source="qrcode.png"></Image>
+                                   Source="qrcode2.png"></Image>
                         </Grid>
                         <Label Text="Basic Info" FontAttributes="Bold"
                                FontSize="Title"

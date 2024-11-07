@@ -27,8 +27,9 @@ namespace AssetManagement.View
             InitializeComponent();
             viewModel = new AssetReportViewModel();
             BindingContext = viewModel;
-/*            entrydocket.Completed += Entrydocket_Completed;
-            entrydocket.TextChanged += Entrydocket_TextChanged;*/
+           
+            /*            entrydocket.Completed += Entrydocket_Completed;
+                        entrydocket.TextChanged += Entrydocket_TextChanged;*/
             docketView.ItemTapped += DocketView_ItemTapped;
           //  entrydocket.Focus();
           /*  var searchtapped = new TapGestureRecognizer();
@@ -148,8 +149,9 @@ namespace AssetManagement.View
             CommonClass.ShareFile(filename);*/
 
             string filename = "Asset_Reports";
-              await viewModel.GetAssetsData();
+             // await viewModel.GetAssetsData();
              await CommonClass.GetAssetDetails(filename, viewModel.AssetList);
+           // await CommonClass.GetAssetDetails(filename, viewModel.ObjStockList);
              CommonClass.ShareFile(filename);
             // await DisplayAlert("Alert", "Work is in progress", "OK");
         }
@@ -158,7 +160,8 @@ namespace AssetManagement.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            viewModel.GetAllAssetsData();
+            // viewModel.GetAllAssetsData();
+            viewModel.GetAssetsData();
         }
 
         private async void btnaddassets_Clicked(object sender, EventArgs e)
@@ -170,63 +173,68 @@ namespace AssetManagement.View
 
         private void pkremployee_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            viewModel.FilteredItem = (int)FilterList.Employee;
-            viewModel.Employee = viewModel.EmployeeList[e.SelectedIndex];
-             pkrsubcat.SelectedIndex = 0;
+            pkrsubcat.SelectedIndex = 0;
             pkrlocation.SelectedIndex = 0;
             pkrbranch.SelectedIndex = 0;
             pkrcategory.SelectedIndex = 0;
+            viewModel.FilteredItem = (int)FilterList.Employee;
+            viewModel.Employee = viewModel.EmployeeList[e.SelectedIndex];
+         
           //  pkremployee.SelectedIndex = 0;
         }
 
         private void pkrlocation_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            viewModel.FilteredItem = (int)FilterList.Location;
-            viewModel.Location = viewModel.LocationList[e.SelectedIndex];
-             pkrsubcat.SelectedIndex = 0;
-           // pkrlocation.SelectedIndex = 0;
+            pkrsubcat.SelectedIndex = 0;
+            // pkrlocation.SelectedIndex = 0;
             pkrbranch.SelectedIndex = 0;
             pkrcategory.SelectedIndex = 0;
             pkremployee.SelectedIndex = 0;
+            viewModel.FilteredItem = (int)FilterList.Location;
+            viewModel.Location = viewModel.LocationList[e.SelectedIndex];
+       
         }
 
         private void pkrbranch_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            viewModel.FilteredItem = (int)FilterList.Branch;
-            viewModel.Branch = viewModel.BranchList[e.SelectedIndex];
-             pkrsubcat.SelectedIndex = 0;
+            pkrsubcat.SelectedIndex = 0;
             pkrlocation.SelectedIndex = 0;
-           // pkrbranch.SelectedIndex = 0;
+            // pkrbranch.SelectedIndex = 0;
             pkrcategory.SelectedIndex = 0;
             pkremployee.SelectedIndex = 0;
+            viewModel.FilteredItem = (int)FilterList.Branch;
+            viewModel.Branch = viewModel.BranchList[e.SelectedIndex];
+  
         }
 
         private void pkrcategory_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            viewModel.FilteredItem = (int)FilterList.Category;
-            viewModel.Category = viewModel.CategoryList[e.SelectedIndex];
-             pkrsubcat.SelectedIndex = 0;
+            pkrsubcat.SelectedIndex = 0;
             pkrlocation.SelectedIndex = 0;
             pkrbranch.SelectedIndex = 0;
-           // pkrcategory.SelectedIndex = 0;
+            // pkrcategory.SelectedIndex = 0;
             pkremployee.SelectedIndex = 0;
+            viewModel.FilteredItem = (int)FilterList.Category;
+            viewModel.Category = viewModel.CategoryList[e.SelectedIndex];
+            
         }
 
         private void pkrsubcat_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            viewModel.FilteredItem = (int)FilterList.Subcategory;
-            viewModel.SubCategory = viewModel.SubCategoryList[e.SelectedIndex];
-           // pkrsubcat.SelectedIndex = 0;
             pkrlocation.SelectedIndex = 0;
             pkrbranch.SelectedIndex = 0;
             pkrcategory.SelectedIndex = 0;
             pkremployee.SelectedIndex = 0;
+            viewModel.FilteredItem = (int)FilterList.Subcategory;
+            viewModel.SubCategory = viewModel.SubCategoryList[e.SelectedIndex];
+           // pkrsubcat.SelectedIndex = 0;
+           
            
         }
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-           viewModel.ObjStockList = viewModel.SEARCHOBJECT;
+           viewModel.AssetList = viewModel.SEARCHOBJECT;
           
             pkrsubcat.SelectedIndex = 0;
             pkrlocation.SelectedIndex = 0;

@@ -52,7 +52,7 @@
                            Grid.Column="0"
                            HeightRequest="30"
                            WidthRequest="30"
-                           Source="qrcode.png"></Image>
+                           Source="qrcode2.png"></Image>
                     <Image x:Name="imgsearch"
                            Grid.Column="2"
                            HeightRequest="30"
