@@ -18,7 +18,7 @@
     <ContentPage.Content>
         <StackLayout Orientation="Vertical"
                      >
-            <StackLayout BackgroundColor="White"
+            <StackLayout 
                          Margin="2,0,2,0">
                 <StackLayout Orientation="Vertical"
                              Margin="0,5,0,5">
@@ -302,12 +302,42 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            <ImageButton x:Name="btnsearchassets" HeightRequest="60" WidthRequest="60"
-                         AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"
-                         Clicked="btnsearchassets_Clicked"
-                         BackgroundColor="Transparent"
-                         AbsoluteLayout.LayoutFlags="PositionProportional"
-                         Source="qrcode2.png" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <ImageButton x:Name="btncreate" Grid.Column="0" Clicked="btncreate_Clicked"
+                             HeightRequest="40"
+                             WidthRequest="40"
+                             AbsoluteLayout.LayoutBounds="1, 0, AutoSize, AutoSize"
+                             BackgroundColor="Transparent"
+                             AbsoluteLayout.LayoutFlags="PositionProportional"
+                             Source="add_assets.png" />
+                <ImageButton x:Name="btnsearchassets"
+                             Grid.Column="1"
+                             HeightRequest="60"
+                             WidthRequest="60"
+                             AbsoluteLayout.LayoutBounds="1, 1, AutoSize, AutoSize"
+                             Clicked="btnsearchassets_Clicked"
+                             BackgroundColor="Transparent"
+                             AbsoluteLayout.LayoutFlags="PositionProportional"
+                             Source="qrcode2.png" />
+                <ImageButton x:Name="btnreport" Clicked="btnreport_Clicked"
+                             Grid.Column="2"
+                             HeightRequest="40"
+                             WidthRequest="40"
+                             AbsoluteLayout.LayoutBounds="0, 1, AutoSize, AutoSize"
+                             BackgroundColor="Transparent"
+                             AbsoluteLayout.LayoutFlags="PositionProportional"
+                             Source="report.png" />
+            </Grid>
+          
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

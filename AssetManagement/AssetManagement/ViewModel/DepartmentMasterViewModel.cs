@@ -100,7 +100,7 @@ namespace AssetManagement.ViewModel
                 CreateDepartmentRequest department = new CreateDepartmentRequest();
 
                 department.Company_Id = company_id;
-                department.Department = DEPARTMENT;
+                department.Department = DEPARTMENT.Trim();
 
                 //...........................
                 var client = new System.Net.Http.HttpClient();

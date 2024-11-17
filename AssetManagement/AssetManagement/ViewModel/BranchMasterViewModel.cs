@@ -254,7 +254,7 @@ namespace AssetManagement.ViewModel
 
                 branch.Company_Id = company_id;
                 branch.Location_Description = LOCATION;
-                branch.Floor = BRANCH;
+                branch.Floor = BRANCH.Trim();
                 //...........................
                 var client = new System.Net.Http.HttpClient();
                 // client.BaseAddress = new Uri("http://114.143.156.30/");
@@ -347,7 +347,7 @@ namespace AssetManagement.ViewModel
 
                 subcategory.Asset_Code = ASSET_CODE;
                 subcategory.Category_Description = CATEGORY_DESCRIPTION;
-                subcategory.SubCategory_Description = SUBCATEGORY_DESCRIPTION;
+                subcategory.SubCategory_Description = SUBCATEGORY_DESCRIPTION.Trim();
                 //...........................
                 var client = new System.Net.Http.HttpClient();
                 // client.BaseAddress = new Uri("http://114.143.156.30/");

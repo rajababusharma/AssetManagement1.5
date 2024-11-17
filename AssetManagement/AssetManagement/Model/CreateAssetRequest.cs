@@ -16,7 +16,7 @@ namespace AssetManagement.Model
         public string Employee { get; set; }
         public string Category { get; set; }
         public string SubCategory { get; set; }
-        public string Asset_type { get; set; }
+        public string Asset_type { get; set; } = "aniche";
         public string Asset_value { get; set; }
         public int Asset_life { get; set; }
         public string Vendor { get; set; }
@@ -25,7 +25,7 @@ namespace AssetManagement.Model
         public string Install_date { get; set; }
         public string ManufacturedBy { get; set; }
         public string Mfd_date { get; set; }
-        public int Warranty_period { get; set; }
+        public int Warranty_period { get; set; } =1;
         public string Model_no { get; set; }
         public string Part_no { get; set; }
         public string Serial_no { get; set; }

@@ -126,7 +126,7 @@ namespace AssetManagement.ViewModel
                 CreateCategoryRequest category = new CreateCategoryRequest();
 
                 category.Company_Id = company_id;
-                category.Category_Description = CATEGORY;
+                category.Category_Description = CATEGORY.Trim();
 
                 //...........................
                 var client = new System.Net.Http.HttpClient();
@@ -211,7 +211,7 @@ namespace AssetManagement.ViewModel
                 CreateLocationRequest location = new CreateLocationRequest();
 
                 location.Company_Id = company_id;
-                location.Location_Description = LOCATION;
+                location.Location_Description = LOCATION.Trim();
 
                 //...........................
                 var client = new System.Net.Http.HttpClient();

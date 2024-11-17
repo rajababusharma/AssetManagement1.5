@@ -299,13 +299,13 @@ namespace AssetManagement.ViewModel
                 CreateEmployeeRequest creaeusers = new CreateEmployeeRequest();
 
                 creaeusers.Company_Id = company_id;
-                creaeusers.Emp_code = EMPCODE;
-                creaeusers.Emp_Name = EMPNAME;
+                creaeusers.Emp_code = EMPCODE.Trim();
+                creaeusers.Emp_Name = EMPNAME.Trim();
                 creaeusers.Department = DEPARTMENT;
                 creaeusers.Location = LOCATION;
                 creaeusers.Branch = BRANCH;
                 creaeusers.Contact = CONTACT;
-                creaeusers.EmailId = EMAIL;
+                creaeusers.EmailId = EMAIL.Trim();
                
 
                 //...........................

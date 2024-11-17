@@ -348,7 +348,7 @@ namespace AssetManagement.ViewModel
         {
             if (!string.IsNullOrEmpty(EMPNAME) && !string.IsNullOrEmpty(BRANCH) && !string.IsNullOrEmpty(CONTACT) && !string.IsNullOrEmpty(LOCATION) && !string.IsNullOrEmpty(DEPARTMENT) && !string.IsNullOrEmpty(EMAIL) && !string.IsNullOrEmpty(PASSWORD) && !string.IsNullOrEmpty(EMPCODE) && !string.IsNullOrEmpty(USERNAME))
             {
-                if (PASSWORD.Equals(CONFIRMPASSWORD))
+                if (PASSWORD.Trim().Equals(CONFIRMPASSWORD.Trim()))
             {
                 try
                 {
@@ -367,14 +367,14 @@ namespace AssetManagement.ViewModel
                     creaeusers.Company_Id = company_id;
                     creaeusers.Contact = CONTACT;
                     creaeusers.Department = DEPARTMENT;
-                    creaeusers.EmailId = EMAIL;
+                    creaeusers.EmailId = EMAIL.Trim();
                     creaeusers.Emp_Name = EMPNAME;
                     creaeusers.IsActive = "True";
                     creaeusers.Location = LOCATION;
-                    creaeusers.Password = PASSWORD;
+                    creaeusers.Password = PASSWORD.Trim();
                     creaeusers.pic = "";
-                    creaeusers.User_Code = EMPCODE;
-                    creaeusers.User_Name = USERNAME;
+                    creaeusers.User_Code = EMPCODE.Trim();
+                    creaeusers.User_Name = USERNAME.Trim();
                         creaeusers.pic = IMAGE1_BASE64;
 
                     //...........................

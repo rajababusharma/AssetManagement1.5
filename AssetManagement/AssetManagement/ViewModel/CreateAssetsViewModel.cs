@@ -48,12 +48,26 @@ namespace AssetManagement.ViewModel
             Install_date = dt.ToString();
             Mfd_date = dt.ToString();
 
-            GetEmployeeList();
+            Device.BeginInvokeOnMainThread(async() =>
+            {
+               await GetEmployeeList();
+            });
+            Device.BeginInvokeOnMainThread(async() =>
+            {
+               await GetCat_Sub_Dept_Vendor();
+            });
+
+            Device.BeginInvokeOnMainThread(async() =>
+            {
+               await GetData(ASSETID);
+            });
+
+          /*  GetEmployeeList();
             Thread.Sleep(500);
             GetCat_Sub_Dept_Vendor();
             Thread.Sleep(500);
             GetData(ASSETID);
-            Thread.Sleep(500);
+            Thread.Sleep(500);*/
 
         }
 
@@ -1111,14 +1125,18 @@ namespace AssetManagement.ViewModel
                         Department = stocktake.Assets.Department;
                         SELECTEDWARRANT_INDEX = asset_warrantyList.IndexOf(stocktake.Assets.Warranty_period.ToString());
                         Warranty_period = stocktake.Assets.Warranty_period.ToString();
-                         SELECTEDPURCHASE_DATE = Convert.ToDateTime(stocktake.Assets.Purchase_date);
-                        SELECTEDINSTALL_DATE = Convert.ToDateTime(stocktake.Assets.Install_date);
-                        Install_date = stocktake.Assets.Install_date;
-                        SELECTEDMFD_DATE = Convert.ToDateTime(stocktake.Assets.Mfd_date);
-                        Mfd_date = stocktake.Assets.Mfd_date;
-                        SELECTEDPURCHASE_DATE = Convert.ToDateTime(stocktake.Assets.Purchase_date);
-                        Purchase_date = stocktake.Assets.Purchase_date;
-                        SELECTEDPURCHASE_DATE = Convert.ToDateTime(stocktake.Assets.Purchase_date);
+                            SELECTEDINSTALL_DATE = stocktake.Assets.Install_date != "" ? DateTime.Parse(stocktake.Assets.Install_date) : DateTime.Now.Date;
+                            //  SELECTEDINSTALL_DATE = Convert.ToDateTime(stocktake.Assets.Install_date) != null ? Convert.ToDateTime(stocktake.Assets.Install_date) : DateTime.Now.Date;
+                            Install_date = stocktake.Assets.Install_date;
+                           // SELECTEDMFD_DATE=DateTime.Parse(stocktake.Assets.Mfd_date);
+                            SELECTEDMFD_DATE = stocktake.Assets.Mfd_date != "" ? DateTime.Parse(stocktake.Assets.Mfd_date) : DateTime.Now.Date;
+                            // SELECTEDMFD_DATE = Convert.ToDateTime(stocktake.Assets.Mfd_date) != null ? Convert.ToDateTime(stocktake.Assets.Mfd_date) : DateTime.Now.Date;
+                            Mfd_date = stocktake.Assets.Mfd_date;
+                            //  SELECTEDPURCHASE_DATE = DateTime.Parse(stocktake.Assets.Purchase_date);
+                            SELECTEDPURCHASE_DATE = stocktake.Assets.Purchase_date != "" ? DateTime.Parse(stocktake.Assets.Purchase_date) : DateTime.Now.Date;
+                            //  SELECTEDPURCHASE_DATE = Convert.ToDateTime(stocktake.Assets.Purchase_date)!=null? Convert.ToDateTime(stocktake.Assets.Purchase_date):DateTime.Now.Date;
+                            Purchase_date = stocktake.Assets.Purchase_date;
+                      //  SELECTEDPURCHASE_DATE = Convert.ToDateTime(stocktake.Assets.Purchase_date)!=null? Convert.ToDateTime(stocktake.Assets.Purchase_date):DateTime.Now.Date;
                         Asset_value = stocktake.Assets.Asset_value;
                         ManufacturedBy = stocktake.Assets.ManufacturedBy;
                         Model_no = stocktake.Assets.Model_no;

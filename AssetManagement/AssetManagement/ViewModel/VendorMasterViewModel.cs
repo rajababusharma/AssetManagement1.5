@@ -190,14 +190,14 @@ namespace AssetManagement.ViewModel
                 CreateVendorRequest vendor = new CreateVendorRequest();
 
                 vendor.Company_Id = company_id;
-                vendor.Vendor_code = VENDOR_CODE;
-                vendor.Vendor_Name = VENDOR_NAME;
+                vendor.Vendor_code = VENDOR_CODE.Trim();
+                vendor.Vendor_Name = VENDOR_NAME.Trim();
                 vendor.Address1 = ADDRESS1;
                 vendor.Address2 = ADDRESS2;
-                vendor.City = CITY;
+                vendor.City = CITY.Trim();
                 vendor.ZipCode = ZIPCODE;
                 vendor.Contact = CONTACT;
-                vendor.EmailId = EMAIL;
+                vendor.EmailId = EMAIL.Trim();
                 vendor.gstno = GSTNO;
 
                 //...........................

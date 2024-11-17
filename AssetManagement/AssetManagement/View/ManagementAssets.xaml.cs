@@ -275,5 +275,15 @@ namespace AssetManagement.View
                 // viewModel.ASSETID = "";
             }
         }
+
+        private async void btnreport_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Reports());
+        }
+
+        private async void btncreate_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CreateAssets(""));
+        }
     }
 }
