@@ -262,6 +262,27 @@ namespace AssetManagement.ViewModel
             }
         }
 
+        public List<string> User_Roles
+        {
+            get
+            {
+                return new List<string> { "Select User Role", "Administrator", "User", "Supervisor", "Editor" };
+            }
+        }
+
+        private int _selectedUser_role;
+        public int SELECTEDUSER_ROLE
+        {
+            get
+            {
+                return _selectedUser_role;
+            }
+            set
+            {
+                _selectedUser_role = value;
+                NotifyPropertyChanged("SELECTEDUSER_ROLE");
+            }
+        }
 
         public Command REGISTER
         {
@@ -307,6 +328,7 @@ namespace AssetManagement.ViewModel
                         creaeusers.User_Code = EMPCODE.Trim();
                         creaeusers.User_Name = USERNAME.Trim();
                         creaeusers.gstno = GSTNO;
+                        creaeusers.User_Role = SELECTEDUSER_ROLE;
                         //...........................
                         var client = new System.Net.Http.HttpClient();
                         // client.BaseAddress = new Uri("http://114.143.156.30/");

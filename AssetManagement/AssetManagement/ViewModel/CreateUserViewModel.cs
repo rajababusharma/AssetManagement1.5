@@ -51,6 +51,20 @@ namespace AssetManagement.ViewModel
             }
         }
 
+        private int _selectedUser_role;
+        public int SELECTEDUSER_ROLE
+        {
+            get
+            {
+                return _selectedUser_role;
+            }
+            set
+            {
+                _selectedUser_role = value;
+                NotifyPropertyChanged("SELECTEDUSER_ROLE");
+            }
+        }
+
         private async Task GetDepartment()
         {
             if (CrossConnectivity.Current.IsConnected)
@@ -334,7 +348,13 @@ namespace AssetManagement.ViewModel
             }
         }
 
-
+        public List<string> User_Roles
+        {
+            get
+            {
+                return new List<string> { "Select User Role", "Administrator", "User", "Supervisor", "Editor" };
+            }
+        }
 
         public Command REGISTER
         {
@@ -344,6 +364,95 @@ namespace AssetManagement.ViewModel
             }
         }
 
+        public async Task GetBranches(string location)
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+                // string location = Preferences.Get(Pref.LOCATION, "");
+                int userrole = Preferences.Get(Pref.User_Role, 0);
+                try
+                {
+                    IsBusy = true;
+                    IsEnable = true;
+                    IsVisible = true;
+
+                    /* string ctype = "Unloading";*/
+                    // string ctype = Preferences.Get(ProjectConstants.CTYPE, "");
+
+                    var client = new System.Net.Http.HttpClient();
+                    //  client.BaseAddress = new Uri("http://114.143.156.30/");
+                    client.BaseAddress = new Uri(ProjectConstants.GETBRANCHES_API1);
+
+
+
+                    var response = await client.GetAsync("Get?Location=" + location + "&userrole=" + userrole);
+                    var responseJson = response.Content.ReadAsStringAsync().Result;
+
+
+
+                    /* var client = new RestClient(ProjectConstants.GETBRANCHES_API);
+                     var request = new RestRequest(Method.GET);
+                     // request.AddHeader("postman-token", "e3fa53b1-0f94-c75d-d04a-e97018565406");
+                     request.AddHeader("cache-control", "no-cache");
+                     request.AddHeader("content-type", "application/x-www-form-urlencoded");
+                     //  request.AddParameter("application/x-www-form-urlencoded", "Truck_No=GJ01DX8008&CType=Loading&Branch_Id=130", ParameterType.RequestBody);
+                     IRestResponse response = client.Execute(request);*/
+
+                    // Extracting output data from received response
+                    // string strresponse = responseJson.Content;
+
+                    BranchMasterResp stocktake = new BranchMasterResp();
+
+                    // List<BranchWiseAssets> mystocklist = new List<BranchWiseAssets>();
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        stocktake = JsonConvert.DeserializeObject<BranchMasterResp>(responseJson);
+                        if (stocktake.Status.Equals("true"))
+                        {
+
+                            BranchList = stocktake.Branches ?? br;
+
+                        }
+                        else
+                        {
+                            //DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.audio_alert_fail);
+                            // await App.Current.MainPage.DisplayAlert("Exception", stocktake.Msg.ToString(), "Ok");
+                            //BranchwiseList = stocktake.BranchWiseAssets;
+                        }
+
+                    }
+                    else
+                    {
+                        // DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.audio_alert_fail);
+                        // await App.Current.MainPage.DisplayAlert("Exception", response.ReasonPhrase, "Ok");
+                        //BranchwiseList = stocktake.BranchWiseAssets;
+                    }
+                    IsBusy = false;
+                    IsEnable = false;
+                    IsVisible = false;
+
+                }
+                catch (Exception excp)
+                {
+                    // Common.SaveLogs(excp.StackTrace);
+                    IsBusy = false;
+                    IsEnable = false;
+                    IsVisible = false;
+
+                    BranchList = null;
+                    //await App.Current.MainPage.DisplayAlert("Exception", "Request could n, please try again later", "Ok");
+                    Crashes.TrackError(excp);
+
+                }
+
+            }
+            else
+            {
+
+                await App.Current.MainPage.DisplayAlert("Alert", "No internet connection, please check and try again later.", "OK");
+            }
+        }
         private async void Register_User(object obj)
         {
             if (!string.IsNullOrEmpty(EMPNAME) && !string.IsNullOrEmpty(BRANCH) && !string.IsNullOrEmpty(CONTACT) && !string.IsNullOrEmpty(LOCATION) && !string.IsNullOrEmpty(DEPARTMENT) && !string.IsNullOrEmpty(EMAIL) && !string.IsNullOrEmpty(PASSWORD) && !string.IsNullOrEmpty(EMPCODE) && !string.IsNullOrEmpty(USERNAME))
@@ -376,9 +485,9 @@ namespace AssetManagement.ViewModel
                     creaeusers.User_Code = EMPCODE.Trim();
                     creaeusers.User_Name = USERNAME.Trim();
                         creaeusers.pic = IMAGE1_BASE64;
-
-                    //...........................
-                    var client = new System.Net.Http.HttpClient();
+                        creaeusers.User_Role = SELECTEDUSER_ROLE;
+                        //...........................
+                        var client = new System.Net.Http.HttpClient();
                     // client.BaseAddress = new Uri("http://114.143.156.30/");
                     client.BaseAddress = new Uri(ProjectConstants.BASE_URL);
                     var json = JsonConvert.SerializeObject(creaeusers);
@@ -456,7 +565,7 @@ namespace AssetManagement.ViewModel
 
         }
 
-        public async Task GetBranches()
+       /* public async Task GetBranches()
         {
             if (CrossConnectivity.Current.IsConnected)
             {
@@ -468,7 +577,7 @@ namespace AssetManagement.ViewModel
                     IsEnable = true;
                     IsVisible = true;
 
-                    /* string ctype = "Unloading";*/
+                    *//* string ctype = "Unloading";*//*
                     // string ctype = Preferences.Get(ProjectConstants.CTYPE, "");
 
 
@@ -530,7 +639,7 @@ namespace AssetManagement.ViewModel
 
                 await App.Current.MainPage.DisplayAlert("Alert", "No internet connection, please check and try again later.", "OK");
             }
-        }
+        }*/
         public async Task GetLocations()
         {
             if (CrossConnectivity.Current.IsConnected)

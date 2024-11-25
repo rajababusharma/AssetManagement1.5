@@ -148,6 +148,7 @@ namespace AssetManagement.View
         private void pkrlocation_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
             viewModel.LOCATION = viewModel.LocationList[e.SelectedIndex];
+            viewModel.GetBranches(viewModel.LOCATION);
         }
 
         private void pkrbranch_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
@@ -158,6 +159,11 @@ namespace AssetManagement.View
         private void pkrdepartment_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
             viewModel.DEPARTMENT = viewModel.DepartmentList[e.SelectedIndex];
+        }
+
+        private void ddrole_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
+        {
+            viewModel.SELECTEDUSER_ROLE = e.SelectedIndex;
         }
     }
 }

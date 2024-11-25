@@ -25,5 +25,6 @@ namespace AssetManagement.Model
         public string EmailId { get; set; }
         public string pic { get; set; }
         public string gstno { get; set; }
+        public int User_Role { get; set; } = 0;
     }
 }

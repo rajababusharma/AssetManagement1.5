@@ -50,24 +50,7 @@ namespace AssetManagement.View
            // DependencyService.Get<IToolbarItemBadgeService>().SetBadge(this, ToolbarItems.First(), "1", Color.Red, Color.White);
         }
 
-        private void pkrBranch_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           // string selectedBranch = pkrBranch.SelectedItem.ToString();
-            // viewModel.GetAMCDetails(selectedBranch);
-            // viewModel.GetStockDetailsBranchWise();
-           // viewModel.GetStockInventory(selectedBranch);
-            /*  if (selectedBranch.Equals("--Select--"))
-              {
-                  string branch_id = Preferences.Get(Pref.BRANCH, "");
-                  viewModel.GetStockInventory(branch_id);
-              }
-              else
-              {
-                  viewModel.GetStockInventory(selectedBranch);
-              }*/
-
-        }
-
+       
         private async void pkrBranch_ItemSelected(object sender, ItemSelectedEventArgs e)
         {
            // string selectedBranch = pkrBranch.SelectedItem.ToString();

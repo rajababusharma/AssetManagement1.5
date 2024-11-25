@@ -10,4 +10,11 @@ namespace AssetManagement.Model
         public string Msg { get; set; }
         public List<string> Branches { get; set; }
     }
+
+    public class Sub_CategoryResp
+    {
+        public string Status { get; set; }
+        public string Msg { get; set; }
+        public List<string> SubCategoryList { get; set; }
+    }
 }

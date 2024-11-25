@@ -202,6 +202,7 @@ namespace AssetManagement.ViewModel
                             Preferences.Set(Pref.Dispose_Asset, loginobject.UserDetails.Dispose_Asset);
                             Preferences.Set(Pref.Repair_Asset, loginobject.UserDetails.Repair_Asset);
                             Preferences.Set(Pref.Rights_Managment, loginobject.UserDetails.Rights_Managment);
+                            Preferences.Set(Pref.User_Role, loginobject.UserDetails.User_Role);
                             if (IsRemember)
                             {
                                 Preferences.Set(Pref.LOGINSTATUS, true);

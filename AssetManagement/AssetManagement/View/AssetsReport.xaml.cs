@@ -173,10 +173,10 @@ namespace AssetManagement.View
 
         private void pkremployee_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            pkrsubcat.SelectedIndex = 0;
-            pkrlocation.SelectedIndex = 0;
-            pkrbranch.SelectedIndex = 0;
-            pkrcategory.SelectedIndex = 0;
+           // pkrsubcat.SelectedIndex = 0;
+           // pkrlocation.SelectedIndex = 0;
+           // pkrbranch.SelectedIndex = 0;
+           // pkrcategory.SelectedIndex = 0;
             viewModel.FilteredItem = (int)FilterList.Employee;
             viewModel.Employee = viewModel.EmployeeList[e.SelectedIndex];
          
@@ -185,23 +185,23 @@ namespace AssetManagement.View
 
         private void pkrlocation_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            pkrsubcat.SelectedIndex = 0;
+           // pkrsubcat.SelectedIndex = 0;
             // pkrlocation.SelectedIndex = 0;
-            pkrbranch.SelectedIndex = 0;
-            pkrcategory.SelectedIndex = 0;
-            pkremployee.SelectedIndex = 0;
+           // pkrbranch.SelectedIndex = 0;
+           // pkrcategory.SelectedIndex = 0;
+           // pkremployee.SelectedIndex = 0;
             viewModel.FilteredItem = (int)FilterList.Location;
             viewModel.Location = viewModel.LocationList[e.SelectedIndex];
-       
+            viewModel.GetBranches(viewModel.Location);
         }
 
         private void pkrbranch_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            pkrsubcat.SelectedIndex = 0;
-            pkrlocation.SelectedIndex = 0;
+           // pkrsubcat.SelectedIndex = 0;
+           // pkrlocation.SelectedIndex = 0;
             // pkrbranch.SelectedIndex = 0;
-            pkrcategory.SelectedIndex = 0;
-            pkremployee.SelectedIndex = 0;
+           // pkrcategory.SelectedIndex = 0;
+           // pkremployee.SelectedIndex = 0;
             viewModel.FilteredItem = (int)FilterList.Branch;
             viewModel.Branch = viewModel.BranchList[e.SelectedIndex];
   
@@ -209,22 +209,22 @@ namespace AssetManagement.View
 
         private void pkrcategory_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            pkrsubcat.SelectedIndex = 0;
-            pkrlocation.SelectedIndex = 0;
-            pkrbranch.SelectedIndex = 0;
+           // pkrsubcat.SelectedIndex = 0;
+           // pkrlocation.SelectedIndex = 0;
+           // pkrbranch.SelectedIndex = 0;
             // pkrcategory.SelectedIndex = 0;
-            pkremployee.SelectedIndex = 0;
+          //  pkremployee.SelectedIndex = 0;
             viewModel.FilteredItem = (int)FilterList.Category;
             viewModel.Category = viewModel.CategoryList[e.SelectedIndex];
-            
+            viewModel.GetSubCategory(viewModel.Category);
         }
 
         private void pkrsubcat_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
-            pkrlocation.SelectedIndex = 0;
-            pkrbranch.SelectedIndex = 0;
-            pkrcategory.SelectedIndex = 0;
-            pkremployee.SelectedIndex = 0;
+           // pkrlocation.SelectedIndex = 0;
+           // pkrbranch.SelectedIndex = 0;
+          //  pkrcategory.SelectedIndex = 0;
+           // pkremployee.SelectedIndex = 0;
             viewModel.FilteredItem = (int)FilterList.Subcategory;
             viewModel.SubCategory = viewModel.SubCategoryList[e.SelectedIndex];
            // pkrsubcat.SelectedIndex = 0;

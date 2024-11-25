@@ -15,7 +15,7 @@ namespace AssetManagement.Constants
         public static string BRANCH = "BRANCH";
         public static string TOOLTRIPBRANCH = "TOOLTRIPBRANCH";
         public static string MOVENOTIFICATION = "MOVENOTIFICATION";
-
+        public static string User_Role = "User_Role";
         public static string Manage_Assets = "Manage_Assets";
         public static string Move_Asset = "Move_Asset";
         public static string Transfer_Asset = "Transfer_Asset";

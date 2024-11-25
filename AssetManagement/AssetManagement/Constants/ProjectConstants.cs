@@ -25,7 +25,7 @@ namespace AssetManagement.Constants
         public static string GETAMCDETAILS_API = BASE_URL + "/AMC/";
         public static string GETSCANNINGREPORTS_API = BASE_URL + "/Reports/";
         public static string GETBRANCHES_API = BASE_URL + "/Branch";
-
+        public static string GETBRANCHES_API1 = BASE_URL + "/Branch/";
         public static string GETDISPOSEDDATA_API = BASE_URL + "/Disposed/";
         public static string GETAMCDATA_API = BASE_URL + "/AMC/";
         public static string GETINSURANCEDATA_API = BASE_URL + "/Insurance/";
@@ -33,7 +33,7 @@ namespace AssetManagement.Constants
         public static string GETMOVEDATA_API = BASE_URL + "/Move/";
         public static string GETASSETCATEGORYCOUNT_API = BASE_URL + "/AssetCategory/";
         public static string GETLOCATIONS_API = BASE_URL + "/Location/GetLocationList";
-     
+        public static string GETSUBCATEGORYCOUNT_API = BASE_URL + "/SubCategory/";
         public static string GETVENDORLIST_API = BASE_URL + "/Vendor/";
         public static string GETEMPLOYEELIST_API = BASE_URL + "/Employee/";
 

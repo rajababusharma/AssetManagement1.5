@@ -41,7 +41,8 @@ namespace AssetManagement.View
             _search.Tapped += async (s, e) =>
             {
                 //search asset
-                viewModel.GetData(viewModel.ASSETID);
+                // viewModel.GetData(viewModel.ASSETID);
+                viewModel.SELECTEDLOCATION_INDEX = 1;
             };
             imgsearch.GestureRecognizers.Add(_search);
 
@@ -315,6 +316,7 @@ namespace AssetManagement.View
         {
             viewModel.Location = viewModel.LocationList[e.SelectedIndex];
             viewModel.SELECTEDLOCATION_INDEX = e.SelectedIndex;
+            viewModel.GetBranches(viewModel.Location);
         }
 
         private void pkrbranch_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
@@ -335,6 +337,7 @@ namespace AssetManagement.View
             {
                 viewModel.Category = viewModel.CategoryList[e.SelectedIndex];
                 viewModel.SELECTEDCATEGORY_INDEX = e.SelectedIndex;
+                viewModel.GetSubCategory(viewModel.Category);
             }
             catch(Exception excp)
             {

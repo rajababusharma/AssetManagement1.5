@@ -20,5 +20,6 @@ namespace AssetManagement.Model
         public bool Dispose_Asset { get; set; }
         public bool Repair_Asset { get; set; }
         public bool Rights_Managment { get; set; }
+        public int User_Role { get; set; } = 0;
     }
 }
