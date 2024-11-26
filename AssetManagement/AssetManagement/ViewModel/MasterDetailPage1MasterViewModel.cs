@@ -39,12 +39,11 @@ namespace AssetManagement.ViewModel
                      new MasterDetailPage1MasterMenuItem { Id = 0, Title = "Create New Users", TargetType=typeof(Create_Users)},
                        new MasterDetailPage1MasterMenuItem { Id = 1, Title = "Rights Management", TargetType=typeof(RightsManagement)},
                         new MasterDetailPage1MasterMenuItem { Id = 2, Title = "Asset Management", TargetType=typeof(ManagementAssets)},
-                         new MasterDetailPage1MasterMenuItem { Id = 3, Title = "Create Assets", TargetType=typeof(CreateAssets)},
-                           new MasterDetailPage1MasterMenuItem { Id = 4, Title = "Stock Inventory",TargetType=typeof(StockTally)},
-                    new MasterDetailPage1MasterMenuItem { Id = 5, Title = "Create Masters", TargetType=typeof(Masters)},
-                      new MasterDetailPage1MasterMenuItem { Id = 6, Title = "Reports", TargetType=typeof(Reports)},
-                       new MasterDetailPage1MasterMenuItem { Id = 7, Title = "Assets Document", TargetType=typeof(DownloadDocuments)},
-                     new MasterDetailPage1MasterMenuItem { Id = 8, Title = "About Us", TargetType=typeof(About_Us)},
+                           new MasterDetailPage1MasterMenuItem { Id = 3, Title = "Stock Inventory",TargetType=typeof(StockTally)},
+                    new MasterDetailPage1MasterMenuItem { Id = 4, Title = "Create Masters", TargetType=typeof(Masters)},
+                      new MasterDetailPage1MasterMenuItem { Id = 5, Title = "Reports", TargetType=typeof(Reports)},
+                       new MasterDetailPage1MasterMenuItem { Id = 6, Title = "Assets Document", TargetType=typeof(DownloadDocuments)},
+                     new MasterDetailPage1MasterMenuItem { Id = 7, Title = "About Us", TargetType=typeof(About_Us)},
                 });
 
             GetMoveNotification();

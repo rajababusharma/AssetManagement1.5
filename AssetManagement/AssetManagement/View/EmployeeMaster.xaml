@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
              x:Class="AssetManagement.View.EmployeeMaster" Title="Create Employee">
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout VerticalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical"
                          VerticalOptions="FillAndExpand"
@@ -89,6 +90,8 @@
                         IsEnabled="{Binding BTNSUBMITSTATUS}"
                         Style="{x:DynamicResource ButtonStyle}"></Button>
             </StackLayout>
-        </StackLayout>
+             
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

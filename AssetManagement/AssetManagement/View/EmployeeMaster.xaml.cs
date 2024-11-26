@@ -1,4 +1,7 @@
-﻿using AssetManagement.ViewModel;
+﻿using AssetManagement.Constants;
+using AssetManagement.Model;
+using AssetManagement.ViewModel;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +29,10 @@ namespace AssetManagement.View
             viewModel.BRANCH = viewModel.BranchList[e.SelectedIndex];
         }
 
-        private void pkrlocation_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
+        private async void pkrlocation_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
             viewModel.LOCATION = viewModel.LocationList[e.SelectedIndex];
+           await viewModel.GetBranches(viewModel.LOCATION);
         }
 
         private void pkrdepartment_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)

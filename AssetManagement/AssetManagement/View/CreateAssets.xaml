@@ -16,7 +16,7 @@
 
     <ContentPage.Content>
         <StackLayout BackgroundColor="{x:DynamicResource PrimaryColor}">
-            <StackLayout Margin="5,0,5,0" BackgroundColor="White">
+            <StackLayout Margin="15,0,15,0" BackgroundColor="White">
                 <ScrollView Orientation="Vertical">
                     <StackLayout>
                         <Grid >
@@ -84,6 +84,7 @@
                                                Placeholder="Asset Description"
                                                PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
                                                Grid.Row="1"></local:EntryBorder>
+                            
                             <local:Dropdown x:Name="pkrlocation"
                                             ItemSelected="pkrlocation_ItemSelected"
                                             Grid.Row="2"
@@ -111,8 +112,11 @@
                                             ItemSelected="pkrsubcategory_ItemSelected"
                                             Grid.Row="6"
                                             ItemsSource="{Binding SubCategoryList}" />
+                                                   
+                              
+  
                            
-                           
+
                             <local:EntryBorder Text="{Binding Asset_value}"
                                                Placeholder="Asset_value"
                                                PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"

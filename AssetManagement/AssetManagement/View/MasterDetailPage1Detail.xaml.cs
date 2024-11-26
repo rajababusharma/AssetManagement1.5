@@ -145,7 +145,17 @@ namespace AssetManagement.View
         }
         private async void btnaddassets_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CreateAssets(""));
+            int userrole = Preferences.Get(Pref.User_Role, 0);
+            bool ast = Preferences.Get(Pref.Manage_Assets, false);
+            if(ast)
+            {
+                await Navigation.PushAsync(new CreateAssets(""));
+            }
+            else
+            {
+                await DisplayAlert("Alert","You don't have sufficient permission for this option. Please contact to your administrator","Ok");
+            }
+           
         }
     }
 }

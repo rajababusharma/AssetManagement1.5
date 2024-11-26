@@ -199,20 +199,52 @@ namespace AssetManagement.View
         private async void btnamc_Clicked(object sender, EventArgs e)
         {
             var assetetails = (STockTallyDetails)((Button)sender).BindingContext;
-            await Navigation.PushAsync(new CreateAMC(assetetails));
-           // await Navigation.PushAsync(new CreateAMC());
+           
+
+           // int userrole = Preferences.Get(Pref.User_Role, 0);
+            bool ast = Preferences.Get(Pref.Manage_Assets, false);
+            if (ast)
+            {
+                await Navigation.PushAsync(new CreateAMC(assetetails));
+            }
+            else
+            {
+                await DisplayAlert("Alert", "You don't have sufficient permission for this option. Please contact to your administrator", "Ok");
+            }
         }
 
         private async void btninsurance_Clicked(object sender, EventArgs e)
         {
             var assetetails = (STockTallyDetails)((Button)sender).BindingContext;
-            await Navigation.PushAsync(new CreateInsurance(assetetails));
+           // await Navigation.PushAsync(new CreateInsurance(assetetails));
+
+           // int userrole = Preferences.Get(Pref.User_Role, 0);
+            bool ast = Preferences.Get(Pref.Manage_Assets, false);
+            if (ast)
+            {
+                await Navigation.PushAsync(new CreateInsurance(assetetails));
+            }
+            else
+            {
+                await DisplayAlert("Alert", "You don't have sufficient permission for this option. Please contact to your administrator", "Ok");
+            }
         }
 
         private async void btnedit_Clicked(object sender, EventArgs e)
         {
             var assetetails = (STockTallyDetails)((Button)sender).BindingContext;
-            await Navigation.PushAsync(new CreateAssets(assetetails.Asset_id));
+           
+
+          //  int userrole = Preferences.Get(Pref.User_Role, 0);
+            bool ast = Preferences.Get(Pref.Manage_Assets, false);
+            if (ast)
+            {
+                await Navigation.PushAsync(new CreateAssets(assetetails.Asset_id));
+            }
+            else
+            {
+                await DisplayAlert("Alert", "You don't have sufficient permission for this option. Please contact to your administrator", "Ok");
+            }
         }
 
         private async void btnsearchassets_Clicked(object sender, EventArgs e)
@@ -283,7 +315,17 @@ namespace AssetManagement.View
 
         private async void btncreate_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CreateAssets(""));
+           
+           // int userrole = Preferences.Get(Pref.User_Role, 0);
+            bool ast = Preferences.Get(Pref.Manage_Assets, false);
+            if (ast)
+            {
+                await Navigation.PushAsync(new CreateAssets(""));
+            }
+            else
+            {
+                await DisplayAlert("Alert", "You don't have sufficient permission for this option. Please contact to your administrator", "Ok");
+            }
         }
     }
 }

@@ -299,6 +299,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\qrcode2.png" />
     <AndroidResource Include="Resources\drawable\clear1.png" />
+    <AndroidResource Include="Resources\drawable\picker.png" />
     <Content Include="Resources\drawable\refresh.png" />
     <AndroidResource Include="Resources\mipmap-hdpi\clear1.png" />
     <Content Include="Resources\mipmap-hdpi\refresh.png" />

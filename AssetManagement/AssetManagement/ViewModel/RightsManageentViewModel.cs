@@ -1,5 +1,7 @@
-﻿using AssetManagement.Constants;
+﻿using Android.Content.Res;
+using AssetManagement.Constants;
 using AssetManagement.Model;
+using AssetManagement.View;
 using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
@@ -352,6 +354,9 @@ namespace AssetManagement.ViewModel
 
         private async void SAVE_PERMISSIONS(object obj)
         {
+            bool ast = Preferences.Get(Pref.Rights_Managment, false);
+            if (ast)
+            {
 
             bool rights_status = Preferences.Get(Pref.Rights_Managment, false);
             if (!rights_status)
@@ -448,8 +453,12 @@ namespace AssetManagement.ViewModel
                 BTNSUBMITSTATUS = true;
             }
 
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Alert", "You don't have sufficient permission for this option. Please contact to your administrator", "Ok");
+            }
 
-           
         }
     }
 }
