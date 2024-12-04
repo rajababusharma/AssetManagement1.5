@@ -13,6 +13,7 @@ namespace AssetManagement.Constants
         public static string Emp_Name = "Emp_Name";
         public static string LOGINSTATUS = "LOGINSTATUS";
         public static string BRANCH = "BRANCH";
+        public static string LOCATION = "LOCATION";
         public static string TOOLTRIPBRANCH = "TOOLTRIPBRANCH";
         public static string MOVENOTIFICATION = "MOVENOTIFICATION";
         public static string User_Role = "User_Role";

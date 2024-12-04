@@ -40,8 +40,8 @@ namespace AssetManagement.View
             var _search = new TapGestureRecognizer();
             _search.Tapped += async (s, e) =>
             {
-                //search asset
-                // viewModel.GetData(viewModel.ASSETID);
+                //search asset..................
+                 viewModel.GetData(viewModel.ASSETID);
                 viewModel.SELECTEDLOCATION_INDEX = 1;
             };
             imgsearch.GestureRecognizers.Add(_search);
