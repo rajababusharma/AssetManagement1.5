@@ -23,5 +23,6 @@ namespace AssetManagement.Constants
         public static string Dispose_Asset = "Dispose_Asset";
         public static string Repair_Asset = "Repair_Asset";
         public static string Rights_Managment = "Rights_Managment";
+        public static string Asset_Id = "Asset_Id";
     }
 }

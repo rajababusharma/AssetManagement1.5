@@ -22,10 +22,10 @@ namespace AssetManagement.View
     public partial class CreateAssets : ContentPage
     {
         CreateAssetsViewModel viewModel;
-        public CreateAssets(string asset_id)
+/*        public CreateAssets()
         {
             InitializeComponent();
-            viewModel = new CreateAssetsViewModel(asset_id);
+            viewModel = new CreateAssetsViewModel();
             BindingContext = viewModel;
             entrydocket.Focus();
             //  viewModel.ASSETID = asset_id;
@@ -106,11 +106,11 @@ namespace AssetManagement.View
 
             };
             qrcode.GestureRecognizers.Add(verifyDocket);
-        }
+        }*/
         public CreateAssets()
         {
             InitializeComponent();
-            viewModel = new CreateAssetsViewModel("");
+            viewModel = new CreateAssetsViewModel();
             BindingContext = viewModel;
           
             // image click event to capture images
@@ -126,6 +126,8 @@ namespace AssetManagement.View
             {
                 //search asset
                 viewModel.GetData(viewModel.ASSETID);
+                entrydocket.CursorPosition = entrydocket.Text.Length + 1;
+                viewModel.ASSETID = "";
             };
             imgsearch.GestureRecognizers.Add(_search);
 
@@ -168,7 +170,9 @@ namespace AssetManagement.View
                             viewModel.ASSETID = result.Text.Trim();
                             DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.BEEP);
                             // await ValidateStock(branch_id);
-                          
+                            entrydocket.CursorPosition = entrydocket.Text.Length + 1;
+                            viewModel.ASSETID = "";
+
                         });
 
                     };
@@ -297,6 +301,7 @@ namespace AssetManagement.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
+          
         }
 
 

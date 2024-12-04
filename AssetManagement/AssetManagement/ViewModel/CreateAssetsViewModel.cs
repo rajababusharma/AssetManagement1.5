@@ -31,9 +31,10 @@ namespace AssetManagement.ViewModel
         List<string> vend = new List<string>(new string[] { "No Vendor" });
         List<string> cat = new List<string>(new string[] { "No Category" });
         List<string> sub = new List<string>(new string[] { "No Subcategory" });
-        public CreateAssetsViewModel(string asset_id)
+        public CreateAssetsViewModel()
         {
-            ASSETID = asset_id;
+
+            ASSETID = ASSETID1 = Preferences.Get(Pref.Asset_Id, null); 
             IsBusy = false;
             IsEnable = false;
             IsVisible = false;
@@ -58,10 +59,10 @@ namespace AssetManagement.ViewModel
             {
                await GetCat_Sub_Dept_Vendor();
             });
-            Thread.Sleep(5000);
+           // Thread.Sleep(5000);
             Device.BeginInvokeOnMainThread(async() =>
             {
-                if(!string.IsNullOrEmpty(asset_id))
+                if(!string.IsNullOrEmpty(ASSETID))
                 {
                     await GetData(ASSETID);
                 }
@@ -253,7 +254,7 @@ namespace AssetManagement.ViewModel
             }
         }
 
-        List<String> _departmentList = null;
+        List<String> _departmentList = new List<string>();
 
         public List<String> DepartmentList
         {
@@ -270,7 +271,7 @@ namespace AssetManagement.ViewModel
             }
         }
 
-        List<String> _EmployeeList = new List<string>(100);
+        List<String> _EmployeeList = new List<string>();
 
         public List<String> EmployeeList
         {
@@ -288,7 +289,7 @@ namespace AssetManagement.ViewModel
         }
 
 
-        List<String> _branchList = null;
+        List<String> _branchList = new List<string>();
 
         public List<String> BranchList
         {
@@ -305,7 +306,7 @@ namespace AssetManagement.ViewModel
             }
         }
 
-        List<String> _LocationList = null;
+        List<String> _LocationList = new List<string>();
 
         public List<String> LocationList
         {
@@ -322,7 +323,7 @@ namespace AssetManagement.ViewModel
             }
         }
 
-        List<String> _CategoryList = null;
+        List<String> _CategoryList = new List<string>();
 
         public List<String> CategoryList
         {
@@ -339,7 +340,7 @@ namespace AssetManagement.ViewModel
             }
         }
 
-        List<String> _SubCategoryList = null;
+        List<String> _SubCategoryList = new List<string>();
 
         public List<String> SubCategoryList
         {
@@ -356,7 +357,7 @@ namespace AssetManagement.ViewModel
             }
         }
 
-        List<String> _VendorList = null;
+        List<String> _VendorList = new List<string>();
 
         public List<String> VendorList
         {
@@ -376,7 +377,7 @@ namespace AssetManagement.ViewModel
 
 
 
-        List<String> _asset_warranty;
+        List<String> _asset_warranty = new List<string>();
 
         public List<String> asset_warrantyList
         {
@@ -394,7 +395,7 @@ namespace AssetManagement.ViewModel
         }
 
 
-        List<String> _asset_life;
+        List<String> _asset_life = new List<string>();
 
         public List<String> asset_lifeList
         {
@@ -490,7 +491,18 @@ namespace AssetManagement.ViewModel
             }
         }
 
-       
+        private string _ASSETID1;
+        public string ASSETID1
+        {
+            get { return _ASSETID1; }
+            set
+            {
+                _ASSETID1 = value;
+                NotifyPropertyChanged("ASSETID1");
+            }
+        }
+
+
 
         private string _Asset_name;
         public string Asset_name
@@ -1009,6 +1021,7 @@ namespace AssetManagement.ViewModel
                             await App.Current.MainPage.DisplayAlert("Alert", "Asset created successfully.", "Ok");
                                 IMAGE1_BASE64 = "";
                                 ASSETID = "";
+                                ASSETID1 = "";
                                 Asset_name = "";
                                 Description = "";
                                 Asset_value = "";
@@ -1111,13 +1124,14 @@ namespace AssetManagement.ViewModel
                     stocktake = JsonConvert.DeserializeObject<Asset_InfoResponse>(responseJson);
                     if (stocktake.Status.Equals("true"))
                     {
+                            ASSETID1 = stocktake.Assets.Asset_id;
                         Asset_name = stocktake.Assets.Asset_name;
                         Description= stocktake.Assets.Description;
                            // Location = stocktake.Assets.Location;
 
                             foreach(string str in LocationList)
                             {
-                                if (string.Equals(stocktake.Assets.Location, str, StringComparison.CurrentCultureIgnoreCase))
+                                if (string.Equals(stocktake.Assets.Location.Trim(), str, StringComparison.CurrentCultureIgnoreCase))
                                 {
                                    // Location = stocktake.Assets.Location;
                                     SELECTEDLOCATION_INDEX = LocationList.IndexOf(str);
@@ -1132,7 +1146,7 @@ namespace AssetManagement.ViewModel
                            
                         foreach (string str in BranchList)
                         {
-                            if (string.Equals(stocktake.Assets.Branch, str, StringComparison.CurrentCultureIgnoreCase))
+                            if (string.Equals(stocktake.Assets.Branch.Trim(), str, StringComparison.CurrentCultureIgnoreCase))
                             {
                                 // Location = stocktake.Assets.Location;
                                 SELECTEDBRANCH_INDEX = BranchList.IndexOf(str);
@@ -1143,7 +1157,7 @@ namespace AssetManagement.ViewModel
                         // Employee = stocktake.Assets.Employee;
                         foreach (string str in EmployeeList)
                         {
-                            if (string.Equals(stocktake.Assets.Employee, str, StringComparison.CurrentCultureIgnoreCase))
+                            if (string.Equals(stocktake.Assets.Employee.Trim(), str, StringComparison.CurrentCultureIgnoreCase))
                             {
                                 // Location = stocktake.Assets.Location;
                                 SELECTEDEMPLOYEE_INDEX = EmployeeList.IndexOf(str);
@@ -1154,7 +1168,7 @@ namespace AssetManagement.ViewModel
                         // Category = stocktake.Assets.Category;
                         foreach (string str in CategoryList)
                         {
-                            if (string.Equals(stocktake.Assets.Category, str, StringComparison.CurrentCultureIgnoreCase))
+                            if (string.Equals(stocktake.Assets.Category.Trim(), str, StringComparison.CurrentCultureIgnoreCase))
                             {
                                 // Location = stocktake.Assets.Location;
                                 SELECTEDCATEGORY_INDEX = CategoryList.IndexOf(str);
@@ -1168,7 +1182,7 @@ namespace AssetManagement.ViewModel
 
                         foreach (string str in SubCategoryList)
                         {
-                            if (string.Equals(stocktake.Assets.SubCategory, str, StringComparison.CurrentCultureIgnoreCase))
+                            if (string.Equals(stocktake.Assets.SubCategory.Trim(), str, StringComparison.CurrentCultureIgnoreCase))
                             {
                                 // Location = stocktake.Assets.Location;
                                 SELECTEDSUBCATEGORY_INDEX = SubCategoryList.IndexOf(str);
@@ -1183,7 +1197,7 @@ namespace AssetManagement.ViewModel
 
                         foreach (string str in VendorList)
                         {
-                            if (string.Equals(stocktake.Assets.Vendor, str, StringComparison.CurrentCultureIgnoreCase))
+                            if (string.Equals(stocktake.Assets.Vendor.Trim(), str, StringComparison.CurrentCultureIgnoreCase))
                             {
                                 // Location = stocktake.Assets.Location;
                                 SELECTEDVENDOR_INDEX = VendorList.IndexOf(str);
@@ -1196,7 +1210,7 @@ namespace AssetManagement.ViewModel
 
                         foreach (string str in DepartmentList)
                         {
-                            if (string.Equals(stocktake.Assets.Department, str, StringComparison.CurrentCultureIgnoreCase))
+                            if (string.Equals(stocktake.Assets.Department.Trim(), str, StringComparison.CurrentCultureIgnoreCase))
                             {
                                 // Location = stocktake.Assets.Location;
                                 SELECTEDDEPARTMENT_INDEX = DepartmentList.IndexOf(str);
@@ -1239,7 +1253,7 @@ namespace AssetManagement.ViewModel
                             Image1 = Xamarin.Forms.ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(stocktake.Assets.FileName)));
                         }
 
-
+                            ASSETID = null;
 
                     }
                     else

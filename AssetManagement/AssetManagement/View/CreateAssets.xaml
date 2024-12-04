@@ -30,9 +30,9 @@
                             </Grid.RowDefinitions>
                             <Entry x:Name="entrydocket"
                                    Grid.Column="1"
+                                   Grid.Row="0"
                                    Text="{Binding ASSETID}"
                                    TextColor="Black"
-                                   IsEnabled="{Binding CANCHANGE}"
                                    Placeholder="Please scan asset here"
                                    PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
                                    HorizontalTextAlignment="Center"
@@ -41,15 +41,21 @@
 
                             <Image x:Name="imgsearch" IsVisible="True"
                                    Grid.Column="2"
+                                   Grid.Row="0"
                                    HeightRequest="30"
                                    WidthRequest="30"
                                    Source="search.png"></Image>
                             <Image x:Name="qrcode"
                                    Grid.Column="0"
+                                   Grid.Row="0"
                                    HeightRequest="30"
                                    WidthRequest="30"
                                    Source="qrcode2.png"></Image>
+                       
                         </Grid>
+                        <Label Text="{Binding ASSETID1}"
+                               TextColor="Red"
+                               HorizontalOptions="CenterAndExpand"></Label>
                         <Label Text="Basic Info" FontAttributes="Bold"
                                FontSize="Title"
                                TextColor="Black"

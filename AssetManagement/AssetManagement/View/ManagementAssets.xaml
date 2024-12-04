@@ -49,6 +49,9 @@
                     </Grid>
 
                 </StackLayout>
+                <Label Text="{Binding ASSETID1}"
+                       TextColor="Red"
+                       HorizontalOptions="CenterAndExpand"></Label>
                 <ActivityIndicator x:Name="indicator"
                                    IsVisible="{Binding IsVisible,Mode=TwoWay}"
                                    IsRunning="{Binding IsBusy,Mode=TwoWay}"

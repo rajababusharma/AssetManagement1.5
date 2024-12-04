@@ -172,7 +172,8 @@ namespace AssetManagement.View
             bool ast = Preferences.Get(Pref.Manage_Assets, false);
             if (ast)
             {
-                await Navigation.PushAsync(new CreateAssets(""));
+                Preferences.Set(Pref.Asset_Id, null);
+                await Navigation.PushAsync(new CreateAssets());
             }
             else
             {

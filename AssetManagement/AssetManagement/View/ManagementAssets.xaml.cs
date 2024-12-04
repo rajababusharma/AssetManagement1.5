@@ -239,7 +239,8 @@ namespace AssetManagement.View
             bool ast = Preferences.Get(Pref.Manage_Assets, false);
             if (ast)
             {
-                await Navigation.PushAsync(new CreateAssets(assetetails.Asset_id));
+                Preferences.Set(Pref.Asset_Id, assetetails.Asset_id);
+                await Navigation.PushAsync(new CreateAssets());
             }
             else
             {
@@ -320,7 +321,8 @@ namespace AssetManagement.View
             bool ast = Preferences.Get(Pref.Manage_Assets, false);
             if (ast)
             {
-                await Navigation.PushAsync(new CreateAssets(""));
+                Preferences.Set(Pref.Asset_Id, null);
+                await Navigation.PushAsync(new CreateAssets());
             }
             else
             {
