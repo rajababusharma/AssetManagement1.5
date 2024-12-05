@@ -39,7 +39,7 @@
                                    VerticalTextAlignment="Center" />
 
 
-                            <Image x:Name="imgsearch" IsVisible="True"
+                            <Image x:Name="imgsearch" IsVisible="False"
                                    Grid.Column="2"
                                    Grid.Row="0"
                                    HeightRequest="30"

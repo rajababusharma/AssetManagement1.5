@@ -81,6 +81,10 @@ namespace AssetManagement.Converters
                     One = (FileImageSource)ImageSource.FromFile("createassets.png");
                     break;
 
+                case "Search Asset":
+                    One = (FileImageSource)ImageSource.FromFile("search.png");
+                    break;
+
                 case "Create New Users":
                     One = (FileImageSource)ImageSource.FromFile("users.jpg");
                     break;

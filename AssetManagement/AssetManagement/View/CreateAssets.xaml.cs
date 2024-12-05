@@ -298,10 +298,14 @@ namespace AssetManagement.View
             Application.Current.MainPage = new MainPage();
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-          
+           /* if (!string.IsNullOrEmpty(viewModel.ASSETID))
+            {
+                await viewModel.GetData(viewModel.ASSETID);
+            }*/
+
         }
 
 

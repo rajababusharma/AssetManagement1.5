@@ -41,9 +41,11 @@ namespace AssetManagement.ViewModel
                         new MasterDetailPage1MasterMenuItem { Id = 2, Title = "Asset Management", TargetType=typeof(ManagementAssets)},
                            new MasterDetailPage1MasterMenuItem { Id = 3, Title = "Stock Inventory",TargetType=typeof(StockTally)},
                     new MasterDetailPage1MasterMenuItem { Id = 4, Title = "Create Masters", TargetType=typeof(Masters)},
-                      new MasterDetailPage1MasterMenuItem { Id = 5, Title = "Reports", TargetType=typeof(Reports)},
-                       new MasterDetailPage1MasterMenuItem { Id = 6, Title = "Assets Document", TargetType=typeof(DownloadDocuments)},
-                     new MasterDetailPage1MasterMenuItem { Id = 7, Title = "About Us", TargetType=typeof(About_Us)},
+                      new MasterDetailPage1MasterMenuItem { Id = 5, Title = "Create Assets", TargetType=typeof(CreateAssets)},
+                        new MasterDetailPage1MasterMenuItem { Id = 6, Title = "Search Asset", TargetType=typeof(UpdateAsset)},
+                      new MasterDetailPage1MasterMenuItem { Id = 7, Title = "Reports", TargetType=typeof(Reports)},
+                       new MasterDetailPage1MasterMenuItem { Id = 8, Title = "Assets Document", TargetType=typeof(DownloadDocuments)},
+                     new MasterDetailPage1MasterMenuItem { Id = 9, Title = "About Us", TargetType=typeof(About_Us)},
                 });
 
             GetMoveNotification();

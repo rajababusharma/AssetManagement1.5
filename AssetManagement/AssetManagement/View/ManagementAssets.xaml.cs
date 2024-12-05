@@ -240,7 +240,8 @@ namespace AssetManagement.View
             if (ast)
             {
                 Preferences.Set(Pref.Asset_Id, assetetails.Asset_id);
-                await Navigation.PushAsync(new CreateAssets());
+              //  await Navigation.PushAsync(new CreateAssets());
+                await Navigation.PushAsync(new UpdateAsset());
             }
             else
             {

@@ -34,12 +34,12 @@ namespace AssetManagement.ViewModel
         public CreateAssetsViewModel()
         {
 
-            ASSETID = ASSETID1 = Preferences.Get(Pref.Asset_Id, null); 
+           // ASSETID = ASSETID1 = Preferences.Get(Pref.Asset_Id, null); 
             IsBusy = false;
             IsEnable = false;
             IsVisible = false;
 
-            CANCHANGE = ASSETID!=""? false : true;
+           // CANCHANGE = ASSETID!=""? false : true;
             List<string> lifelist = new List<string>(new string[] { "Select Asset Life","0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" });
             List<string> warrantylist = new List<string>(new string[] { "Select Asset Warranty","0","1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" });
            
@@ -60,14 +60,14 @@ namespace AssetManagement.ViewModel
                await GetCat_Sub_Dept_Vendor();
             });
            // Thread.Sleep(5000);
-            Device.BeginInvokeOnMainThread(async() =>
+          /*  Device.BeginInvokeOnMainThread(async() =>
             {
                 if(!string.IsNullOrEmpty(ASSETID))
                 {
                     await GetData(ASSETID);
                 }
               
-            });
+            });*/
 
           /*  GetEmployeeList();
             Thread.Sleep(500);
