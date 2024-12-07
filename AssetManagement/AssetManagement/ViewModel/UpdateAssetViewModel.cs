@@ -1,5 +1,6 @@
 ﻿using AssetManagement.Constants;
 using AssetManagement.Model;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using RestSharp;
@@ -11,11 +12,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using static Android.App.Assist.AssistStructure;
+using static Android.Net.Wifi.WifiEnterpriseConfig;
 
 namespace AssetManagement.ViewModel
 {
     internal class UpdateAssetViewModel: BaseViewModel
     {
+        List<string> dept = new List<string>(new string[] { "No Department" });
+        List<string> loc = new List<string>(new string[] { "No Location" });
+        List<string> br = new List<string>(new string[] { "No Branch" });
+        List<string> emp = new List<string>(new string[] { "No Employee" });
+        List<string> vend = new List<string>(new string[] { "No Vendor" });
+        List<string> cat = new List<string>(new string[] { "No Category" });
+        List<string> sub = new List<string>(new string[] { "No Subcategory" });
         public UpdateAssetViewModel()
         {
             ASSETID = ASSETID1 = Preferences.Get(Pref.Asset_Id, null);
@@ -34,20 +44,24 @@ namespace AssetManagement.ViewModel
             Install_date = dt.ToString();
             Mfd_date = dt.ToString();
 
-           
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await GetEmployeeList();
+            });
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await GetCat_Sub_Dept_Vendor();
             });
 
-           /* Device.BeginInvokeOnMainThread(async () =>
+
+            Device.BeginInvokeOnMainThread(async () =>
             {
                 if (!string.IsNullOrEmpty(ASSETID))
                 {
                     await GetData(ASSETID);
                 }
 
-            });*/
+            });
         }
         List<String> _departmentList = new List<string>();
 
@@ -57,12 +71,11 @@ namespace AssetManagement.ViewModel
 
             set
             {
-                if (_departmentList != value)
-                {
+               
                     _departmentList = value;
                     // OnPropertyChanged("ObjPaymentList");
                     NotifyPropertyChanged("DepartmentList");
-                }
+               
             }
         }
 
@@ -74,12 +87,11 @@ namespace AssetManagement.ViewModel
 
             set
             {
-                if (_VendorList != value)
-                {
+               
                     _VendorList = value;
                     // OnPropertyChanged("ObjPaymentList");
                     NotifyPropertyChanged("VendorList");
-                }
+               
             }
         }
 
@@ -91,12 +103,11 @@ namespace AssetManagement.ViewModel
 
             set
             {
-                if (_asset_warranty != value)
-                {
+               
                     _asset_warranty = value;
                     // OnPropertyChanged("ObjPaymentList");
                     NotifyPropertyChanged("asset_warrantyList");
-                }
+               
             }
         }
 
@@ -109,12 +120,11 @@ namespace AssetManagement.ViewModel
 
             set
             {
-                if (_asset_life != value)
-                {
+               
                     _asset_life = value;
                     // OnPropertyChanged("ObjPaymentList");
                     NotifyPropertyChanged("asset_lifeList");
-                }
+               
             }
         }
 
@@ -151,6 +161,17 @@ namespace AssetManagement.ViewModel
             {
                 _BTNSUBMITSTATUS = value;
                 NotifyPropertyChanged("BTNSUBMITSTATUS");
+            }
+        }
+
+        private bool selected_Event = false;
+        public bool SELECTED_EVENT
+        {
+            get { return selected_Event; }
+            set
+            {
+                selected_Event = value;
+                NotifyPropertyChanged("SELECTED_EVENT");
             }
         }
 
@@ -581,6 +602,145 @@ namespace AssetManagement.ViewModel
             }
         }
 
+        private int _selectedlocation_index = 0;
+        public int SELECTEDLOCATION_INDEX
+        {
+            get { return _selectedlocation_index; }
+            set
+            {
+                _selectedlocation_index = value;
+                NotifyPropertyChanged("SELECTEDLOCATION_INDEX");
+            }
+        }
+        private int _selectedbranch_index = 0;
+        public int SELECTEDBRANCH_INDEX
+        {
+            get { return _selectedbranch_index; }
+            set
+            {
+                _selectedbranch_index = value;
+                NotifyPropertyChanged("SELECTEDBRANCH_INDEX");
+            }
+        }
+        private int _selectedemployee_index = 0;
+        public int SELECTEDEMPLOYEE_INDEX
+        {
+            get { return _selectedemployee_index; }
+            set
+            {
+                _selectedemployee_index = value;
+                NotifyPropertyChanged("SELECTEDEMPLOYEE_INDEX");
+            }
+        }
+
+        private int _selectedcategory_index = 0;
+        public int SELECTEDCATEGORY_INDEX
+        {
+            get { return _selectedcategory_index; }
+            set
+            {
+                _selectedcategory_index = value;
+                NotifyPropertyChanged("SELECTEDCATEGORY_INDEX");
+            }
+        }
+
+        private int _selectedsubcategory_index = 0;
+        public int SELECTEDSUBCATEGORY_INDEX
+        {
+            get { return _selectedsubcategory_index; }
+            set
+            {
+                _selectedsubcategory_index = value;
+                NotifyPropertyChanged("SELECTEDSUBCATEGORY_INDEX");
+            }
+        }
+
+        List<String> _EmployeeList = new List<string>();
+
+        public List<String> EmployeeList
+        {
+            get { return _EmployeeList; }
+
+            set
+            {
+                if (_EmployeeList != value)
+                {
+                    _EmployeeList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("EmployeeList");
+                }
+            }
+        }
+
+
+        List<String> _branchList = new List<string>();
+
+        public List<String> BranchList
+        {
+            get { return _branchList; }
+
+            set
+            {
+                if (_branchList != value)
+                {
+                    _branchList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("BranchList");
+                }
+            }
+        }
+
+        List<String> _LocationList = new List<string>();
+
+        public List<String> LocationList
+        {
+            get { return _LocationList; }
+
+            set
+            {
+                if (_LocationList != value)
+                {
+                    _LocationList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("LocationList");
+                }
+            }
+        }
+
+        List<String> _CategoryList = new List<string>();
+
+        public List<String> CategoryList
+        {
+            get { return _CategoryList; }
+
+            set
+            {
+                if (_CategoryList != value)
+                {
+                    _CategoryList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("CategoryList");
+                }
+            }
+        }
+
+        List<String> _SubCategoryList = new List<string>();
+
+        public List<String> SubCategoryList
+        {
+            get { return _SubCategoryList; }
+
+            set
+            {
+                if (_SubCategoryList != value)
+                {
+                    _SubCategoryList = value;
+                    // OnPropertyChanged("ObjPaymentList");
+                    NotifyPropertyChanged("SubCategoryList");
+                }
+            }
+        }
+
         private bool _canchange;
 
         public bool CANCHANGE
@@ -744,6 +904,7 @@ namespace AssetManagement.ViewModel
             if (CrossConnectivity.Current.IsConnected)
             {
                 string branch_id = Preferences.Get(Pref.BRANCH, "");
+                int userrole = Preferences.Get(Pref.User_Role, 2);
                 // string assetid = ASSETID;
                 try
                 {
@@ -761,7 +922,8 @@ namespace AssetManagement.ViewModel
 
 
 
-                    var response = await client.GetAsync("GetAssets?assetid=" + assetid + "&branch=" + branch_id);
+                  //  var response = await client.GetAsync("GetAssets?assetid=" + assetid + "&branch=" + branch_id);
+                    var response = await client.GetAsync("GetAssets?assetid=" + assetid + "&branch=" + branch_id + "&userrole=" + userrole);
 
                     var responseJson = response.Content.ReadAsStringAsync().Result;
 
@@ -844,7 +1006,7 @@ namespace AssetManagement.ViewModel
                             }
 
                             ASSETID = null;
-
+                            SELECTED_EVENT = true;
                         }
                         else
                         {
@@ -929,13 +1091,13 @@ namespace AssetManagement.ViewModel
                         apiresponse = JsonConvert.DeserializeObject<Cate_Sub_Dept_VendorResp>(strresponse);
                         if (apiresponse.Status.Equals("true"))
                         {
-
-                            DepartmentList = apiresponse.DepartmentList;
-                           // CategoryList = apiresponse.CategoryList ?? cat;
-                           // SubCategoryList = apiresponse.SubCategoryList ?? sub;
-                            VendorList = apiresponse.VendorList;
-                           // LocationList = apiresponse.LocationList ?? loc;
-                           // BranchList = apiresponse.BranchList ?? br;
+                      
+                            DepartmentList = apiresponse.DepartmentList ?? dept;
+                            CategoryList = apiresponse.CategoryList ?? cat;
+                            SubCategoryList = apiresponse.SubCategoryList ?? sub;
+                            VendorList = apiresponse.VendorList ?? vend;
+                            LocationList = apiresponse.LocationList ?? loc;
+                            BranchList = apiresponse.BranchList ?? br;
                         }
                         else
                         {
@@ -959,6 +1121,258 @@ namespace AssetManagement.ViewModel
                     IsEnable = false;
                     IsVisible = false;
                     //await App.Current.MainPage.DisplayAlert("Exception", "Request could n, please try again later", "Ok");
+
+                }
+
+            }
+            else
+            {
+
+                await App.Current.MainPage.DisplayAlert("Alert", "No internet connection, please check and try again later.", "OK");
+            }
+        }
+        public async Task GetEmployeeList()
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+
+                try
+                {
+                    IsBusy = true;
+                    IsEnable = true;
+                    IsVisible = true;
+
+                    var client = new System.Net.Http.HttpClient();
+                    client.BaseAddress = new Uri(ProjectConstants.GETEMPLOYEELIST_API);
+                    try
+                    {
+                        string branch = Preferences.Get(Pref.BRANCH, "");
+                        int userrole = Preferences.Get(Pref.User_Role, 2);
+                        // string vaid = "2961";
+
+                        //var response = await client.GetAsync("AuthenticateUser?UserName=TNAX5004&Password=TNAX5004");
+                        var response = await client.GetAsync("GetEmployeeList?Branch=" + branch + "&userrole=" + userrole);
+                        // var response = await client.GetAsync("GetEmployeeList?Branch=" + branch);
+                        var docketJson = response.Content.ReadAsStringAsync().Result;
+
+
+                        EmployeeMasterResp docketobject = new EmployeeMasterResp();
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            if (docketJson != "")
+                            {
+                                docketobject = JsonConvert.DeserializeObject<EmployeeMasterResp>(docketJson);
+                                if (docketobject.Status.Equals("true"))
+                                {
+                                    // dockets= JsonConvert.DeserializeObject<DeliveryDoket>(docketJson);
+
+                                    EmployeeList = docketobject.Employee?? emp;
+
+                                }
+                                else
+                                {
+                                    await App.Current.MainPage.DisplayAlert("Exception", docketobject.Msg, "Ok");
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            await App.Current.MainPage.DisplayAlert("Exception", response.ReasonPhrase, "Ok");
+                        }
+                        IsBusy = false;
+                        IsEnable = false;
+                        IsVisible = false;
+
+                    }
+                    catch (Exception excp)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Exception", excp.Message, "Ok");
+                       // Crashes.TrackError(excp);
+                        IsBusy = false;
+                        IsEnable = false;
+                        IsVisible = false;
+                    }
+
+                }
+                catch (Exception excp)
+                {
+                    // Common.SaveLogs(excp.StackTrace);
+                    IsBusy = false;
+                    IsEnable = false;
+                    IsVisible = false;
+
+                    // BranchList = null;
+                    //await App.Current.MainPage.DisplayAlert("Exception", "Request could n, please try again later", "Ok");
+
+                   // Crashes.TrackError(excp);
+                }
+
+            }
+            else
+            {
+
+                await App.Current.MainPage.DisplayAlert("Alert", "No internet connection, please check and try again later.", "OK");
+            }
+        }
+
+        public async Task GetBranches(string location)
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+                // string location = Preferences.Get(Pref.LOCATION, "");
+                int userrole = Preferences.Get(Pref.User_Role, 0);
+                try
+                {
+                    IsBusy = true;
+                    IsEnable = true;
+                    IsVisible = true;
+
+                    /* string ctype = "Unloading";*/
+                    // string ctype = Preferences.Get(ProjectConstants.CTYPE, "");
+
+                    var client = new System.Net.Http.HttpClient();
+                    //  client.BaseAddress = new Uri("http://114.143.156.30/");
+                    client.BaseAddress = new Uri(ProjectConstants.GETBRANCHES_API1);
+
+
+
+                    var response = await client.GetAsync("Get?Location=" + location + "&userrole=" + userrole);
+                    var responseJson = response.Content.ReadAsStringAsync().Result;
+
+
+
+                    /* var client = new RestClient(ProjectConstants.GETBRANCHES_API);
+                     var request = new RestRequest(Method.GET);
+                     // request.AddHeader("postman-token", "e3fa53b1-0f94-c75d-d04a-e97018565406");
+                     request.AddHeader("cache-control", "no-cache");
+                     request.AddHeader("content-type", "application/x-www-form-urlencoded");
+                     //  request.AddParameter("application/x-www-form-urlencoded", "Truck_No=GJ01DX8008&CType=Loading&Branch_Id=130", ParameterType.RequestBody);
+                     IRestResponse response = client.Execute(request);*/
+
+                    // Extracting output data from received response
+                    // string strresponse = responseJson.Content;
+
+                    BranchMasterResp stocktake = new BranchMasterResp();
+
+                    // List<BranchWiseAssets> mystocklist = new List<BranchWiseAssets>();
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        stocktake = JsonConvert.DeserializeObject<BranchMasterResp>(responseJson);
+                        if (stocktake.Status.Equals("true"))
+                        {
+
+                            BranchList = stocktake.Branches ?? br;
+                           // Branch=
+                        }
+                        else
+                        {
+                            //DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.audio_alert_fail);
+                            // await App.Current.MainPage.DisplayAlert("Exception", stocktake.Msg.ToString(), "Ok");
+                            //BranchwiseList = stocktake.BranchWiseAssets;
+                        }
+
+                    }
+                    else
+                    {
+                        // DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.audio_alert_fail);
+                        // await App.Current.MainPage.DisplayAlert("Exception", response.ReasonPhrase, "Ok");
+                        //BranchwiseList = stocktake.BranchWiseAssets;
+                    }
+                    IsBusy = false;
+                    IsEnable = false;
+                    IsVisible = false;
+
+                }
+                catch (Exception excp)
+                {
+                    // Common.SaveLogs(excp.StackTrace);
+                    IsBusy = false;
+                    IsEnable = false;
+                    IsVisible = false;
+
+                    BranchList = null;
+                    //await App.Current.MainPage.DisplayAlert("Exception", "Request could n, please try again later", "Ok");
+                    Crashes.TrackError(excp);
+
+                }
+
+            }
+            else
+            {
+
+                await App.Current.MainPage.DisplayAlert("Alert", "No internet connection, please check and try again later.", "OK");
+            }
+        }
+
+        public async Task GetSubCategory(string category)
+        {
+            if (CrossConnectivity.Current.IsConnected)
+            {
+
+                // string location = Preferences.Get(Pref.LOCATION, "");
+                int userrole = Preferences.Get(Pref.User_Role, 0);
+                try
+                {
+                    IsBusy = true;
+                    IsEnable = true;
+                    IsVisible = true;
+
+                    /* string ctype = "Unloading";*/
+                    // string ctype = Preferences.Get(ProjectConstants.CTYPE, "");
+
+                    var client = new System.Net.Http.HttpClient();
+                    //  client.BaseAddress = new Uri("http://114.143.156.30/");
+                    client.BaseAddress = new Uri(ProjectConstants.GETSUBCATEGORYCOUNT_API);
+
+
+
+                    var response = await client.GetAsync("GetSub_Category?Category=" + category);
+                    var responseJson = response.Content.ReadAsStringAsync().Result;
+
+                    Sub_CategoryResp stocktake = new Sub_CategoryResp();
+
+                    // List<BranchWiseAssets> mystocklist = new List<BranchWiseAssets>();
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        stocktake = JsonConvert.DeserializeObject<Sub_CategoryResp>(responseJson);
+                        if (stocktake.Status.Equals("true"))
+                        {
+
+                            SubCategoryList = stocktake.SubCategoryList ?? sub;
+
+                        }
+                        else
+                        {
+                            //DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.audio_alert_fail);
+                            // await App.Current.MainPage.DisplayAlert("Exception", stocktake.Msg.ToString(), "Ok");
+                            //BranchwiseList = stocktake.BranchWiseAssets;
+                        }
+
+                    }
+                    else
+                    {
+                        // DependencyService.Get<IAudio>().PlayAudioFile(ProjectConstants.audio_alert_fail);
+                        // await App.Current.MainPage.DisplayAlert("Exception", response.ReasonPhrase, "Ok");
+                        //BranchwiseList = stocktake.BranchWiseAssets;
+                    }
+                    IsBusy = false;
+                    IsEnable = false;
+                    IsVisible = false;
+
+                }
+                catch (Exception excp)
+                {
+                    // Common.SaveLogs(excp.StackTrace);
+                    IsBusy = false;
+                    IsEnable = false;
+                    IsVisible = false;
+
+                    SubCategoryList = null;
+                    //await App.Current.MainPage.DisplayAlert("Exception", "Request could n, please try again later", "Ok");
+                    Crashes.TrackError(excp);
 
                 }
 

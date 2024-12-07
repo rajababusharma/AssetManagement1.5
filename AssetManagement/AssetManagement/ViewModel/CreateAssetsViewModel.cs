@@ -187,10 +187,12 @@ namespace AssetManagement.ViewModel
                     try
                     {
                         string branch = Preferences.Get(Pref.BRANCH, "");
+                        int userrole = Preferences.Get(Pref.User_Role, 2);
                         // string vaid = "2961";
 
                         //var response = await client.GetAsync("AuthenticateUser?UserName=TNAX5004&Password=TNAX5004");
-                        var response = await client.GetAsync("GetEmployeeList?Branch=" + branch);
+                        var response = await client.GetAsync("GetEmployeeList?Branch=" + branch + "&userrole=" + userrole);
+                       // var response = await client.GetAsync("GetEmployeeList?Branch=" + branch);
                         var docketJson = response.Content.ReadAsStringAsync().Result;
 
 
@@ -1095,8 +1097,9 @@ namespace AssetManagement.ViewModel
             if (CrossConnectivity.Current.IsConnected)
             {
                 string branch_id = Preferences.Get(Pref.BRANCH, "");
-           // string assetid = ASSETID;
-            try
+                int userrole = Preferences.Get(Pref.User_Role, 2);
+                // string assetid = ASSETID;
+                try
             {
                 IsBusy = true;
                 IsEnable = true;
@@ -1112,9 +1115,10 @@ namespace AssetManagement.ViewModel
 
 
 
-                var response = await client.GetAsync("GetAssets?assetid=" + assetid + "&branch=" + branch_id);
+               // var response = await client.GetAsync("GetAssets?assetid=" + assetid + "&branch=" + branch_id);
+                    var response = await client.GetAsync("GetAssets?assetid=" + assetid + "&branch=" + branch_id + "&userrole=" + userrole);
 
-                var responseJson = response.Content.ReadAsStringAsync().Result;
+                    var responseJson = response.Content.ReadAsStringAsync().Result;
 
                 Asset_InfoResponse stocktake = new Asset_InfoResponse();
 

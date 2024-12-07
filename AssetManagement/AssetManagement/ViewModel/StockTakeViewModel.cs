@@ -255,6 +255,7 @@ namespace AssetManagement.ViewModel
         public async Task GetData()
         {
             string branch_id = Preferences.Get(Pref.BRANCH, "");
+            int userrole = Preferences.Get(Pref.User_Role, 2);
             try
             {
                 IsBusy = true;
@@ -271,7 +272,8 @@ namespace AssetManagement.ViewModel
 
 
 
-                var response = await client.GetAsync("GetStockData?Branch=" + branch_id);
+               // var response = await client.GetAsync("GetStockData?Branch=" + branch_id);
+                var response = await client.GetAsync("GetStockData?Branch=" + branch_id + "&userrole=" + userrole);
                 var responseJson = response.Content.ReadAsStringAsync().Result;
 
                 StockTallyResponse stocktake = new StockTallyResponse();

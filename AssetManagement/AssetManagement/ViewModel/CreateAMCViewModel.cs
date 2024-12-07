@@ -465,6 +465,7 @@ namespace AssetManagement.ViewModel
         public async Task GetData()
         {
              string branch_id = Preferences.Get(Pref.BRANCH, "");
+            int userrole = Preferences.Get(Pref.User_Role, 2);
             string assetid = ASSETID;
             try
             {
@@ -482,8 +483,9 @@ namespace AssetManagement.ViewModel
 
 
 
-                var response = await client.GetAsync("GetAssets?assetid=" + assetid + "&branch=" + branch_id);
-                
+                var response = await client.GetAsync("GetAssets?assetid=" + assetid + "&branch=" + branch_id + "&userrole=" + userrole);
+               // var response = await client.GetAsync("GetAssets?assetid=" + assetid + "&branch=" + branch_id);
+
                 var responseJson = response.Content.ReadAsStringAsync().Result;
 
                 StockTallyResponse stocktake = new StockTallyResponse();

@@ -231,10 +231,11 @@ namespace AssetManagement.ViewModel
                     try
                     {
                         string branch = Preferences.Get(Pref.BRANCH, "");
+                        int userrole = Preferences.Get(Pref.User_Role, 2);
                         // string vaid = "2961";
 
                         //var response = await client.GetAsync("AuthenticateUser?UserName=TNAX5004&Password=TNAX5004");
-                        var response = await client.GetAsync("GetEmployeeList?Branch=" + branch);
+                        var response = await client.GetAsync("GetEmployeeList?Branch=" + branch + "&userrole=" + userrole);
                         var docketJson = response.Content.ReadAsStringAsync().Result;
 
 

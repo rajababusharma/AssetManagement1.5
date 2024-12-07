@@ -2,15 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AssetManagement.CustomRenderer"
-             x:Class="AssetManagement.View.UpdateAsset">
+             x:Class="AssetManagement.View.UpdateAsset"
+             Title="View/Update Asset">
     <ContentPage.ToolbarItems>
 
-        <ToolbarItem x:Name="logout"
+        <!--<ToolbarItem x:Name="logout"
                      Text="Logout"
                      Clicked="logout_Clicked"
                      Priority="1"
                      IconImageSource="logout_icon.png"
                      Order="Primary" />
+        -->
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -91,6 +93,7 @@
                                    Grid.Row="0"
                                    Grid.Column="1"
                                    TextColor="Red"></Label>
+                            <!--
                             <Label Text="Asset Name: "
                                    Margin="10,0,0,0"
                                    Grid.Row="1"
@@ -157,8 +160,50 @@
                             <Label Text="{Binding SubCategory}"
                                    Grid.Row="7"
                                    Grid.Column="1" />
+                        -->
 
+                            <local:EntryBorder  Text="{Binding Asset_name}" Grid.ColumnSpan="2"
+                                                Placeholder="Asset Name"
+                                                PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                                Grid.Row="1"></local:EntryBorder>
+                            <local:EntryBorder Text="{Binding Description}"
+                                               Grid.ColumnSpan="2"
+                                               Placeholder="Asset Description"
+                                               PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
+                                               Grid.Row="2"></local:EntryBorder>
 
+                            <Picker x:Name="pkrlocation" SelectedIndexChanged="pkrlocation_SelectedIndexChanged"
+                                    Grid.ColumnSpan="2"
+                                    SelectedItem="{Binding Location}"
+                                            Grid.Row="3"
+                                            SelectedIndex="{Binding SELECTEDLOCATION_INDEX}"
+                                            ItemsSource="{Binding LocationList}" />
+
+                            <Picker x:Name="pkrbranch"
+                                    Grid.ColumnSpan="2"
+                                    SelectedIndex="{Binding SELECTEDBRANCH_INDEX}"
+                                            SelectedItem="{Binding Branch}"
+                                            Grid.Row="4"
+                                            ItemsSource="{Binding BranchList}" />
+                            <Picker x:Name="pkremployee"
+                                    Grid.ColumnSpan="2"
+                                    SelectedIndex="{Binding SELECTEDEMPLOYEE_INDEX}"
+                                    SelectedItem="{Binding Employee}"
+                                            Grid.Row="5"
+                                            ItemsSource="{Binding EmployeeList}" />
+                            <Picker x:Name="pkrcategory" SelectedIndexChanged="pkrcategory_SelectedIndexChanged"
+                                    Grid.ColumnSpan="2"
+                                    SelectedIndex="{Binding SELECTEDCATEGORY_INDEX}"
+                                    SelectedItem="{Binding Category}"
+                                            Grid.Row="6"
+                                            ItemsSource="{Binding CategoryList}" />
+
+                            <Picker x:Name="pkrsubcategory"
+                                    Grid.ColumnSpan="2"
+                                    SelectedIndex="{Binding SELECTEDSUBCATEGORY_INDEX}"
+                                    SelectedItem="{Binding SubCategory}"
+                                            Grid.Row="7"
+                                            ItemsSource="{Binding SubCategoryList}" />
 
 
 
@@ -168,13 +213,20 @@
                                                Grid.Row="8"
                                                Grid.ColumnSpan="2"></local:EntryBorder>
 
-                            <local:Dropdown x:Name="pkrassetlife"
+                            <!--<local:Dropdown x:Name="pkrassetlife"
                                             SelectedIndex="{Binding SELECTEDLIFE_INDEX}"
                                             ItemSelected="pkrassetlife_ItemSelected"
                                             Grid.Row="9"
                                             Grid.ColumnSpan="2"
                                             ItemsSource="{Binding asset_lifeList}" />
 
+                            -->
+                            <Picker x:Name="pkrassetlife"
+                                    SelectedIndex="{Binding SELECTEDLIFE_INDEX}"
+                                    SelectedItem="{Binding Asset_life}"
+                                            Grid.Row="9"
+                                            Grid.ColumnSpan="2"
+                                            ItemsSource="{Binding asset_lifeList}" />
 
                         </Grid>
                         <Label Text="Purchase Info"
@@ -201,9 +253,16 @@
                                 <RowDefinition Height="50" />
 
                             </Grid.RowDefinitions>
-                            <local:Dropdown x:Name="pkrvendor"
+                            <!--<local:Dropdown x:Name="pkrvendor"
                                             SelectedIndex="{Binding SELECTEDVENDOR_INDEX}"
                                             ItemSelected="pkrvendor_ItemSelected"
+                                            Grid.Row="0"
+                                            ItemsSource="{Binding VendorList}" />
+                            -->
+
+                            <Picker x:Name="pkrvendor"
+                                    SelectedIndex="{Binding SELECTEDVENDOR_INDEX}"
+                                    SelectedItem="{Binding Vendor}"
                                             Grid.Row="0"
                                             ItemsSource="{Binding VendorList}" />
 
@@ -251,9 +310,16 @@
                             </StackLayout>
 
 
-                            <local:Dropdown x:Name="pkrwarranty"
+                            <!--<local:Dropdown x:Name="pkrwarranty"
                                             SelectedIndex="{Binding SELECTEDWARRANT_INDEX}"
                                             ItemSelected="pkrwarranty_ItemSelected"
+                                            Grid.Row="6"
+                                            ItemsSource="{Binding asset_warrantyList}" />
+                            -->
+
+                            <Picker x:Name="pkrwarranty"
+                                            SelectedIndex="{Binding SELECTEDWARRANT_INDEX}"
+                                    SelectedItem="{Binding Warranty_period}"
                                             Grid.Row="6"
                                             ItemsSource="{Binding asset_warrantyList}" />
 
@@ -307,9 +373,16 @@
                                                Placeholder="Make"
                                                PlaceholderColor="{x:DynamicResource PlaceHOlderTextColor}"
                                                Grid.Row="2"></local:EntryBorder>
-                            <local:Dropdown x:Name="pkrdepartment"
+                            <!--<local:Dropdown x:Name="pkrdepartment"
                                             SelectedIndex="{Binding SELECTEDDEPARTMENT_INDEX}"
                                             ItemSelected="pkrdepartment_ItemSelected"
+                                            Grid.Row="3"
+                                            ItemsSource="{Binding DepartmentList}" />
+                            -->
+
+                            <Picker x:Name="pkrdepartment"
+                                            SelectedIndex="{Binding SELECTEDDEPARTMENT_INDEX}"
+                                    SelectedItem="{Binding Department}"
                                             Grid.Row="3"
                                             ItemsSource="{Binding DepartmentList}" />
 

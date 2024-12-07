@@ -686,8 +686,10 @@ namespace AssetManagement.ViewModel
                     {
 
                         string branch = Preferences.Get(Pref.BRANCH, "");
-         
-                        var response = await client.GetAsync("GetEmployeeList?Branch=" + branch);
+                        int userrole = Preferences.Get(Pref.User_Role, 2);
+
+                        // var response = await client.GetAsync("GetEmployeeList?Branch=" + branch);
+                        var response = await client.GetAsync("GetEmployeeList?Branch=" + branch + "&userrole=" + userrole);
                         var docketJson = response.Content.ReadAsStringAsync().Result;
 
 

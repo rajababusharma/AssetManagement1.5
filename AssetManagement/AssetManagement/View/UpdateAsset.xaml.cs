@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 using ZXing.Mobile;
 using ZXing.Net.Mobile.Forms;
@@ -38,6 +39,7 @@ namespace AssetManagement.View
             var _search = new TapGestureRecognizer();
             _search.Tapped += async (s, e) =>
             {
+                viewModel.SELECTED_EVENT = false;
                 //search asset
                 viewModel.GetData(viewModel.ASSETID);
                 entrydocket.CursorPosition = entrydocket.Text.Length + 1;
@@ -206,17 +208,17 @@ namespace AssetManagement.View
 
         }
 
-        private void logout_Clicked(object sender, EventArgs e)
+       /* private void logout_Clicked(object sender, EventArgs e)
         {
             Preferences.Set(Pref.LOGINSTATUS, false);
 
-            Application.Current.MainPage = new MainPage();
-        }
+           // Application.Current.MainPage = new MainPage();
+        }*/
 
         private void pkrassetlife_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
             viewModel.Asset_life = viewModel.asset_lifeList[e.SelectedIndex];
-            viewModel.SELECTEDLIFE_INDEX = e.SelectedIndex;
+           // viewModel.SELECTEDLIFE_INDEX = e.SelectedIndex;
         }
 
         private void pkrvendor_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
@@ -224,7 +226,7 @@ namespace AssetManagement.View
             try
             {
                 viewModel.Vendor = viewModel.VendorList[e.SelectedIndex];
-                viewModel.SELECTEDVENDOR_INDEX = e.SelectedIndex;
+              //  viewModel.SELECTEDVENDOR_INDEX = e.SelectedIndex;
             }
             catch (Exception excp)
             {
@@ -250,28 +252,56 @@ namespace AssetManagement.View
         private void pkrwarranty_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
             viewModel.Warranty_period = viewModel.asset_warrantyList[e.SelectedIndex];
-            viewModel.SELECTEDWARRANT_INDEX = e.SelectedIndex;
+           // viewModel.SELECTEDWARRANT_INDEX = e.SelectedIndex;
         }
 
         private void pkrdepartment_ItemSelected(object sender, CustomRenderer.ItemSelectedEventArgs e)
         {
             viewModel.Department = viewModel.DepartmentList[e.SelectedIndex];
-            viewModel.SELECTEDDEPARTMENT_INDEX = e.SelectedIndex;
+           // viewModel.SELECTEDDEPARTMENT_INDEX = e.SelectedIndex;
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            if (!string.IsNullOrEmpty(viewModel.ASSETID))
+           /* if (!string.IsNullOrEmpty(viewModel.ASSETID))
             {
                 await viewModel.GetData(viewModel.ASSETID);
-            }
+            }*/
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             Preferences.Set(Pref.Asset_Id, null);
+        }
+
+        private void pkrlocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+
+            // Check if the selected index is valid
+            if (pkrlocation.SelectedIndex != -1 && viewModel.SELECTED_EVENT)
+            {
+                // Get the selected item
+                viewModel.Location = pkrlocation.SelectedItem.ToString();
+               // viewModel.SELECTEDLOCATION_INDEX = pkrlocation.SelectedIndex;
+                viewModel.GetBranches(viewModel.Location);
+                pkrbranch.SelectedIndex = 1;
+            }
+        }
+
+        private void pkrcategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Check if the selected index is valid
+            if (pkrcategory.SelectedIndex != -1 && viewModel.SELECTED_EVENT)
+            {
+                // Get the selected item
+                viewModel.Category = pkrcategory.SelectedItem.ToString();
+               // viewModel.SELECTEDCATEGORY_INDEX = pkrcategory.SelectedIndex;
+                viewModel.GetSubCategory(viewModel.Category);
+                pkrsubcategory.SelectedIndex = 1;
+            }
         }
     }
 }
